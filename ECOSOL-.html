@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teoria da Economia Solidária — E-Book de Referência</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════════════════ */
+:root {
+  --navy:      #0f1f3d;
+  --navy-mid:  #1b3464;
+  --navy-lt:   #2e5096;
+  --gold:      #c89b3c;
+  --gold-lt:   #e8c47a;
+  --gold-pale: #f9f0d8;
+  --cream:     #faf7f2;
+  --cream-dk:  #f0ebe2;
+  --green:     #1e6b3c;
+  --green-lt:  #d4eddf;
+  --rust:      #b84a1e;
+  --rust-lt:   #fdeee8;
+  --ink:       #1a1a2e;
+  --ink-mid:   #3d3d5c;
+  --ink-lt:    #6b6b8a;
+  --white:     #ffffff;
+  --shadow-sm: 0 2px 8px rgba(15,31,61,.10);
+  --shadow-md: 0 6px 24px rgba(15,31,61,.15);
+  --shadow-lg: 0 16px 48px rgba(15,31,61,.22);
+  --r:         6px;
+  --r-lg:      12px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESET / BASE
+═══════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:17px}
+body{
+  font-family:'Lora',Georgia,serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.8;
+  overflow-x:hidden;
+}
+::selection{background:var(--gold);color:var(--navy)}
+
+/* ═══════════════════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════════════════ */
+.page-wrap{display:flex;min-height:100vh}
+
+/* ─── Sidebar ─────────────────────────────────────────── */
+#sidebar{
+  position:fixed;top:0;left:0;
+  width:280px;height:100vh;
+  background:var(--navy);
+  overflow-y:auto;overflow-x:hidden;
+  z-index:100;
+  display:flex;flex-direction:column;
+  transition:transform .35s ease;
+}
+#sidebar::-webkit-scrollbar{width:4px}
+#sidebar::-webkit-scrollbar-track{background:var(--navy-mid)}
+#sidebar::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+.sidebar-logo{
+  padding:32px 24px 20px;
+  border-bottom:1px solid rgba(200,155,60,.25);
+}
+.sidebar-logo .eq{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;font-weight:600;
+  color:var(--gold);
+  letter-spacing:.02em;
+  line-height:1.5;
+  word-break:break-all;
+}
+.sidebar-logo .label{
+  font-family:'Crimson Pro',serif;
+  font-size:.7rem;color:rgba(255,255,255,.45);
+  text-transform:uppercase;letter-spacing:.12em;
+  margin-top:6px;
+}
+
+nav{padding:20px 0 32px;flex:1}
+nav a{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 24px;
+  font-family:'Crimson Pro',serif;
+  font-size:.82rem;color:rgba(255,255,255,.65);
+  text-decoration:none;letter-spacing:.02em;
+  border-left:2px solid transparent;
+  transition:all .2s;
+}
+nav a:hover,nav a.active{
+  color:var(--gold-lt);
+  background:rgba(200,155,60,.08);
+  border-left-color:var(--gold);
+}
+nav .nav-part{
+  padding:14px 24px 4px;
+  font-family:'Crimson Pro',serif;
+  font-size:.68rem;color:rgba(200,155,60,.5);
+  text-transform:uppercase;letter-spacing:.18em;
+  font-weight:600;
+}
+nav .nav-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;color:var(--gold);
+  min-width:24px;opacity:.7;
+}
+
+/* ─── Main content ────────────────────────────────────── */
+#content{
+  margin-left:280px;
+  flex:1;
+  min-width:0;
+}
+
+/* ─── Mobile toggle ───────────────────────────────────── */
+#menu-toggle{
+  display:none;
+  position:fixed;top:16px;left:16px;z-index:200;
+  background:var(--navy);color:var(--gold);
+  border:none;border-radius:4px;
+  padding:8px 12px;font-size:1.2rem;cursor:pointer;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COVER
+═══════════════════════════════════════════════════════════ */
+#cover{
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 40%, rgba(200,155,60,.12) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 80% at 80% 70%, rgba(46,80,150,.18) 0%, transparent 60%),
+    linear-gradient(160deg, var(--navy) 0%, #0a1628 55%, #141e35 100%);
+  display:flex;align-items:center;justify-content:center;
+  padding:60px 64px;
+  position:relative;
+  overflow:hidden;
+}
+#cover::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(200,155,60,0.07)'/%3E%3C/svg%3E") repeat;
+  pointer-events:none;
+}
+.cover-inner{max-width:800px;width:100%;text-align:center;position:relative}
+.cover-badge{
+  display:inline-block;
+  font-family:'Crimson Pro',serif;
+  font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);
+  border:1px solid rgba(200,155,60,.4);
+  padding:6px 18px;border-radius:20px;
+  margin-bottom:40px;
+  background:rgba(200,155,60,.06);
+}
+.cover-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.8rem,6vw,5rem);
+  font-weight:900;
+  color:var(--white);
+  line-height:1.1;
+  letter-spacing:-.02em;
+  margin-bottom:16px;
+}
+.cover-title span{color:var(--gold)}
+.cover-subtitle{
+  font-family:'Crimson Pro',serif;
+  font-size:1.25rem;color:rgba(255,255,255,.65);
+  font-style:italic;margin-bottom:56px;
+  line-height:1.5;
+}
+.cover-equation{
+  background:rgba(200,155,60,.07);
+  border:1px solid rgba(200,155,60,.3);
+  border-radius:var(--r-lg);
+  padding:28px 40px;
+  margin-bottom:48px;
+  backdrop-filter:blur(8px);
+}
+.cover-equation .eq-label{
+  font-family:'Crimson Pro',serif;
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(200,155,60,.7);margin-bottom:12px;
+}
+.cover-equation .eq-formula{
+  font-family:'JetBrains Mono',monospace;
+  font-size:clamp(1.2rem,3vw,1.9rem);
+  font-weight:700;
+  color:var(--gold-lt);
+  letter-spacing:.04em;
+}
+.cover-meta{
+  display:flex;align-items:center;justify-content:center;gap:32px;
+  flex-wrap:wrap;
+}
+.cover-meta-item{
+  font-family:'Crimson Pro',serif;
+  font-size:.82rem;color:rgba(255,255,255,.45);
+  letter-spacing:.06em;
+}
+.cover-meta-divider{color:rgba(200,155,60,.35)}
+.cover-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  font-family:'Crimson Pro',serif;font-size:.75rem;
+  color:rgba(255,255,255,.3);letter-spacing:.15em;
+  text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.cover-scroll::after{
+  content:'';width:1px;height:32px;background:rgba(200,155,60,.3);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ═══════════════════════════════════════════════════════════
+   CHAPTER SECTIONS
+═══════════════════════════════════════════════════════════ */
+.chapter{
+  max-width:820px;
+  margin:0 auto;
+  padding:72px 48px;
+  border-bottom:1px solid var(--cream-dk);
+  animation:fadeUp .6s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.chapter-header{
+  margin-bottom:48px;
+  padding-bottom:32px;
+  border-bottom:2px solid var(--cream-dk);
+  position:relative;
+}
+.chapter-header::after{
+  content:'';position:absolute;bottom:-2px;left:0;
+  width:60px;height:2px;background:var(--gold);
+}
+.chapter-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;font-weight:600;letter-spacing:.2em;
+  color:var(--gold);text-transform:uppercase;
+  margin-bottom:12px;display:block;
+}
+.chapter-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,4vw,2.6rem);
+  font-weight:700;
+  color:var(--navy);
+  line-height:1.2;
+  letter-spacing:-.01em;
+}
+.chapter-lead{
+  font-family:'Crimson Pro',serif;
+  font-size:1.2rem;color:var(--ink-mid);
+  font-style:italic;line-height:1.7;
+  margin-top:16px;
+  padding-left:20px;
+  border-left:3px solid var(--gold);
+}
+
+/* Part header */
+.part-header{
+  background:var(--navy);
+  padding:64px 48px;
+  text-align:center;
+}
+.part-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;display:block;
+}
+.part-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:900;color:var(--white);
+  line-height:1.15;
+}
+.part-desc{
+  font-family:'Crimson Pro',serif;
+  font-size:1.1rem;color:rgba(255,255,255,.55);
+  font-style:italic;margin-top:16px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════════════════════ */
+.chapter p{
+  margin-bottom:1.4em;
+  text-align:justify;
+  hyphens:auto;
+}
+.chapter p:first-of-type::first-letter{
+  float:left;
+  font-family:'Playfair Display',serif;
+  font-size:3.8em;font-weight:900;
+  color:var(--navy);
+  line-height:.75;
+  margin-right:.1em;margin-top:.05em;
+  padding-right:4px;
+}
+h2.sec{
+  font-family:'Playfair Display',serif;
+  font-size:1.55rem;font-weight:700;
+  color:var(--navy);
+  margin:2.4em 0 .8em;
+  padding-bottom:.4em;
+  border-bottom:1px solid var(--cream-dk);
+  letter-spacing:-.01em;
+}
+h3.sec{
+  font-family:'Crimson Pro',serif;
+  font-size:1.18rem;font-weight:600;
+  color:var(--navy-mid);
+  margin:1.8em 0 .6em;
+  letter-spacing:.02em;
+}
+h4.sec{
+  font-family:'Lora',serif;
+  font-size:1rem;font-weight:600;font-style:italic;
+  color:var(--ink-mid);
+  margin:1.4em 0 .5em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COMPONENTS
+═══════════════════════════════════════════════════════════ */
+
+/* Pull quote */
+.pullquote{
+  margin:2.4em 0;
+  padding:28px 32px 28px 56px;
+  background:var(--cream-dk);
+  border-radius:var(--r-lg);
+  position:relative;
+  font-family:'Crimson Pro',serif;
+  font-size:1.22rem;font-style:italic;
+  color:var(--navy-mid);
+  line-height:1.65;
+}
+.pullquote::before{
+  content:'\201C';
+  position:absolute;left:16px;top:10px;
+  font-family:'Playfair Display',serif;
+  font-size:5rem;line-height:1;
+  color:var(--gold);opacity:.5;
+}
+.pullquote .pq-author{
+  display:block;margin-top:12px;
+  font-family:'Crimson Pro',serif;
+  font-size:.82rem;font-style:normal;font-weight:600;
+  color:var(--ink-lt);letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.pullquote .pq-author::before{content:'— '}
+
+/* Author cite inline */
+.cite{
+  background:rgba(200,155,60,.12);
+  border-radius:3px;
+  padding:1px 6px;
+  font-family:'Crimson Pro',serif;
+  font-size:.9em;font-style:italic;
+  color:var(--navy-mid);
+}
+
+/* Callout box */
+.callout{
+  margin:2em 0;
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+.callout-header{
+  padding:12px 20px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;
+}
+.callout-body{
+  padding:20px 24px;
+  font-family:'Crimson Pro',serif;
+  font-size:1.05rem;line-height:1.7;
+}
+.callout.blue .callout-header{background:var(--navy);color:var(--gold-lt)}
+.callout.blue .callout-body{background:#eef3fb;color:var(--navy)}
+.callout.green .callout-header{background:var(--green);color:#fff}
+.callout.green .callout-body{background:var(--green-lt);color:var(--ink)}
+.callout.gold .callout-header{background:var(--gold);color:var(--navy)}
+.callout.gold .callout-body{background:var(--gold-pale);color:var(--ink)}
+.callout.rust .callout-header{background:var(--rust);color:#fff}
+.callout.rust .callout-body{background:var(--rust-lt);color:var(--ink)}
+
+/* Equation box */
+.eq-box{
+  margin:2.4em 0;
+  background:var(--navy);
+  border-radius:var(--r-lg);
+  padding:36px 40px;
+  text-align:center;
+  box-shadow:var(--shadow-lg);
+  position:relative;
+  overflow:hidden;
+}
+.eq-box::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(200,155,60,.12), transparent);
+}
+.eq-box .eq-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(200,155,60,.6);margin-bottom:14px;
+}
+.eq-box .eq-main{
+  font-family:'JetBrains Mono',monospace;
+  font-size:clamp(1.3rem,3vw,2.2rem);
+  font-weight:700;color:var(--gold-lt);
+  letter-spacing:.06em;
+  position:relative;
+}
+.eq-box .eq-desc{
+  font-family:'Crimson Pro',serif;
+  font-size:.92rem;font-style:italic;
+  color:rgba(255,255,255,.5);
+  margin-top:14px;position:relative;
+}
+
+/* Variable card */
+.var-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:16px;
+  margin:1.6em 0;
+}
+.var-card{
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow .2s,transform .2s;
+}
+.var-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.var-card-head{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;
+}
+.var-badge{
+  width:44px;height:44px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:1.3rem;font-weight:700;color:#fff;
+  flex-shrink:0;
+}
+.var-card-name{
+  font-family:'Crimson Pro',serif;
+  font-size:1rem;font-weight:600;color:var(--navy);
+}
+.var-card-role{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;letter-spacing:.12em;
+  color:var(--ink-lt);text-transform:uppercase;
+}
+.var-card-body{
+  padding:12px 18px 16px;
+  background:var(--cream);
+  font-family:'Crimson Pro',serif;
+  font-size:.95rem;color:var(--ink-mid);
+  line-height:1.6;
+  border-top:1px solid var(--cream-dk);
+}
+
+/* Table */
+.tbl-wrap{overflow-x:auto;margin:1.8em 0;border-radius:var(--r-lg);box-shadow:var(--shadow-sm)}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+thead tr{background:var(--navy)}
+thead th{
+  padding:12px 16px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;font-weight:600;letter-spacing:.12em;
+  color:var(--gold-lt);text-align:left;text-transform:uppercase;
+}
+tbody tr:nth-child(even){background:var(--cream-dk)}
+tbody tr:nth-child(odd){background:var(--white)}
+tbody tr:hover{background:rgba(200,155,60,.07)}
+tbody td{
+  padding:11px 16px;
+  font-family:'Crimson Pro',serif;
+  font-size:.95rem;color:var(--ink);
+  border-bottom:1px solid var(--cream-dk);
+  line-height:1.5;
+  vertical-align:top;
+}
+td.td-key{font-weight:600;color:var(--navy-mid)}
+td.td-mono{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.82rem;color:var(--navy-mid);font-weight:600;
+}
+
+/* Bullet list */
+.ul-styled{
+  list-style:none;padding:0;margin:.8em 0 1.4em;
+}
+.ul-styled li{
+  padding:.35em 0 .35em 28px;
+  position:relative;
+  font-family:'Crimson Pro',serif;
+  font-size:1rem;color:var(--ink);
+  line-height:1.6;
+  border-bottom:1px solid rgba(0,0,0,.04);
+}
+.ul-styled li::before{
+  content:'';
+  position:absolute;left:6px;top:50%;transform:translateY(-50%);
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);
+}
+.ul-styled.green li::before{background:var(--green)}
+.ul-styled.rust li::before{background:var(--rust)}
+.ul-styled.navy li::before{background:var(--navy-mid)}
+
+/* Numbered list */
+.ol-styled{
+  counter-reset:item;
+  list-style:none;padding:0;margin:.8em 0 1.4em;
+}
+.ol-styled li{
+  padding:.4em 0 .4em 42px;
+  position:relative;
+  font-family:'Crimson Pro',serif;
+  font-size:1rem;color:var(--ink);line-height:1.6;
+  counter-increment:item;
+}
+.ol-styled li::before{
+  content:counter(item);
+  position:absolute;left:0;top:.35em;
+  width:28px;height:28px;border-radius:50%;
+  background:var(--navy);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;font-weight:700;
+}
+
+/* Proposition box */
+.prop{
+  margin:2em 0;
+  padding:24px 28px;
+  border-radius:var(--r-lg);
+  border-left:4px solid var(--navy);
+  background:#f0f4fb;
+  position:relative;
+}
+.prop::before{
+  content:attr(data-n);
+  position:absolute;right:16px;top:16px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:2.5rem;font-weight:700;
+  color:rgba(27,52,100,.08);
+  line-height:1;
+}
+.prop-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;font-weight:600;letter-spacing:.2em;
+  color:var(--navy-mid);text-transform:uppercase;
+  margin-bottom:8px;display:block;
+}
+.prop-text{
+  font-family:'Crimson Pro',serif;
+  font-size:1.05rem;color:var(--navy);
+  line-height:1.65;font-style:italic;
+}
+.prop.green-border{border-left-color:var(--green);background:var(--green-lt)}
+.prop.green-border .prop-tag{color:var(--green)}
+.prop.gold-border{border-left-color:var(--gold);background:var(--gold-pale)}
+.prop.gold-border .prop-tag{color:#8a6b1a}
+.prop.rust-border{border-left-color:var(--rust);background:var(--rust-lt)}
+.prop.rust-border .prop-tag{color:var(--rust)}
+
+/* Author chip */
+.author-row{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin:.6em 0 1.2em;
+}
+.author-chip{
+  font-family:'Crimson Pro',serif;
+  font-size:.82rem;color:var(--navy-mid);
+  background:var(--cream-dk);
+  border:1px solid rgba(46,80,150,.15);
+  border-radius:20px;padding:4px 12px;
+  display:inline-flex;align-items:center;gap:5px;
+}
+.author-chip::before{content:'✦';font-size:.65em;color:var(--gold)}
+
+/* Relation row */
+.relation-list{margin:1.2em 0}
+.relation-item{
+  display:grid;
+  grid-template-columns:160px 1fr;
+  gap:0;
+  border-bottom:1px solid var(--cream-dk);
+}
+.relation-item:last-child{border-bottom:none}
+.rel-formula{
+  padding:12px 16px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;font-weight:600;
+  color:var(--navy-mid);
+  background:var(--cream-dk);
+  border-right:1px solid rgba(0,0,0,.06);
+  display:flex;align-items:center;
+}
+.rel-text{
+  padding:12px 18px;
+  font-family:'Crimson Pro',serif;
+  font-size:.95rem;color:var(--ink);
+  line-height:1.6;
+}
+
+/* References section */
+.ref-section{margin:1.6em 0}
+.ref-section h3{
+  font-family:'Crimson Pro',serif;
+  font-size:1rem;font-weight:600;
+  color:var(--navy);
+  padding-bottom:6px;
+  border-bottom:1px solid var(--cream-dk);
+  margin-bottom:.8em;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.ref-item{
+  font-family:'Crimson Pro',serif;
+  font-size:.9rem;color:var(--ink-mid);
+  padding:.4em 0 .4em 20px;
+  border-bottom:1px solid rgba(0,0,0,.04);
+  line-height:1.55;
+  position:relative;
+}
+.ref-item::before{
+  content:'';position:absolute;left:4px;top:.85em;
+  width:6px;height:1px;background:var(--gold);
+}
+
+/* Type map diagram */
+.type-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px;margin:1.6em 0;
+}
+.type-card{
+  border-radius:var(--r-lg);
+  padding:20px;
+  background:var(--white);
+  box-shadow:var(--shadow-sm);
+  border-top:3px solid var(--gold);
+}
+.type-card.t2{border-top-color:var(--navy-mid)}
+.type-card.t3{border-top-color:var(--rust)}
+.type-card.t4{border-top-color:#888}
+.type-card.t5{border-top-color:#c00}
+.type-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;font-weight:700;letter-spacing:.18em;
+  color:var(--ink-lt);text-transform:uppercase;
+  margin-bottom:6px;
+}
+.type-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;font-weight:700;color:var(--navy);
+  margin-bottom:8px;
+}
+.type-desc{
+  font-family:'Crimson Pro',serif;
+  font-size:.9rem;color:var(--ink-mid);line-height:1.55;
+}
+
+/* Horizontal rule */
+hr.sec-rule{
+  border:none;border-top:1px solid var(--cream-dk);
+  margin:3em 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   READING PROGRESS
+═══════════════════════════════════════════════════════════ */
+#progress-bar{
+  position:fixed;top:0;left:280px;right:0;height:2px;
+  background:var(--gold);transform-origin:left;transform:scaleX(0);
+  z-index:300;transition:transform .1s linear;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media(max-width:900px){
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:translateX(0)}
+  #content{margin-left:0}
+  #menu-toggle{display:block}
+  #progress-bar{left:0}
+  .chapter{padding:48px 24px}
+  #cover{padding:40px 24px}
+  .var-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="progress-bar"></div>
+
+<!-- Mobile toggle -->
+<button id="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<!-- Sidebar -->
+<aside id="sidebar">
+  <div class="sidebar-logo">
+    <div class="eq">R = f(S·[A+I+N+F+T]−C)</div>
+    <div class="label">Teoria da Economia Solidária</div>
+  </div>
+  <nav>
+    <a href="#cover" class="active"><span class="nav-num">◉</span>Capa</a>
+    <a href="#sumario"><span class="nav-num">◈</span>Sumário</a>
+    <div class="nav-part">Fundamentos</div>
+    <a href="#preface"><span class="nav-num">00</span>Prefácio</a>
+    <a href="#intro"><span class="nav-num">01</span>Introdução</a>
+    <div class="nav-part">Parte I</div>
+    <a href="#cap1"><span class="nav-num">02</span>Origens Teóricas do Campo</a>
+    <a href="#cap2"><span class="nav-num">03</span>Ontologia da ES</a>
+    <a href="#cap3"><span class="nav-num">04</span>Epistemologia</a>
+    <div class="nav-part">Parte II</div>
+    <a href="#cap4"><span class="nav-num">05</span>Variáveis do Modelo</a>
+    <a href="#cap5"><span class="nav-num">06</span>Campos Estruturais</a>
+    <a href="#cap6"><span class="nav-num">07</span>Dimensões Transversais</a>
+    <div class="nav-part">Parte III</div>
+    <a href="#cap7"><span class="nav-num">08</span>O Modelo Formal</a>
+    <a href="#cap8"><span class="nav-num">09</span>Dinâmica do Sistema</a>
+    <a href="#cap9"><span class="nav-num">10</span>Condições de Viabilidade</a>
+    <div class="nav-part">Parte IV</div>
+    <a href="#cap10"><span class="nav-num">11</span>A Pressão Capitalista</a>
+    <a href="#cap11"><span class="nav-num">12</span>Hipóteses e Indicadores</a>
+    <a href="#cap12"><span class="nav-num">13</span>Políticas Públicas</a>
+    <a href="#cap13"><span class="nav-num">14</span>Agenda de Pesquisa</a>
+    <div class="nav-part">Final</div>
+    <a href="#conclusao"><span class="nav-num">15</span>Conclusão</a>
+    <a href="#referencias"><span class="nav-num">◈</span>Referências</a>
+  </nav>
+</aside>
+
+<main id="content">
+
+<!-- ══════════════════════════════════════════════════════
+     COVER
+══════════════════════════════════════════════════════ -->
+<section id="cover">
+  <div class="cover-inner">
+    <div class="cover-badge">E-Book de Referência Acadêmica · 2025</div>
+    <h1 class="cover-title">Teoria da<br><span>Economia Solidária</span></h1>
+    <p class="cover-subtitle">Fundamentos, Modelo Formal e Aplicações<br>para Políticas Públicas e Planejamento Institucional</p>
+    <div class="cover-equation">
+      <div class="eq-label">Equação Central da Teoria</div>
+      <div class="eq-formula">R = f ( S · [A + I + N + F + T] − C )</div>
+    </div>
+    <div class="cover-meta">
+      <span class="cover-meta-item">Fundamentação em Singer · Gaiger · Laville · Polanyi</span>
+      <span class="cover-meta-divider">·</span>
+      <span class="cover-meta-item">Teoria Formal Operacionalizável</span>
+      <span class="cover-meta-divider">·</span>
+      <span class="cover-meta-item">Versão 2025</span>
+    </div>
+  </div>
+  <div class="cover-scroll">Rolar</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SUMÁRIO
+══════════════════════════════════════════════════════ -->
+<section id="sumario" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">◈ Sumário</span>
+    <h1 class="chapter-title">Estrutura da Obra</h1>
+  </div>
+
+  <div class="callout blue">
+    <div class="callout-header">Nota ao Leitor</div>
+    <div class="callout-body">Este e-book constitui uma obra de referência para a Teoria da Economia Solidária. Está organizado de modo que pode ser lido sequencialmente — como um livro — ou por acesso direto a capítulos específicos via menu lateral. Cada capítulo é autossuficiente, mas as conexões entre eles formam o sistema teórico completo.</div>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:2em">
+    <table>
+      <thead><tr>
+        <th>Parte</th><th>Capítulo</th><th>Tema</th><th>Função</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="td-key">Prefácio</td><td class="td-mono">00</td><td>Prefácio e Apresentação</td><td>Contextualização da obra</td></tr>
+        <tr><td class="td-key">Intro</td><td class="td-mono">01</td><td>Introdução — Do Campo Disperso à Teoria</td><td>Problema, objetivos e método</td></tr>
+        <tr><td class="td-key" rowspan="3">Parte I<br>Fundamentos</td><td class="td-mono">02</td><td>Origens Teóricas do Campo</td><td>Nível histórico-epistemológico</td></tr>
+        <tr><td class="td-mono">03</td><td>Ontologia da Economia Solidária</td><td>O que existe na ES</td></tr>
+        <tr><td class="td-mono">04</td><td>Epistemologia da ES</td><td>Como se conhece a ES</td></tr>
+        <tr><td class="td-key" rowspan="3">Parte II<br>Estrutura</td><td class="td-mono">05</td><td>Variáveis do Modelo Formal</td><td>Definição e fundamentação das variáveis</td></tr>
+        <tr><td class="td-mono">06</td><td>Os Oito Campos Estruturais</td><td>Nível estrutural do sistema</td></tr>
+        <tr><td class="td-mono">07</td><td>Dimensões Transversais</td><td>Gênero, raça, ecologia, saberes</td></tr>
+        <tr><td class="td-key" rowspan="3">Parte III<br>Modelo</td><td class="td-mono">08</td><td>O Modelo Formal Integrado</td><td>A equação central e suas proposições</td></tr>
+        <tr><td class="td-mono">09</td><td>Dinâmica do Sistema — O Ciclo Solidário</td><td>Nível dinâmico</td></tr>
+        <tr><td class="td-mono">10</td><td>Condições de Viabilidade e Tipologia dos EES</td><td>Análise comparativa</td></tr>
+        <tr><td class="td-key" rowspan="4">Parte IV<br>Aplicações</td><td class="td-mono">11</td><td>Contradições e a Pressão Capitalista</td><td>Limites e resistências da ES</td></tr>
+        <tr><td class="td-mono">12</td><td>Hipóteses Científicas e Indicadores Empíricos</td><td>Operacionalização da teoria</td></tr>
+        <tr><td class="td-mono">13</td><td>Políticas Públicas e Planejamento Institucional</td><td>Aplicação prática</td></tr>
+        <tr><td class="td-mono">14</td><td>Agenda de Pesquisa</td><td>Programa científico futuro</td></tr>
+        <tr><td class="td-key">Final</td><td class="td-mono">15</td><td>Conclusão — Uma Teoria para Transformar</td><td>Síntese e legado</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     PREFÁCIO
+══════════════════════════════════════════════════════ -->
+<div class="part-header" id="preface-part">
+  <span class="part-num">Abertura</span>
+  <h2 class="part-title">Prefácio</h2>
+  <p class="part-desc">A passagem da descrição à teoria</p>
+</div>
+
+<section id="preface" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">00 · Prefácio</span>
+    <h1 class="chapter-title">Da Riqueza Dispersa à Teoria Sistematizada</h1>
+    <p class="chapter-lead">Uma teoria nasce quando a complexidade da realidade pode ser explicada por poucas relações fundamentais. Este livro representa exatamente essa passagem.</p>
+  </div>
+
+  <p>A Economia Solidária acumulou, nas últimas três décadas, um conjunto extraordinariamente rico de experiências práticas, dados empíricos, reflexões teóricas e elaborações conceituais. Paul Singer, com sua análise da inversão da relação entre capital e trabalho; Luiz Inácio Gaiger, com sua sociologia dos empreendimentos econômicos solidários; Jean-Louis Laville, com sua teoria da economia plural; e Karl Polanyi, com o conceito de enraizamento social da economia — cada um desses autores ofereceu contribuições decisivas para a compreensão de um fenômeno que desafia as categorias da economia ortodoxa.</p>
+
+  <p>No Brasil, essa produção se enriqueceu com a experiência prática de milhares de empreendimentos mapeados pelo Sistema de Informações em Economia Solidária (SIES), com a ação das Incubadoras Tecnológicas de Cooperativas Populares (ITCPs), com a inovação dos Bancos Comunitários de Desenvolvimento, com os avanços das políticas públicas da SENAES e com a articulação política do Fórum Brasileiro de Economia Solidária (FBES).</p>
+
+  <div class="pullquote">
+    "O campo possui múltiplas abordagens, objetos e métodos, constituindo uma área ampla, multidimensional e interdisciplinar de pesquisa e prática social — mas carece de uma arquitetura teórica que integre suas partes em um sistema explicativo coerente."
+    <span class="pq-author">Síntese da literatura sobre o campo da ES no Brasil</span>
+  </div>
+
+  <p>Este e-book responde a essa lacuna. Seu objetivo não é descrever a Economia Solidária — há literatura abundante que já o faz. Seu objetivo é construir uma teoria: um sistema explicativo que identifica as variáveis fundamentais, formaliza as relações entre elas, formula hipóteses testáveis e orienta intervenções na realidade. Uma teoria que seja, ao mesmo tempo, rigorosa do ponto de vista científico e útil do ponto de vista prático.</p>
+
+  <p>A equação central que atravessa toda a obra — <strong>R = f(S · [A + I + N + F + T] − C)</strong> — não é uma simplificação redutora. É uma condensação teórica: cada letra carrega uma tradição de pesquisa, uma dimensão da prática solidária e um conjunto de indicadores mensuráveis. Juntas, elas respondem a pergunta que a literatura havia deixado em aberto: <em>quando e por que a Economia Solidária funciona — e quando e por que ela falha?</em></p>
+
+  <p>Esta obra é dirigida a três públicos complementares: pesquisadores que buscam um programa científico coerente; gestores públicos que precisam de referenciais para formular e avaliar políticas; e organizações da ES que necessitam de instrumentos de autodiagnóstico e planejamento estratégico. Para cada um desses públicos, a teoria aqui construída oferece algo distinto — e para todos, oferece algo essencial: um mapa do sistema que estão tentando compreender, construir ou apoiar.</p>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     INTRODUÇÃO
+══════════════════════════════════════════════════════ -->
+<section id="intro" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">01 · Introdução</span>
+    <h1 class="chapter-title">Do Campo Disperso à Teoria Operacional</h1>
+    <p class="chapter-lead">O problema teórico central não é falta de dados — é falta de síntese. O campo da Economia Solidária precisa de uma teoria que transforme sua riqueza empírica em sistema explicativo.</p>
+  </div>
+
+  <h2 class="sec">O Problema Teórico Central</h2>
+  <p>A produção acadêmica sobre Economia Solidária no Brasil é extensa, crescente e de qualidade reconhecida. Revisões da literatura identificam produção sobre autogestão, inclusão social, desenvolvimento territorial, políticas públicas, cooperativismo, saúde, juventude, gênero, finanças solidárias e muitas outras dimensões. O SIES mapeou mais de 19.000 empreendimentos. Teses e dissertações se multiplicaram nas universidades brasileiras a partir dos anos 2000. Eventos como o Encontro Internacional de Economia Solidária e o Congresso Brasileiro de Pesquisadores em Economia Solidária consolidaram o campo acadêmico.</p>
+
+  <p>E, no entanto, o campo permanece fragmentado. A razão é epistemológica, não empírica: a maioria dos trabalhos opera em modos que não produzem teoria. Eles descrevem casos sem generalizar; analisam partes sem articular o todo; ou utilizam teorias de outras áreas (sociologia, ciência política, economia institucional) sem construir uma teoria específica do campo da ES. O resultado é um paradoxo: muita evidência, pouca síntese.</p>
+
+  <div class="callout gold">
+    <div class="callout-header">Diagnóstico Central</div>
+    <div class="callout-body">A Economia Solidária tem dados, práticas e conceitos suficientes. O que falta não é evidência — é organização teórica do conhecimento existente. Esta obra responde a essa lacuna por meio de uma <strong>revisão teórica integrativa</strong>: não apenas descreve o campo, mas o reorganiza em uma arquitetura coerente.</div>
+  </div>
+
+  <h2 class="sec">A Solução: Modelo Formal com Variáveis Explícitas</h2>
+  <p>A solução proposta é a construção de um modelo formal — com variáveis identificadas, equação central, relações causais explícitas, hipóteses testáveis e indicadores empíricos. Um modelo formal tem cinco vantagens decisivas sobre abordagens meramente descritivas:</p>
+
+  <ul class="ul-styled">
+    <li><strong>Explicação:</strong> responde <em>por que</em> e <em>como</em>, não apenas <em>o quê</em>;</li>
+    <li><strong>Comparação:</strong> permite comparar empreendimentos, redes e territórios em escala nacional;</li>
+    <li><strong>Predição:</strong> formula hipóteses sobre condições de sucesso e fracasso que podem ser verificadas;</li>
+    <li><strong>Teste empírico:</strong> os indicadores operacionalizam as variáveis e tornam as relações verificáveis;</li>
+    <li><strong>Redução de complexidade:</strong> poucas relações fundamentais explicam muitos fenômenos observados.</li>
+  </ul>
+
+  <h2 class="sec">Método de Construção da Teoria</h2>
+  <p>A teoria foi construída por meio de uma <strong>revisão teórica integrativa</strong> — não descritiva, mas reorganizadora. O método operou em três camadas sucessivas:</p>
+
+  <ol class="ol-styled">
+    <li><strong>Cartografia do conhecimento:</strong> levantamento e classificação da produção existente em tipos (teórica, empírica, institucional, de movimentos sociais), identificando autores seminais, correntes e lacunas;</li>
+    <li><strong>Classificação analítica:</strong> organização do conhecimento levantado em campos estruturais, dimensões transversais e fundamentos — construindo a arquitetura do sistema;</li>
+    <li><strong>Integração teórica:</strong> articulação das partes em um modelo sistêmico formal, com equação central, proposições derivadas e hipóteses testáveis.</li>
+  </ol>
+
+  <p>Esse método tem um caráter <strong>meta-teórico</strong>: não apenas usa teorias existentes, mas organiza teorias existentes em uma arquitetura de segunda ordem. No sentido de Lakatos, o resultado é um <em>programa científico</em>: possui um núcleo duro (a equação central e suas proposições), um cinturão protetor (os campos estruturais e seus indicadores) e uma heurística positiva (as hipóteses e a agenda de pesquisa).</p>
+
+  <h2 class="sec">Tese Central da Obra</h2>
+
+  <div class="prop" data-n="T" style="border-left-color:var(--navy)">
+    <span class="prop-tag">Tese Central</span>
+    <p class="prop-text">A Economia Solidária constitui um sistema socioeconômico integrado, composto por múltiplos campos estruturais interdependentes, fundamentado no trabalho associado e na autogestão, articulado por redes e mediações institucionais, modulado por dimensões transversais de gênero, raça e ecologia, e orientado por uma racionalidade solidária voltada à reprodução ampliada da vida. Seu desempenho é função direta do grau de integração entre seus campos, mediada pela racionalidade solidária e limitada pelas pressões do sistema capitalista.</p>
+  </div>
+
+</section>
+</main>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = window.scrollY / total;
+  document.getElementById('progress-bar').style.transform = `scaleX(${pct})`;
+});
+
+// Active nav tracking
+const sections = document.querySelectorAll('section[id], div[id$="-part"]');
+const navLinks = document.querySelectorAll('nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`nav a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+
+<!-- PART 1 HEADER -->
+<div class="part-header" id="part1">
+  <span class="part-num">Parte I</span>
+  <h2 class="part-title">Fundamentos Teóricos da Economia Solidária</h2>
+  <p class="part-desc">Origens intelectuais, ontologia e epistemologia do campo</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 2 — ORIGENS TEÓRICAS
+══════════════════════════════════════════════════════ -->
+<section id="cap1" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">02 · Capítulo 1</span>
+    <h1 class="chapter-title">Origens Teóricas da Economia Solidária</h1>
+    <p class="chapter-lead">A Economia Solidária não surgiu do nada. Ela é o resultado da convergência de múltiplas tradições intelectuais — do socialismo associativista do século XIX ao pensamento crítico latino-americano do século XXI.</p>
+  </div>
+
+  <h2 class="sec">1.1 As Raízes do Pensamento Solidário</h2>
+  <p>A ideia de que o trabalho pode ser organizado de forma coletiva, democrática e orientada ao bem comum — em vez de subordinada ao capital — tem raízes profundas na história do pensamento econômico e social. Identificar essas raízes não é um exercício de arqueologia intelectual: é compreender de onde vêm as categorias que ainda estruturam o debate contemporâneo sobre Economia Solidária.</p>
+
+  <div class="author-row">
+    <span class="author-chip">Robert Owen (1771–1858)</span>
+    <span class="author-chip">Charles Fourier (1772–1837)</span>
+    <span class="author-chip">Pierre-Joseph Proudhon (1809–1865)</span>
+    <span class="author-chip">Karl Marx (1818–1883)</span>
+  </div>
+
+  <p>No século XIX, os chamados <em>socialistas utópicos</em> — Owen, Fourier, Saint-Simon — formularam as primeiras críticas sistemáticas ao capitalismo industrial e propuseram formas alternativas de organização do trabalho. Robert Owen, industrial inglês convertido em reformador social, criou a comunidade de New Harmony e liderou o primeiro grande movimento cooperativista britânico. Fourier propôs os <em>falanstérios</em> — comunidades de trabalho e vida coletiva onde a produção seria organizada em consonância com as inclinações naturais de cada trabalhador. Proudhon, com a noção de <em>mutualismo</em>, antecipou muitos dos debates contemporâneos sobre crédito solidário e associativismo produtivo.</p>
+
+  <div class="pullquote">
+    "A cooperativa não é apenas uma forma de empresa — é uma escola de democracia econômica. Ela demonstra, na prática, que o capital pode ser subordinado ao trabalho e não o contrário."
+    <span class="pq-author">Paul Singer, Introdução à Economia Solidária (2002)</span>
+  </div>
+
+  <p>O movimento cooperativista moderno, com os Pioneiros de Rochdale em 1844, traduziu essas ideias em princípios práticos: adesão voluntária e livre, controle democrático pelos membros, participação econômica dos membros, autonomia e independência, educação e informação, cooperação entre cooperativas, e preocupação com a comunidade. Esses princípios — reformulados periodicamente pela Aliança Cooperativa Internacional (ACI) — permanecem como referência fundamental para a Economia Solidária contemporânea.</p>
+
+  <h2 class="sec">1.2 Karl Polanyi e a Grande Transformação</h2>
+  <div class="author-row">
+    <span class="author-chip">Karl Polanyi (1886–1964)</span>
+  </div>
+
+  <p>A contribuição de Karl Polanyi é, talvez, a mais fundamental para os fundamentos teóricos da Economia Solidária. Em <em>A Grande Transformação</em> (1944), Polanyi demonstra que o mercado autorregulado — a ideia de que a economia funciona segundo leis próprias, independentes da sociedade — é uma construção histórica recente e socialmente destrutiva, não uma ordem natural das coisas.</p>
+
+  <p>Polanyi introduz dois conceitos centrais para a TES. O primeiro é a distinção entre <strong>economia formal</strong> (a análise dos meios escassos e fins alternativos, da tradição neoclássica) e <strong>economia substantiva</strong> (a análise de como as sociedades humanas organizam a produção e distribuição para garantir sua subsistência). A ES, nesse sentido, é uma economia substantiva: ela parte das necessidades humanas reais, não de axiomas de maximização.</p>
+
+  <div class="pullquote">
+    "A economia do homem, via de regra, está submersa em suas relações sociais. Ele não age desta forma para salvaguardar seu interesse individual na posse de bens materiais; ele age assim para salvaguardar sua situação social, suas exigências sociais, seu patrimônio social."
+    <span class="pq-author">Karl Polanyi, A Grande Transformação (1944)</span>
+  </div>
+
+  <p>O segundo conceito polanyiano fundamental é o de <strong>enraizamento</strong> (<em>embeddedness</em>): as relações econômicas são sempre enraizadas em relações sociais mais amplas — de reciprocidade, de redistribuição, de parentesco, de comunidade. A ES, nesse sentido, não é uma anomalia econômica: é a forma de organização que respeita o enraizamento natural da economia na vida social.</p>
+
+  <p>Polanyi também distingue três princípios de integração econômica que coexistem em qualquer sociedade complexa: <strong>mercado</strong> (troca baseada em preço), <strong>redistribuição</strong> (centralização e distribuição por uma autoridade) e <strong>reciprocidade</strong> (troca baseada em vínculos de obrigação mútua). A ES, segundo Laville, é uma economia <em>plural</em> que combina os três princípios — em contraste com o capitalismo, que tende à hegemonia do mercado.</p>
+
+  <h2 class="sec">1.3 Paul Singer e a Reinvenção da Economia Solidária</h2>
+  <div class="author-row">
+    <span class="author-chip">Paul Singer (1932–2018)</span>
+  </div>
+
+  <p>No contexto brasileiro, nenhuma contribuição foi mais decisiva para a consolidação da Economia Solidária como campo teórico e político do que a de Paul Singer. Professor da USP e fundador da SENAES, Singer formulou a teoria da ES como alternativa ao desemprego estrutural e como projeto de transformação social.</p>
+
+  <p>A contribuição teórica central de Singer é a formulação da <strong>inversão da relação capital-trabalho</strong> como o princípio definidor da ES. No capitalismo, é o capital que contrata e comanda o trabalho: quem detém os meios de produção decide o que produzir, como produzir, quanto pagar ao trabalhador e como distribuir o resultado. Na ES, essa relação se inverte: é o trabalho — por meio da associação dos próprios trabalhadores — que organiza e comanda o capital. Os trabalhadores são, ao mesmo tempo, os proprietários dos meios de produção e os gestores do processo produtivo.</p>
+
+  <div class="pullquote">
+    "A Economia Solidária seria outra forma de produção, cujos valores básicos são a igualdade e a democracia. Ela é anticapitalista no sentido de que nega a exploração do trabalho pelo capital, mas não nega o mercado."
+    <span class="pq-author">Paul Singer, Introdução à Economia Solidária (2002, p. 10)</span>
+  </div>
+
+  <p>Singer também é o responsável pela inserção da ES no debate político brasileiro. Como primeiro secretário nacional de Economia Solidária (2003-2015), ele transformou conceitos acadêmicos em instrumentos de política pública — consolidando o SIES, fortalecendo as ITCPs, promovendo o PAA e o PNAE como formas de comercialização solidária e defendendo um marco legal específico para a ES. Sua influência sobre a arquitetura institucional da ES no Brasil é inegável.</p>
+
+  <h2 class="sec">1.4 Luiz Inácio Gaiger e a Sociologia dos EES</h2>
+  <div class="author-row">
+    <span class="author-chip">Luiz Inácio Gaiger (1956–)</span>
+  </div>
+
+  <p>Se Singer foi o principal teórico político da ES brasileira, Gaiger foi seu principal sociólogo empírico. Seu trabalho consistiu em transformar as experiências concretas dos empreendimentos solidários em base de dados e teorização rigorosa — produzindo o que é, até hoje, a análise empírica mais sistemática da ES no Brasil.</p>
+
+  <p>A contribuição central de Gaiger ao modelo teórico da TES é a distinção entre <strong>autogestão formal e autogestão real</strong>. Enquanto a autogestão formal designa a existência de instâncias coletivas de decisão (assembleia, conselho de administração eleito), a autogestão real designa a participação efetiva dos membros nessas instâncias, a qualidade das deliberações e o grau em que as decisões coletivas determinam os rumos do empreendimento. Essa distinção é crucial: ela impede a confusão entre cooperativas que são solidárias apenas em nome e empreendimentos que vivem a autogestão como prática cotidiana.</p>
+
+  <div class="pullquote">
+    "A eficiência sistêmica dos empreendimentos solidários depende de que as virtudes solidárias e as necessidades de desempenho econômico se reforcem mutuamente — e não que uma suprima a outra."
+    <span class="pq-author">Luiz Inácio Gaiger, Sentidos e Experiências da Economia Solidária no Brasil (2004)</span>
+  </div>
+
+  <p>Gaiger também desenvolveu o conceito de <strong>eficiência sistêmica</strong> dos EES — a ideia de que a solidariedade interna (cooperação, partilha, democracia) não é um custo econômico, mas uma fonte de vantagem competitiva específica dos empreendimentos solidários. A solidariedade reduz custos de transação, aumenta a motivação dos trabalhadores, facilita a resolução de conflitos e fortalece os vínculos com o território — tudo isso com impacto positivo sobre a viabilidade econômica.</p>
+
+  <h2 class="sec">1.5 Jean-Louis Laville e a Economia Plural</h2>
+  <div class="author-row">
+    <span class="author-chip">Jean-Louis Laville (1954–)</span>
+    <span class="author-chip">Karl Polanyi (influência)</span>
+    <span class="author-chip">Gosta Esping-Andersen (diálogo)</span>
+  </div>
+
+  <p>O sociólogo francês Jean-Louis Laville desenvolveu, a partir dos anos 1990, uma abordagem da ES fortemente influenciada por Polanyi. Para Laville, a ES não é um setor econômico marginal ou uma resposta à crise do mercado de trabalho — é a expressão contemporânea de uma <strong>economia plural</strong>, que combina os princípios polanyianos de mercado, redistribuição e reciprocidade em formas organizativas inovadoras.</p>
+
+  <p>Laville introduz o conceito de <strong>serviços de proximidade</strong> e de <strong>iniciativas de solidariedade</strong> para descrever empreendimentos que emergem de demandas sociais não atendidas pelo Estado nem pelo mercado, ancoradas em vínculos comunitários e orientadas por lógicas de reciprocidade. Sua teoria da <em>hybridation des ressources</em> (hibridização de recursos) é especialmente relevante para a TES: empreendimentos solidários sustentáveis combinam, tipicamente, recursos de mercado (vendas), recursos públicos (subsídios, contratos) e recursos não monetários (trabalho voluntário, redes de reciprocidade) — sem depender exclusivamente de nenhum dos três.</p>
+
+  <div class="pullquote">
+    "A economia solidária não é a negação do mercado, mas a afirmação de que o mercado deve estar subordinado ao projeto político de uma sociedade justa e democrática."
+    <span class="pq-author">Jean-Louis Laville, L'économie solidaire: une perspective internationale (2007)</span>
+  </div>
+
+  <h2 class="sec">1.6 José Luis Coraggio e a Economia Social e Solidária</h2>
+  <div class="author-row">
+    <span class="author-chip">José Luis Coraggio (1942–)</span>
+  </div>
+
+  <p>O economista argentino José Luis Coraggio formulou o conceito de <strong>economia do trabalho</strong> — uma crítica ao capitalismo formulada não a partir do capital, mas da perspectiva dos trabalhadores. Para Coraggio, o objetivo central de qualquer organização econômica deve ser a reprodução da vida dos trabalhadores e de suas famílias — não a acumulação de capital. Esse deslocamento de perspectiva é o fundamento da variável R (Reprodução Ampliada da Vida) no modelo formal da TES.</p>
+
+  <p>Coraggio também desenvolveu o conceito de <strong>sector de la economía popular</strong> — o conjunto das unidades econômicas domésticas e comunitárias que operam segundo lógicas diferentes das empresas capitalistas, mas que precisam ser fortalecidas e articuladas para constituir uma alternativa sistêmica. Sua contribuição é fundamental para entender a ES não como um conjunto de empreendimentos isolados, mas como um <em>sistema</em> de reprodução econômica alternativa.</p>
+
+  <h2 class="sec">1.7 Boaventura de Sousa Santos e as Epistemologias do Sul</h2>
+  <div class="author-row">
+    <span class="author-chip">Boaventura de Sousa Santos (1940–)</span>
+  </div>
+
+  <p>A contribuição de Boaventura ao campo da ES é primariamente epistemológica. Em <em>Produzir para Viver</em> (2002) e em sua teoria das <em>Epistemologias do Sul</em>, Santos argumenta que as práticas de ES representam não apenas alternativas econômicas, mas <strong>alternativas epistemológicas</strong>: elas produzem conhecimento a partir de experiências e sujeitos que a ciência convencional ignora ou desqualifica.</p>
+
+  <p>Para Santos, a ES é parte de um projeto mais amplo de <em>globalização contra-hegemônica</em>: uma resposta coletiva e organizada dos movimentos sociais do Sul Global à globalização neoliberal. Essa perspectiva é relevante para a TES porque situa a ES em seu contexto político e histórico — e porque justifica a atenção da teoria às dimensões de raça, colonialidade e saberes locais como variáveis constitutivas, não periféricas.</p>
+
+  <h2 class="sec">1.8 Paulo Freire e a Pedagogia da Economia Solidária</h2>
+  <div class="author-row">
+    <span class="author-chip">Paulo Freire (1921–1997)</span>
+  </div>
+
+  <p>A influência de Paulo Freire na Economia Solidária é menos óbvia, mas não menos profunda. Sua <em>Pedagogia do Oprimido</em> fornece a base para compreender a <strong>dimensão educativa da autogestão</strong>: o processo de gestão coletiva é, em si mesmo, um processo de conscientização e emancipação. Os trabalhadores que participam de assembleias, que tomam decisões coletivas, que prestam contas uns aos outros e que resolvem conflitos de forma democrática estão não apenas gerindo um empreendimento — estão se desenvolvendo como sujeitos políticos.</p>
+
+  <p>As Incubadoras Tecnológicas de Cooperativas Populares (ITCPs) — o principal dispositivo de formação e apoio à ES no Brasil — incorporam explicitamente a pedagogia freireana em suas metodologias. A ideia de que o saber técnico e o saber organizativo não podem ser simplesmente transferidos aos trabalhadores, mas precisam ser construídos com eles a partir de suas experiências e saberes prévios, é uma herança direta de Freire.</p>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 3 — ONTOLOGIA
+══════════════════════════════════════════════════════ -->
+<section id="cap2" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">03 · Capítulo 2</span>
+    <h1 class="chapter-title">Ontologia da Economia Solidária</h1>
+    <p class="chapter-lead">O que existe, de forma própria e irredutível, no campo da Economia Solidária? Quatro elementos ontológicos fundamentais constituem a substância diferenciada da ES.</p>
+  </div>
+
+  <h2 class="sec">2.1 Trabalho Associado — O Elemento Central</h2>
+  <p>O trabalho associado é o elemento ontológico mais fundamental da ES e aquele que a distingue mais radicalmente do capitalismo. No capitalismo, o trabalho é uma mercadoria: é comprado pelo capital no mercado de trabalho, utilizado no processo produtivo e remunerado por um salário que representa, em geral, menos do que o valor que o trabalho cria. O trabalhador é, nesse sistema, um fator de produção — um recurso a ser otimizado, não um sujeito a ser respeitado.</p>
+
+  <p>Na Economia Solidária, essa relação se inverte estruturalmente. Os trabalhadores são, ao mesmo tempo, os proprietários dos meios de produção e os gestores do processo produtivo. Não há relação de emprego no sentido clássico: não há quem compra e quem vende força de trabalho. Há, em vez disso, associação — a forma pela qual sujeitos livres e iguais se unem para alcançar objetivos comuns que não poderiam alcançar sozinhos.</p>
+
+  <div class="callout blue">
+    <div class="callout-header">Definição Teórica — Trabalho Associado</div>
+    <div class="callout-body">Forma de organização da atividade produtiva na qual os trabalhadores são simultaneamente os proprietários coletivos dos meios de produção e os sujeitos do processo produtivo, sem que haja relação de emprego ou subordinação a capital externo. A identidade entre trabalhador e proprietário é o que define estruturalmente o trabalho associado em contraste com o trabalho assalariado.</div>
+  </div>
+
+  <h2 class="sec">2.2 Autogestão — O Princípio Organizador</h2>
+  <p>A autogestão é o princípio pelo qual os trabalhadores associados exercem, coletivamente, o poder de gestão sobre o empreendimento. Ela não é apenas um método de administração — é uma forma de poder radicalmente diferente da hierarquia capitalista. Na empresa capitalista, o poder emana do capital: quem possui os meios de produção decide os rumos do empreendimento. Na ES autogestionária, o poder emana do trabalho coletivo: cada trabalhador tem, em princípio, o mesmo peso decisório — independentemente do capital que eventualmente tenha investido.</p>
+
+  <p>A literatura distingue, desde Gaiger (2004), entre <strong>autogestão formal</strong> e <strong>autogestão real</strong>. A autogestão formal refere-se à existência de instâncias coletivas de decisão: assembleia geral, conselho de administração eleito, mecanismos de prestação de contas. A autogestão real vai além: exige a participação efetiva dos membros — incluindo os menos escolarizados, os mais tímidos, as mulheres e os trabalhadores mais jovens — em decisões que afetam sua vida e seu trabalho.</p>
+
+  <div class="pullquote">
+    "Não basta que a assembleia exista. É preciso que ela delibere, que suas deliberações sejam respeitadas, e que todos os membros se sintam capazes e seguros para participar dela."
+    <span class="pq-author">Luiz Inácio Gaiger, Sentidos e Experiências da Economia Solidária no Brasil (2004)</span>
+  </div>
+
+  <p>A autogestão também tem uma dimensão pedagógica que se articula diretamente com a variável S (Racionalidade Solidária) do modelo formal: a prática cotidiana da autogestão desenvolve e consolida nos trabalhadores as capacidades políticas, organizativas e éticas que constituem a racionalidade solidária. Autogestão e racionalidade solidária se reforçam mutuamente — o que explica, no modelo, a relação A → fortalece → S.</p>
+
+  <h2 class="sec">2.3 Cooperação — O Laço Social Econômico</h2>
+  <p>A cooperação é o laço social que articula os membros do empreendimento e os diferentes empreendimentos entre si. Ela opera em dois planos simultâneos: (i) <em>intraorganizacional</em> — entre os membros de um mesmo empreendimento; e (ii) <em>interorganizacional</em> — entre empreendimentos, redes e territórios.</p>
+
+  <p>É fundamental distinguir a cooperação solidária da cooperação instrumental. A cooperação instrumental — como a que ocorre em equipes de trabalho em empresas capitalistas — é orientada para a eficiência produtiva e não necessariamente envolve comprometimento com os objetivos e bem-estar dos demais. A cooperação solidária, por sua vez, envolve um grau de identificação com o coletivo que vai além da racionalidade instrumental: os trabalhadores cooperam não apenas porque isso os beneficia individualmente, mas porque se identificam como membros de uma comunidade com objetivos e valores compartilhados.</p>
+
+  <h2 class="sec">2.4 Racionalidade Solidária — O Fundamento Axiológico</h2>
+  <p>A racionalidade solidária é o fundamento axiológico da ES — o conjunto de valores, normas e disposições que orienta as decisões econômicas dos agentes. Ela se distingue da racionalidade capitalista não apenas por incluir valores de solidariedade e equidade, mas por estabelecer uma hierarquia de fins radicalmente diferente: na ES, a viabilidade econômica é condição de existência, não objetivo final. O objetivo final é a reprodução ampliada da vida.</p>
+
+  <div class="callout green">
+    <div class="callout-header">Racionalidade Solidária vs. Racionalidade Capitalista</div>
+    <div class="callout-body">
+      <strong>Racionalidade capitalista:</strong> instrumental-maximizadora — orienta as decisões para a maximização do retorno sobre o capital investido. O bem-estar dos trabalhadores é relevante apenas na medida em que afeta a produtividade.<br><br>
+      <strong>Racionalidade solidária:</strong> substantivo-emancipatória — orienta as decisões para a reprodução ampliada da vida dos trabalhadores e comunidades. A viabilidade econômica é condição necessária, não objetivo supremo.
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 4 — EPISTEMOLOGIA
+══════════════════════════════════════════════════════ -->
+<section id="cap3" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">04 · Capítulo 3</span>
+    <h1 class="chapter-title">Epistemologia da Economia Solidária</h1>
+    <p class="chapter-lead">Como se produz conhecimento válido sobre a ES? A questão epistemológica não é periférica — ela determina que perguntas podem ser feitas, que métodos podem ser usados e que respostas são legítimas.</p>
+  </div>
+
+  <h2 class="sec">3.1 Interdisciplinaridade como Princípio</h2>
+  <p>A Economia Solidária não pode ser adequadamente compreendida por uma única disciplina. Ela mobiliza, simultaneamente: a <em>Economia</em> (viabilidade, mercados, finanças, distribuição); a <em>Sociologia</em> (cooperação, redes, identidades coletivas, estruturas organizacionais); a <em>Ciência Política</em> (poder, autogestão, políticas públicas, movimentos sociais); a <em>Geografia</em> (territorialidade, desenvolvimento local, escala); a <em>Pedagogia</em> (processos formativos, educação popular); e a <em>Ecologia</em> (sustentabilidade, limites planetários, agroecologia).</p>
+
+  <p>Isso impõe à TES uma postura epistemológica interdisciplinar: não a justaposição superficial de disciplinas (multidisciplinaridade), nem a dissolução das fronteiras disciplinares (transdisciplinaridade), mas a articulação rigorosa de cada disciplina para iluminar aspectos específicos de um objeto comum e indivisível.</p>
+
+  <h2 class="sec">3.2 Construção a partir da Prática</h2>
+  <p>Um princípio epistemológico específico da ES é que o conhecimento válido sobre ela se constrói, em parte, <em>a partir da prática dos sujeitos</em>. Os empreendimentos solidários, as redes territoriais, os Bancos Comunitários de Desenvolvimento, as cooperativas agroecológicas — todos esses são laboratórios vivos de inovação social e econômica. Ignorar o saber que emerge dessas práticas seria, epistemologicamente, um empobrecimento.</p>
+
+  <div class="pullquote">
+    "Não há sabedoria que não haja passado pela experiência. A teoria da Economia Solidária que não dialoga com a prática dos trabalhadores associados é uma teoria sobre eles, não com eles — e, portanto, uma teoria incompleta."
+    <span class="pq-author">Síntese da tradição freiriana na pesquisa em ES</span>
+  </div>
+
+  <h2 class="sec">3.3 Triangulação Metodológica</h2>
+  <p>Dada a complexidade do objeto, a TES propõe a triangulação metodológica como estratégia central: combinar análises quantitativas (dados do SIES, surveys, estatísticas) com análises qualitativas (estudos de caso, etnografias, entrevistas em profundidade) e análises documentais (políticas públicas, estatutos, atas, balanços). Cada método captura dimensões que os outros não alcançam. A robustez da teoria depende da convergência dos achados obtidos por múltiplos métodos.</p>
+
+  <h2 class="sec">3.4 O Engajamento Crítico Reflexivo</h2>
+  <p>Muitos pesquisadores da ES são, ao mesmo tempo, assessores de empreendimentos, militantes de redes solidárias e participantes dos movimentos sociais que promovem a ES. Isso levanta questões legítimas sobre objetividade e imparcialidade. A TES não propõe um falso distanciamento positivista — mas um <strong>engajamento crítico reflexivo</strong>: o pesquisador deve tornar explícitos seus valores e posicionamentos e submetê-los ao escrutínio metodológico. O engajamento pode ser uma fonte de conhecimento privilegiado, desde que não comprometa o rigor analítico.</p>
+
+  <h2 class="sec">3.5 A Metateoria como Nível Epistemológico Superior</h2>
+  <p>A Teoria da Economia Solidária aqui proposta opera em um nível epistemológico específico: o da <strong>metateoria</strong>. Uma metateoria é uma teoria que organiza outras teorias — que estabelece a arquitetura conceitual dentro da qual teorias de médio alcance podem ser situadas, relacionadas e avaliadas. Nesse sentido, a TES não substitui as teorias existentes sobre cooperativismo, finanças solidárias, territorialidade ou autogestão: ela as integra em uma arquitetura coerente de segunda ordem.</p>
+
+  <p>Essa função meta-teórica é o que, no sentido lakatosiano, constitui um <em>programa científico</em>: uma estrutura teórica com um <em>núcleo duro</em> (a equação central e suas proposições), um <em>cinturão protetor</em> (os campos estruturais e seus indicadores, passíveis de revisão sem comprometer o núcleo) e uma <em>heurística positiva</em> (as hipóteses e a agenda de pesquisa que o programa gera).</p>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     PART II HEADER
+══════════════════════════════════════════════════════ -->
+<div class="part-header" id="part2">
+  <span class="part-num">Parte II</span>
+  <h2 class="part-title">Estrutura do Sistema</h2>
+  <p class="part-desc">Variáveis, campos estruturais e dimensões transversais</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 5 — VARIÁVEIS DO MODELO
+══════════════════════════════════════════════════════ -->
+<section id="cap4" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">05 · Capítulo 4</span>
+    <h1 class="chapter-title">As Variáveis do Modelo Formal</h1>
+    <p class="chapter-lead">O modelo formal da TES opera com oito variáveis — uma dependente, uma mediadora, cinco independentes e uma de tensão. Cada variável carrega uma tradição teórica e um conjunto de indicadores empíricos.</p>
+  </div>
+
+  <div class="eq-box">
+    <div class="eq-tag">Equação Central da Teoria da Economia Solidária</div>
+    <div class="eq-main">R = f ( S · [A + I + N + F + T] − C )</div>
+    <div class="eq-desc">A reprodução ampliada da vida (R) é função do produto da racionalidade solidária (S) pela soma das variáveis estruturais, subtraída da pressão capitalista (C)</div>
+  </div>
+
+  <h2 class="sec">4.1 R — Variável Dependente: Reprodução Ampliada da Vida</h2>
+  <div class="var-grid">
+    <div class="var-card">
+      <div class="var-card-head" style="background:var(--cream-dk)">
+        <div class="var-badge" style="background:var(--navy)">R</div>
+        <div>
+          <div class="var-card-name">Reprodução Ampliada da Vida</div>
+          <div class="var-card-role">Variável Dependente — O que se busca maximizar</div>
+        </div>
+      </div>
+      <div class="var-card-body">Resultado multidimensional que integra: renda e condições materiais de vida; autonomia coletiva e autodeterminação; sustentabilidade de longo prazo; e desenvolvimento das capacidades humanas dos trabalhadores e comunidades.</div>
+    </div>
+  </div>
+
+  <p>A escolha de R como variável dependente é um posicionamento teórico e ético explícito, derivado da tradição de Coraggio (2011) e do pensamento do Bem Viver. A ES não pode ser avaliada pelos mesmos critérios que a empresa capitalista — lucratividade, retorno sobre investimento, participação de mercado. Ela deve ser avaliada por sua contribuição à vida em sua multidimensionalidade.</p>
+
+  <p>R é uma variável composta, operacionalizada por um índice que articula: renda média das famílias dos trabalhadores; grau de autonomia coletiva do empreendimento; índice de sustentabilidade (econômica, social e ambiental); e índice de desenvolvimento de capacidades (escolaridade, participação política, qualidade de vida).</p>
+
+  <h2 class="sec">4.2 S — Variável Mediadora: Racionalidade Solidária</h2>
+  <div class="var-grid">
+    <div class="var-card">
+      <div class="var-card-head" style="background:#e8f5ee">
+        <div class="var-badge" style="background:var(--green)">S</div>
+        <div>
+          <div class="var-card-name">Racionalidade Solidária</div>
+          <div class="var-card-role">Variável Mediadora — O multiplicador do sistema</div>
+        </div>
+      </div>
+      <div class="var-card-body">Conjunto de valores, normas e disposições que orienta as decisões econômicas dos agentes da ES — subordinando a viabilidade econômica à reprodução da vida, segundo princípios de cooperação, equidade, sustentabilidade e autonomia coletiva.</div>
+    </div>
+  </div>
+
+  <p>S é a variável mediadora porque determina o <em>modo</em> como as variáveis estruturais se articulam e o <em>fim</em> para o qual se articulam. Matematicamente, S multiplica a soma [A+I+N+F+T]: se S = 0, o resultado é zero — não importa quanto os demais elementos existam, sem racionalidade solidária eles produzem cooperativismo instrumental, não ES. Se S é alto, o efeito das variáveis estruturais sobre R é potencializado.</p>
+
+  <p>S opera em três planos simultâneos: o <em>individual</em> (valores e disposições dos trabalhadores); o <em>organizacional</em> (cultura interna do empreendimento); e o <em>sistêmico</em> (lógica de articulação entre os campos). A formação solidária — campo estrutural do modelo — é o principal instrumento de construção e manutenção de S.</p>
+
+  <h2 class="sec">4.3 As Cinco Variáveis Independentes</h2>
+
+  <div class="var-grid">
+    <div class="var-card">
+      <div class="var-card-head" style="background:#eef3fb">
+        <div class="var-badge" style="background:var(--navy-mid)">A</div>
+        <div>
+          <div class="var-card-name">Autogestão</div>
+          <div class="var-card-role">Motor interno do sistema</div>
+        </div>
+      </div>
+      <div class="var-card-body">Princípio organizativo pelo qual trabalhadores associados gerem coletivamente o empreendimento. Inclui assembleias deliberativas, rotatividade de liderança, participação real dos membros e prestação de contas horizontalizada.</div>
+    </div>
+    <div class="var-card">
+      <div class="var-card-head" style="background:#eaf0f9">
+        <div class="var-badge" style="background:var(--navy-lt)">I</div>
+        <div>
+          <div class="var-card-name">Integração Sistêmica</div>
+          <div class="var-card-role">Meta-variável de maior impacto</div>
+        </div>
+      </div>
+      <div class="var-card-body">Grau de articulação funcional entre os campos estruturais da ES. Não é dada automaticamente — emerge de processos deliberados de construção de vínculos. Quanto maior I, maior o efeito multiplicador das demais variáveis.</div>
+    </div>
+    <div class="var-card">
+      <div class="var-card-head" style="background:#f0f8f4">
+        <div class="var-badge" style="background:var(--green)">N</div>
+        <div>
+          <div class="var-card-name">Densidade de Redes</div>
+          <div class="var-card-role">Articulação e proteção coletiva</div>
+        </div>
+      </div>
+      <div class="var-card-body">Grau de conexão entre EES, organizações de apoio, redes de comercialização, finanças solidárias e movimentos sociais. Inclui densidade (número de conexões), intensidade (volume de trocas) e reciprocidade.</div>
+    </div>
+    <div class="var-card">
+      <div class="var-card-head" style="background:var(--rust-lt)">
+        <div class="var-badge" style="background:var(--rust)">F</div>
+        <div>
+          <div class="var-card-name">Finanças Solidárias</div>
+          <div class="var-card-role">Sustentação econômica do sistema</div>
+        </div>
+      </div>
+      <div class="var-card-body">Acesso a instrumentos de financiamento compatíveis com a ES: crédito solidário, fundos rotativos, BCDs, moedas sociais. F é frequentemente o gargalo mais crítico dos EES.</div>
+    </div>
+    <div class="var-card">
+      <div class="var-card-head" style="background:#f0eaf8">
+        <div class="var-badge" style="background:var(--roxo, #5B2D8E)">T</div>
+        <div>
+          <div class="var-card-name">Enraizamento Territorial</div>
+          <div class="var-card-role">Estabilizador do sistema</div>
+        </div>
+      </div>
+      <div class="var-card-body">Grau de integração do EES com seu território. Expressa o conceito polanyiano de <em>embeddedness</em>: empreendimentos enraizados são mais resilientes, mais sustentáveis e mais contribuintes ao desenvolvimento local.</div>
+    </div>
+  </div>
+
+  <h2 class="sec">4.4 C — Variável de Tensão: Pressão Capitalista</h2>
+  <div class="var-grid">
+    <div class="var-card">
+      <div class="var-card-head" style="background:#fff0ec">
+        <div class="var-badge" style="background:#b84a1e">C</div>
+        <div>
+          <div class="var-card-name">Pressão Capitalista</div>
+          <div class="var-card-role">Força de resistência e cooptação</div>
+        </div>
+      </div>
+      <div class="var-card-body">Conjunto de forças estruturais do capitalismo que incidem sobre os EES: concorrência predatória, escassez de crédito adequado, exigências burocráticas, isomorfismo institucional, pressão por rentabilidade de curto prazo e desmonte de políticas públicas.</div>
+    </div>
+  </div>
+
+  <p>C age sobre o sistema por três mecanismos principais. Primeiro, <strong>C reduz S</strong>: a necessidade de competir em mercados capitalistas induz comportamentos individualistas e corrói a racionalidade solidária. Segundo, <strong>C fragmenta I</strong>: o capitalismo opera por especialização e separação, impedindo a construção de ecossistemas solidários integrados. Terceiro, <strong>C impõe lógica de mercado</strong> como único critério de avaliação — pressionando os EES a eliminar os "custos" da democracia interna.</p>
+
+  <div class="prop rust-border" data-n="C">
+    <span class="prop-tag">Mecanismo Central de C</span>
+    <p class="prop-text">A pressão capitalista age prioritariamente sobre S e I — reduzindo a racionalidade solidária e fragmentando a integração sistêmica. Por isso, as estratégias mais eficazes de resistência à pressão capitalista são: formação permanente (que reconstrói S) e políticas integradas que constroem ecossistemas solidários territoriais (que elevam I).</p>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 6 — CAMPOS ESTRUTURAIS
+══════════════════════════════════════════════════════ -->
+<section id="cap5" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">06 · Capítulo 5</span>
+    <h1 class="chapter-title">Os Oito Campos Estruturais da Economia Solidária</h1>
+    <p class="chapter-lead">Os campos estruturais são as dimensões organizativas concretas por meio das quais a ES se materializa. Cada campo tem fundamento teórico, funções no sistema e indicadores empíricos específicos.</p>
+  </div>
+
+  <h2 class="sec">Campo 1 — Trabalho e Produção Associada</h2>
+  <p>O campo da produção associada engloba todas as formas de organização coletiva da atividade produtiva nas quais os trabalhadores são simultaneamente proprietários e gestores. A forma jurídica mais comum é a cooperativa, regulamentada pela Lei 5.764/1971 no Brasil — mas a TES reconhece que a forma jurídica não determina a natureza solidária do empreendimento: o que determina são os princípios de funcionamento.</p>
+  <p>Singer (2002) destaca que os empreendimentos recuperados por trabalhadores — empresas que foram falidas e retomadas pelos funcionários como cooperativas — são os casos mais radicais e politicamente significativos de trabalho associado, pois implicam a expropriação do capital pelos trabalhadores e a construção da autogestão em condições de adversidade extrema.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Indicador</th><th>Mensuração</th><th>Fonte</th></tr></thead>
+      <tbody>
+        <tr><td>Grau de democratização</td><td>% decisões por assembleia</td><td>Atas / Questionário</td></tr>
+        <tr><td>Frequência de assembleias</td><td>N.º/ano</td><td>Registros internos</td></tr>
+        <tr><td>Participação real dos membros</td><td>% membros ativos em deliberações</td><td>Questionário</td></tr>
+        <tr><td>Rotatividade de liderança</td><td>Anos consecutivos na direção</td><td>Estatuto / Eleições</td></tr>
+        <tr><td>Equidade distributiva</td><td>Coeficiente de variação das retiradas</td><td>Balancete</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sec">Campo 2 — Finanças Solidárias</h2>
+  <p>As finanças solidárias compreendem o conjunto de instrumentos, práticas e instituições voltados à captação, gestão e distribuição de recursos financeiros segundo os princípios da ES. O caso paradigmático é o Banco Palmas, fundado em 1998 no Ceará, que combina microcrédito em moeda nacional com emissão de moeda social circulante local — a <em>palma</em>. O Banco Palmas demonstrou empiricamente que comunidades excluídas do sistema financeiro convencional podem construir seus próprios instrumentos financeiros, aumentando a circulação interna de recursos e fortalecendo a economia local.</p>
+
+  <div class="pullquote">
+    "A moeda social não é apenas um instrumento financeiro — é um instrumento político. Ela expressa a capacidade da comunidade de criar sua própria lógica de troca, ancorada em relações de confiança e reciprocidade que o sistema financeiro convencional não reconhece nem valoriza."
+    <span class="pq-author">Instituto Palmas, Banco Palmas: 15 anos (2013)</span>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Indicador</th><th>Mensuração</th><th>Fonte</th></tr></thead>
+      <tbody>
+        <tr><td>Acesso a crédito solidário</td><td>S/N; volume captado (R$)</td><td>Questionário / SIES</td></tr>
+        <tr><td>Diversidade de fontes</td><td>N.º fontes distintas</td><td>Balanço / Questionário</td></tr>
+        <tr><td>Uso de moeda social</td><td>S/N; volume circulado</td><td>BCD local</td></tr>
+        <tr><td>Taxa de reinvestimento coletivo</td><td>% sobras reinvestidas</td><td>Balancete</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sec">Campo 3 — Comercialização Solidária</h2>
+  <p>A comercialização solidária abrange as formas de circulação de mercadorias e serviços que respeitam e reforçam os princípios da ES. Seus instrumentos principais são: feiras de ES; lojas solidárias; compras públicas (PAA e PNAE); grupos de consumo responsável; e plataformas digitais cooperativas. O princípio orientador é a maximização da margem que permanece com o produtor e no território — em contraposição ao princípio capitalista de maximização da margem dos intermediários.</p>
+
+  <p>O Programa de Aquisição de Alimentos (PAA), criado em 2003, e o Programa Nacional de Alimentação Escolar (PNAE), reformado em 2009 para exigir 30% de compras da agricultura familiar, são as políticas públicas que mais impactaram a comercialização solidária no Brasil. Estudos demonstram que o acesso ao PAA e ao PNAE aumenta significativamente a renda dos produtores, reduz a dependência de atravessadores e fortalece a organização coletiva.</p>
+
+  <h2 class="sec">Campo 4 — Redes e Ecossistemas Solidários</h2>
+  <p>As redes solidárias são arranjos de cooperação que representam o nível meso da ES — a articulação entre o micro (empreendimentos) e o macro (políticas, mercados, instituições). O FBES, criado em 2003, é o principal exemplo de rede político-organizativa no Brasil: articula mais de 3.000 empreendimentos, entidades de apoio e gestores públicos em torno de uma agenda comum de fortalecimento da ES.</p>
+
+  <p>A análise de redes sociais (ARS) fornece instrumentos metodológicos importantes para o estudo das redes solidárias: densidade (proporção de vínculos existentes sobre possíveis), centralidade (posição de cada nó na rede), intermediação (capacidade de conectar diferentes partes da rede) e reciprocidade (proporção de vínculos bidirecionais).</p>
+
+  <h2 class="sec">Campo 5 — Territorialidade e Desenvolvimento Local</h2>
+  <p>A territorialidade é a variável que estabiliza o sistema. Empreendimentos profundamente enraizados no território — usando recursos locais, vendendo para o mercado local, participando da vida comunitária — são mais resilientes a crises externas e mais contribuintes ao desenvolvimento local. O conceito de <em>Território Solidário</em> designa um espaço geográfico onde se verifica: densidade de EES interconectados; finanças solidárias circulantes; circuitos locais de comercialização; apoio de políticas públicas; e cultura de cooperação enraizada.</p>
+
+  <h2 class="sec">Campo 6 — Tecnociência Solidária</h2>
+  <p>A tecnociência solidária designa tecnologias e saberes técnicos compatíveis com os princípios da ES. O conceito central é o de <strong>Tecnologia Social</strong> (TS) — desenvolvido pela Rede de Tecnologia Social (RTS) e pela FINEP — que designa produtos, técnicas ou metodologias reaplicáveis, desenvolvidos com as comunidades, que representam soluções de inclusão social de domínio coletivo. Dagnino (2009) desenvolveu o conceito complementar de <strong>Adequação Sociotécnica</strong> (AST): o processo de adaptação de tecnologias convencionais para uso em EES, tornando-as coerentes com os princípios autogestionários.</p>
+
+  <h2 class="sec">Campo 7 — Educação e Formação Solidária</h2>
+  <p>A educação solidária é um campo estrutural — não auxiliar — da ES porque a autogestão exige capacidades que precisam ser desenvolvidas intencionalmente. As ITCPs, criadas a partir da experiência da COPPE/UFRJ em 1995, são as principais instituições de educação solidária no Brasil. Elas incorporam a metodologia freiriana de educação popular: o saber técnico e organizativo não é transferido de fora para dentro, mas construído em processo dialogado com os trabalhadores, a partir de suas experiências e saberes.</p>
+
+  <h2 class="sec">Campo 8 — Políticas Públicas e Marco Institucional</h2>
+  <p>As políticas públicas são o principal instrumento pelo qual o Estado pode alterar as condições de viabilidade dos EES. O período 2003-2016 foi o de maior avanço no Brasil: SENAES, SIES, PRONINC, PAA, PNAE, Lei do Cooperativismo de Crédito. A partir de 2016, houve inflexão regressiva com o desmonte da SENAES — demonstrando empiricamente a importância de C (pressão capitalista via Estado) como variável do modelo. A recriação de espaço institucional para a ES a partir de 2023 reabriu oportunidades.</p>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 7 — DIMENSÕES TRANSVERSAIS
+══════════════════════════════════════════════════════ -->
+<section id="cap6" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">07 · Capítulo 6</span>
+    <h1 class="chapter-title">Dimensões Transversais</h1>
+    <p class="chapter-lead">Gênero, raça, ecologia e saberes locais não são temas auxiliares da ES — são dimensões constitutivas. Sua ausência na teoria não produz neutralidade: produz invisibilidade e reprodução de desigualdades.</p>
+  </div>
+
+  <h2 class="sec">6.1 Gênero e a Economia Feminista</h2>
+  <div class="author-row">
+    <span class="author-chip">Nalu Faria</span>
+    <span class="author-chip">Miriam Nobre</span>
+    <span class="author-chip">SOF — Sempreviva Organização Feminista</span>
+  </div>
+  <p>A perspectiva feminista da ES, desenvolvida pela SOF (Sempreviva Organização Feminista) e por autoras como Nalu Faria e Miriam Nobre, aponta que a ES pode ser um espaço de emancipação das mulheres — mas somente se incorporar explicitamente a crítica à divisão sexual do trabalho e à economia do cuidado. As mulheres representam mais de 60% dos participantes de EES no Brasil (SIES, 2013), mas persistem desigualdades de representação nos cargos de direção, de distribuição das retiradas e de reconhecimento do trabalho de cuidado não remunerado.</p>
+
+  <div class="pullquote">
+    "Uma Economia Solidária que não questiona a divisão sexual do trabalho reproduz, dentro de si mesma, a desigualdade que diz querer superar no mundo."
+    <span class="pq-author">Nalu Faria e Miriam Nobre, Economia Feminista (SOF, 2003)</span>
+  </div>
+
+  <h2 class="sec">6.2 Raça, Colonialidade e Povos Tradicionais</h2>
+  <div class="author-row">
+    <span class="author-chip">Aníbal Quijano</span>
+    <span class="author-chip">Boaventura de Sousa Santos</span>
+  </div>
+  <p>A perspectiva decolonial — articulada por Quijano com o conceito de <em>colonialidade do poder</em> e por Santos com as <em>Epistemologias do Sul</em> — é relevante para a ES porque o campo está fortemente associado a populações historicamente marginalizadas pelo racismo estrutural: comunidades quilombolas, povos indígenas, trabalhadores negros nas periferias urbanas, agricultores familiares negros do Nordeste. Ignorar a dimensão racial é ignorar as determinações históricas que produziram a exclusão que a ES pretende superar.</p>
+
+  <h2 class="sec">6.3 Ecologia e os Limites Planetários</h2>
+  <p>A racionalidade solidária — orientada à reprodução da vida — é intrinsecamente incompatível com a exploração predatória da natureza. Os limites planetários (mudanças climáticas, perda de biodiversidade, ciclos biogeoquímicos) são parâmetros inegociáveis do sistema econômico que a ES precisa incorporar. Na prática, isso se traduz em: agroecologia e produção orgânica; economia circular (cooperativas de reciclagem, reparação, reutilização); gestão coletiva de bens comuns naturais; e tecnologias de baixo impacto ambiental.</p>
+
+  <h2 class="sec">6.4 Saberes Locais e Tradicionais</h2>
+  <p>Os saberes locais e tradicionais — técnicos, culturais, ecológicos e organizativos — acumulados por gerações de comunidades representam um patrimônio imaterial estratégico para a ES. Ao contrário da lógica tecnológica convencional, que frequentemente despreza esses saberes, a ES os incorpora e valoriza — seja no desenvolvimento de tecnologias sociais, seja na criação de produtos com identidade cultural (denominações de origem, produtos culturais, ecoturismo solidário).</p>
+
+</section>
+
+<!-- PART III HEADER -->
+<div class="part-header" id="part3">
+  <span class="part-num">Parte III</span>
+  <h2 class="part-title">O Modelo Formal e suas Aplicações</h2>
+  <p class="part-desc">A equação central, a dinâmica do sistema, as condições de viabilidade e as contradições da ES</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 8 — MODELO FORMAL
+══════════════════════════════════════════════════════ -->
+<section id="cap7" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">08 · Capítulo 7</span>
+    <h1 class="chapter-title">O Modelo Formal Integrado</h1>
+    <p class="chapter-lead">O núcleo duro da Teoria da Economia Solidária: a equação central, as proposições derivadas e a arquitetura sistêmica que permite explicar, comparar e prescrever.</p>
+  </div>
+
+  <h2 class="sec">7.1 A Equação Central</h2>
+  <p>A Teoria da Economia Solidária se formaliza na seguinte equação central:</p>
+
+  <div class="eq-box">
+    <div class="eq-tag">Equação Central — Teoria da Economia Solidária (TES)</div>
+    <div class="eq-main">R = f ( S · [A + I + N + F + T] − C )</div>
+    <div class="eq-desc">
+      R = Reprodução Ampliada da Vida &nbsp;|&nbsp; S = Racionalidade Solidária &nbsp;|&nbsp; A = Autogestão<br>
+      I = Integração Sistêmica &nbsp;|&nbsp; N = Redes &nbsp;|&nbsp; F = Finanças &nbsp;|&nbsp; T = Território &nbsp;|&nbsp; C = Pressão Capitalista
+    </div>
+  </div>
+
+  <h2 class="sec">7.2 Leitura Formal da Equação</h2>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Elemento</th><th>Papel na Equação</th><th>Implicação Teórica Central</th></tr></thead>
+      <tbody>
+        <tr><td class="td-key">S — mediador</td><td class="td-mono">Multiplica [A+I+N+F+T]</td><td>Se S = 0, o resultado é zero. As variáveis estruturais existem, mas produzem cooperativismo instrumental, não ES.</td></tr>
+        <tr><td class="td-key">[A+I+N+F+T] — estrutura</td><td class="td-mono">Soma positiva</td><td>Cada variável contribui para R. I potencializa as demais. Déficit em qualquer variável reduz o sistema.</td></tr>
+        <tr><td class="td-key">C — tensão</td><td class="td-mono">Subtrai do resultado</td><td>Pressão capitalista age sobre S e I, fragmentando e cooptando o sistema. É o limitador estrutural.</td></tr>
+        <tr><td class="td-key">f — função</td><td class="td-mono">Relação não linear</td><td>Há interações, sinergias e limiares. Acima de certos valores de I, o efeito das demais variáveis é amplificado.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sec">7.3 As Relações Internas do Sistema</h2>
+
+  <div class="relation-list">
+    <div class="relation-item">
+      <div class="rel-formula">I = f(A, N, F, T)</div>
+      <div class="rel-text"><strong>Relação central:</strong> a integração sistêmica não é dada — ela emerge da articulação entre autogestão, redes, finanças e território. É o produto mais valioso do sistema solidário.</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-formula">A → S</div>
+      <div class="rel-text"><strong>Autogestão fortalece racionalidade:</strong> a prática cotidiana de decidir coletivamente desenvolve e consolida a racionalidade solidária. A e S se reforçam mutuamente em ciclo virtuoso.</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-formula">A → I</div>
+      <div class="rel-text"><strong>Autogestão eleva integração:</strong> trabalhadores autogestionários tendem a construir ativamente vínculos com outros campos, elevando o grau de integração do sistema.</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-formula">N → I</div>
+      <div class="rel-text"><strong>Redes aumentam integração:</strong> redes densas criam fluxos entre campos — comercialização, finanças, formação, tecnologia — elevando sistematicamente I.</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-formula">N → F</div>
+      <div class="rel-text"><strong>Redes facilitam finanças:</strong> a pertença a redes reduz assimetrias de informação e aumenta credibilidade junto a cooperativas de crédito e BCDs.</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-formula">F → Produção</div>
+      <div class="rel-text"><strong>Finanças sustentam produção:</strong> acesso a crédito solidário é condição de viabilidade econômica. Sem F, os EES ficam em subcapitalização estrutural crônica.</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-formula">T → Sistema</div>
+      <div class="rel-text"><strong>Território estabiliza:</strong> enraizamento gera base social de apoio, mercado local fiel e menor vulnerabilidade a choques externos. T é o amortecedor do sistema.</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-formula">C ↓ S e I</div>
+      <div class="rel-text"><strong>Pressão capitalista corrói:</strong> C age prioritariamente sobre S (corroendo a racionalidade solidária) e I (fragmentando a integração), os dois elementos de maior impacto sobre R.</div>
+    </div>
+  </div>
+
+  <h2 class="sec">7.4 As Quatro Proposições do Modelo</h2>
+
+  <div class="prop" data-n="P1">
+    <span class="prop-tag">Proposição 1 — Mediação Necessária</span>
+    <p class="prop-text">A Racionalidade Solidária (S) é condição necessária, embora não suficiente, para que a combinação de variáveis estruturais produza Reprodução da Vida (R). S = 0 implica R → 0, independentemente dos valores de A, I, N, F e T. Um empreendimento com estrutura cooperativa mas racionalidade capitalista produz acumulação, não reprodução da vida.</p>
+  </div>
+
+  <div class="prop green-border" data-n="P2">
+    <span class="prop-tag">Proposição 2 — Primado da Integração</span>
+    <p class="prop-text">A Integração Sistêmica (I) é a variável com maior capacidade de multiplicar o efeito das demais. Um aumento marginal em I tem impacto maior sobre R do que um aumento equivalente em qualquer outra variável isolada. Por isso, intervenções que elevam I — políticas integradas, ecossistemas territoriais solidários — são sistematicamente mais eficazes que políticas setoriais.</p>
+  </div>
+
+  <div class="prop rust-border" data-n="P3">
+    <span class="prop-tag">Proposição 3 — Mecanismo Central de C</span>
+    <p class="prop-text">A Pressão Capitalista (C) age prioritariamente sobre S e I. A estratégia mais eficaz de resistência é o fortalecimento combinado de S (por meio de formação solidária permanente) e I (por meio de políticas integradas e construção de ecossistemas territoriais). Estratégias que atacam C diretamente — sem fortalecer S e I — têm efeito limitado e não sustentado.</p>
+  </div>
+
+  <div class="prop gold-border" data-n="P4">
+    <span class="prop-tag">Proposição 4 — Produto S·I como Indicador Síntese</span>
+    <p class="prop-text">O desempenho de um EES é proporcional ao produto S · I — o grau de racionalidade solidária multiplicado pelo grau de integração sistêmica. Empreendimentos com alto S e alto I são os mais resilientes e os que mais contribuem para R. Este produto pode ser operacionalizado como o principal indicador de saúde sistêmica de um EES.</p>
+  </div>
+
+  <h2 class="sec">7.5 Arquitetura Sistêmica em Camadas</h2>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Camada</th><th>Conteúdo</th><th>Pergunta que Responde</th><th>Autores de Referência</th></tr></thead>
+      <tbody>
+        <tr><td class="td-key">1 — Ontológica</td><td>Trabalho associado + Cooperação</td><td>O que existe na ES?</td><td>Singer (2002); Marx; Gaiger (2004)</td></tr>
+        <tr><td class="td-key">2 — Estrutural</td><td>A + I + N + F + T (+ 8 campos)</td><td>Como se organiza?</td><td>Gaiger; Laville; Polanyi; Singer</td></tr>
+        <tr><td class="td-key">3 — Mediadora</td><td>S — Racionalidade Solidária</td><td>Com que lógica funciona?</td><td>Coraggio (2011); Laville (2007)</td></tr>
+        <tr><td class="td-key">4 — Dinâmica</td><td>Ciclo Econômico Solidário</td><td>Como funciona no tempo?</td><td>Gaiger; Singer; Coraggio</td></tr>
+        <tr><td class="td-key">5 — Tensão</td><td>C — Pressão Capitalista</td><td>O que limita e ameaça?</td><td>Polanyi; Marx; Santos (2002)</td></tr>
+        <tr><td class="td-key">6 — Normativa</td><td>R — Reprodução da Vida</td><td>Para quê existe?</td><td>Coraggio; Bem Viver; Freire</td></tr>
+        <tr><td class="td-key">7 — Epistemológica</td><td>Interdisciplinaridade + construção pela prática</td><td>Como se conhece?</td><td>Santos; Freire; Gaiger</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 9 — DINÂMICA DO SISTEMA
+══════════════════════════════════════════════════════ -->
+<section id="cap8" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">09 · Capítulo 8</span>
+    <h1 class="chapter-title">Dinâmica Econômica Solidária — O Ciclo Solidário</h1>
+    <p class="chapter-lead">A ES não é um estado — é um processo. O Ciclo Econômico Solidário descreve como os elementos do sistema se movem e se articulam no tempo, em contraste com o circuito do capital.</p>
+  </div>
+
+  <h2 class="sec">8.1 O Contraste com o Circuito do Capital</h2>
+  <p>O circuito do capital, formalizado por Marx na fórmula D–M–D' (dinheiro–mercadoria–mais dinheiro), tem como objetivo a <em>valorização do capital</em>: a ampliação quantitativa do valor monetário. Tudo no circuito capitalista está subordinado a esse objetivo — a forma de organizar o trabalho, as decisões de investimento, a distribuição do resultado.</p>
+
+  <p>O Ciclo Econômico Solidário tem um objetivo radicalmente diferente: a <em>reprodução ampliada da vida</em>. Suas quatro fases articulam-se em um movimento no qual o resultado final não é mais dinheiro — é mais vida, mais capacidade, mais autonomia, mais sustentabilidade.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Fase</th><th>Processo</th><th>Variáveis Dominantes</th><th>Critério Solidário de Avaliação</th></tr></thead>
+      <tbody>
+        <tr><td class="td-key">1 — Produção</td><td>Organização coletiva do trabalho</td><td>A, T, Tecnociência, Formação</td><td>Qualidade social e ambiental; desenvolvimento das capacidades dos trabalhadores</td></tr>
+        <tr><td class="td-key">2 — Circulação</td><td>Chegada ao consumidor por canais solidários</td><td>N, F, Comercialização</td><td>Maximização da margem que fica com o produtor e no território</td></tr>
+        <tr><td class="td-key">3 — Distribuição</td><td>Repartição dos resultados econômicos</td><td>A, S, Equidade</td><td>Equidade: critérios coletivamente definidos, modulados por gênero e raça</td></tr>
+        <tr><td class="td-key">4 — Reprodução</td><td>Ampliação das condições de vida e autonomia</td><td>R (variável dependente)</td><td>Desenvolvimento de capacidades; sustentabilidade do território; autonomia coletiva</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sec">8.2 Fase 1 — Produção Solidária</h2>
+  <p>Na fase de produção, a autogestão (A) é a variável dominante: ela define como o trabalho é organizado, como as decisões técnicas são tomadas, como as responsabilidades são distribuídas. A produção solidária não é avaliada apenas por eficiência econômica — custo, produtividade — mas por critérios sociais (condições de trabalho, desenvolvimento dos trabalhadores) e ambientais (impacto ecológico).</p>
+
+  <p>Gaiger (2004) demonstra empiricamente que empreendimentos com autogestão real — onde os trabalhadores efetivamente participam das decisões técnicas e organizativas — apresentam maior inovação produtiva, maior comprometimento com a qualidade e maior capacidade de adaptar-se a mudanças do mercado. A democracia interna não é um custo da produção solidária: é um fator de competitividade específico.</p>
+
+  <h2 class="sec">8.3 Fase 2 — Circulação Solidária</h2>
+  <p>A circulação solidária tem como princípio a <strong>minimização dos intermediários</strong> e a <strong>maximização do valor que permanece com o produtor e no território</strong>. Os circuitos curtos de comercialização — especialmente relevantes na ES agrícola — são a expressão mais direta desse princípio: a distância entre produtor e consumidor é reduzida ao mínimo, eliminando os diferentes estágios de intermediação que capturam parcelas crescentes do valor criado pelo trabalho.</p>
+
+  <h2 class="sec">8.4 Fase 3 — Distribuição Solidária</h2>
+  <p>A distribuição solidária combina dois critérios: <em>igualdade</em> (participação equivalente para todos os membros, independentemente do capital investido) e <em>proporcionalidade ao trabalho</em> (participação que reflete a contribuição efetiva ao processo produtivo). As dimensões transversais de gênero e raça modulam criticamente essa fase: sem atenção explícita à equidade interna, a distribuição solidária pode reproduzir as hierarquias de poder da sociedade mais ampla.</p>
+
+  <h2 class="sec">8.5 Fase 4 — Reprodução Ampliada da Vida</h2>
+  <p>A quarta fase é o <em>telos</em> — a razão de ser — de todo o ciclo. Quando o Ciclo Econômico Solidário funciona adequadamente, ele não reproduz os trabalhadores e a comunidade ao nível da subsistência: ele <em>amplia</em> suas capacidades, melhora suas condições materiais e imateriais, fortalece sua organização coletiva e contribui para a sustentabilidade do território. Essa é a razão pela qual R — e não o lucro — é a variável dependente da teoria.</p>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 10 — CONDIÇÕES DE VIABILIDADE
+══════════════════════════════════════════════════════ -->
+<section id="cap9" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">10 · Capítulo 9</span>
+    <h1 class="chapter-title">Condições de Viabilidade e Tipologia dos EES</h1>
+    <p class="chapter-lead">A teoria não apenas descreve — ela prevê. O modelo formal permite identificar as condições que determinam alta ou baixa performance, e construir uma tipologia dos empreendimentos solidários.</p>
+  </div>
+
+  <h2 class="sec">9.1 Condições de Alta Performance</h2>
+  <p>O modelo prevê alta performance — R elevado — quando:</p>
+  <ul class="ul-styled green">
+    <li><strong>A alto:</strong> assembleias frequentes e deliberativas; rotatividade de liderança; participação real dos membros nas decisões estratégicas;</li>
+    <li><strong>I alto:</strong> articulação ativa entre produção, finanças, comercialização, redes e território; ausência de campos estruturais isolados;</li>
+    <li><strong>N denso:</strong> participação em redes de comercialização, finanças e articulação política; trocas recíprocas entre empreendimentos;</li>
+    <li><strong>F adequado:</strong> acesso a crédito solidário, fundo rotativo ou BCD local; diversidade de fontes; baixa dependência de capital rentista;</li>
+    <li><strong>T enraizado:</strong> alta proporção de insumos e vendas locais; vínculos comunitários ativos;</li>
+    <li><strong>S forte:</strong> cultura organizacional solidária explícita; critérios de equidade internalizados;</li>
+    <li><strong>C moderado/controlado:</strong> proteção via políticas públicas, redes e mercados alternativos.</li>
+  </ul>
+
+  <h2 class="sec">9.2 Condições de Baixa Performance</h2>
+  <ul class="ul-styled rust">
+    <li><strong>I baixo:</strong> campos estruturais isolados. Causa mais frequente de underperformance — EES que têm produção mas não têm acesso a mercados, ou crédito mas não têm formação para usá-lo;</li>
+    <li><strong>F insuficiente:</strong> subcapitalização crônica que limita escala, qualidade e capacidade de renovação;</li>
+    <li><strong>N frágil:</strong> isolamento que expõe o EES diretamente às pressões do mercado capitalista;</li>
+    <li><strong>A formal sem A real:</strong> estrutura cooperativa funcionando com lógica hierárquica — S enfraquece e o empreendimento deriva para a lógica capitalista;</li>
+    <li><strong>C alto sem contrapartida:</strong> pressão do mercado capitalista intensa e sem instrumentos de proteção.</li>
+  </ul>
+
+  <h2 class="sec">9.3 Tipologia dos Empreendimentos Solidários</h2>
+
+  <div class="type-grid">
+    <div class="type-card">
+      <div class="type-num">Tipo 1</div>
+      <div class="type-name">Solidário Pleno</div>
+      <div class="type-desc">A, I, N, F, T altos; S forte; C moderado. Alta performance e sustentabilidade estrutural. Referência e modelo para replicação no campo.</div>
+    </div>
+    <div class="type-card t2">
+      <div class="type-num">Tipo 2</div>
+      <div class="type-name">Solidário Fragmentado</div>
+      <div class="type-desc">A alto; I e N baixos. Boa autogestão interna, mas isolamento. Necessita inserção em redes e construção de ecossistema local.</div>
+    </div>
+    <div class="type-card t3">
+      <div class="type-num">Tipo 3</div>
+      <div class="type-name">Solidário Subcapitalizado</div>
+      <div class="type-desc">A e N altos; F muito baixo. Organização sólida, mas inviabilidade econômica por falta de crédito. Acesso prioritário a finanças solidárias.</div>
+    </div>
+    <div class="type-card t4">
+      <div class="type-num">Tipo 4</div>
+      <div class="type-name">Cooperativa Formal</div>
+      <div class="type-desc">Estrutura cooperativa; S baixo; A formal. Forma solidária sem conteúdo. Deriva para lógica capitalista. Necessita processo formativo intensivo.</div>
+    </div>
+    <div class="type-card t5">
+      <div class="type-num">Tipo 5</div>
+      <div class="type-name">Em Risco Sistêmico</div>
+      <div class="type-desc">Múltiplas variáveis baixas; C alto. Alta vulnerabilidade e risco de dissolução. Intervenção sistêmica urgente e integrada é imperativa.</div>
+    </div>
+  </div>
+
+  <h2 class="sec">9.4 Modelo de Diagnóstico Institucional</h2>
+  <p>O modelo formal é, ao mesmo tempo, um instrumento prático de diagnóstico. O procedimento opera em quatro passos:</p>
+  <ol class="ol-styled">
+    <li><strong>Levantamento:</strong> coleta de dados para cada variável do modelo (A, I, N, F, T, S, C, R) por meio do instrumento de pesquisa estruturado;</li>
+    <li><strong>Análise:</strong> cálculo dos índices compostos e posicionamento do EES na tipologia;</li>
+    <li><strong>Diagnóstico:</strong> identificação das variáveis com maior déficit e das relações causais que explicam o desempenho atual;</li>
+    <li><strong>Prescrição:</strong> formulação de intervenções específicas para elevar as variáveis deficitárias, priorizando I (integração) e S (racionalidade solidária) como alavancas de maior impacto.</li>
+  </ol>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 10 — PRESSÃO CAPITALISTA
+══════════════════════════════════════════════════════ -->
+<section id="cap10" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">11 · Capítulo 10</span>
+    <h1 class="chapter-title">Contradições e Limites: A Pressão Capitalista</h1>
+    <p class="chapter-lead">Nenhuma teoria da Economia Solidária pode ser completa sem uma teoria de seus limites. A variável C formaliza os mecanismos pelos quais o capitalismo tende a corroer, cooptar e fragmentar a ES.</p>
+  </div>
+
+  <h2 class="sec">10.1 Os Três Mecanismos de C</h2>
+
+  <div class="callout rust">
+    <div class="callout-header">Mecanismo 1 — C Reduz S</div>
+    <div class="callout-body">A necessidade de competir em mercados capitalistas induz comportamentos individualistas que corroem a racionalidade solidária. A escassez de recursos produz conflitos distributivos internos. A pressão por resultados de curto prazo inibe investimentos em formação e participação. Trabalhadores questionam os valores solidários como "luxos que não podemos nos dar".</div>
+  </div>
+
+  <div class="callout rust" style="margin-top:.8em">
+    <div class="callout-header">Mecanismo 2 — C Fragmenta I</div>
+    <div class="callout-body">O capitalismo opera por especialização e separação: produção separada de finanças, finanças separadas de território. Essa fragmentação não é neutra — impede que os EES construam ecossistemas solidários completos, mantendo-os dependentes de cada campo do sistema capitalista separadamente.</div>
+  </div>
+
+  <div class="callout rust" style="margin-top:.8em">
+    <div class="callout-header">Mecanismo 3 — C Impõe Lógica de Mercado</div>
+    <div class="callout-body">Quando um EES é avaliado apenas por eficiência econômica convencional, ele sofre pressão para eliminar os "custos" da democracia interna: assembleias, formação, participação. Esse processo — documentado em estudos sobre cooperativas ao redor do mundo — é o caminho mais comum de degeneração dos princípios solidários.</div>
+  </div>
+
+  <h2 class="sec">10.2 O Isomorfismo Institucional</h2>
+  <p>O conceito de <strong>isomorfismo institucional</strong> — desenvolvido na teoria organizacional por DiMaggio e Powell — descreve a pressão para que organizações alternativas adotem as formas e práticas das organizações dominantes como condição de sobrevivência. Na ES, isso se manifesta como: adoção de hierarquia gerencial para "ser mais eficiente"; contratação de trabalhadores não-sócios para "trabalhos menores"; priorização do resultado financeiro sobre a participação; e abandono gradual das práticas formativas.</p>
+
+  <div class="pullquote">
+    "O maior perigo para a Economia Solidária não é a repressão externa, mas a assimilação interna — a lenta substituição dos princípios solidários por práticas capitalistas, justificada pela necessidade de sobrevivência econômica."
+    <span class="pq-author">Síntese da literatura sobre degeneração cooperativa</span>
+  </div>
+
+  <h2 class="sec">10.3 A Hibridização</h2>
+  <p>A pressão de C não resulta sempre em abandono total dos princípios solidários — frequentemente produz formas <strong>híbridas</strong>: organizações que combinam elementos solidários e capitalistas de maneiras complexas e instáveis. A literatura identifica três padrões:</p>
+  <ul class="ul-styled">
+    <li><strong>Hibridização progressiva:</strong> EES que mantém forma solidária mas internaliza gradualmente lógica capitalista nas práticas cotidianas;</li>
+    <li><strong>Hibridização estratégica:</strong> EES que adota práticas capitalistas de forma deliberada e transitória para sobreviver em condições adversas, mantendo o projeto solidário como horizonte;</li>
+    <li><strong>Hibridização degenerativa:</strong> EES que, sob pressão intensa e prolongada, perde a substância solidária — tornando-se formalmente cooperativa mas funcionalmente empresa capitalista.</li>
+  </ul>
+
+  <h2 class="sec">10.4 Estratégias de Resistência</h2>
+  <ul class="ul-styled green">
+    <li><strong>Mercados protegidos:</strong> compras públicas (PAA, PNAE), feiras solidárias, plataformas cooperativas — espaços onde a concorrência capitalista predatória é reduzida;</li>
+    <li><strong>Finanças próprias:</strong> BCDs, fundos rotativos, cooperativas de crédito — libertação da dependência do sistema financeiro capitalista;</li>
+    <li><strong>Ecossistemas territoriais densos:</strong> quanto mais os EES estão interconectados em redes e territórios solidários, menor a exposição individual às pressões externas;</li>
+    <li><strong>Formação permanente:</strong> o investimento contínuo em formação solidária é a principal defesa contra a degeneração isomórfica — porque reconstrói S;</li>
+    <li><strong>Incidência política:</strong> a participação na elaboração de políticas públicas é a estratégia pela qual os EES influenciam o ambiente institucional, reduzindo sistemicamente C.</li>
+  </ul>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     PART IV HEADER
+══════════════════════════════════════════════════════ -->
+<div class="part-header" id="part4">
+  <span class="part-num">Parte IV</span>
+  <h2 class="part-title">Operacionalização e Aplicações</h2>
+  <p class="part-desc">Hipóteses testáveis, indicadores empíricos, políticas públicas e agenda de pesquisa</p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 11 — HIPÓTESES E INDICADORES
+══════════════════════════════════════════════════════ -->
+<section id="cap11" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">12 · Capítulo 11</span>
+    <h1 class="chapter-title">Hipóteses Científicas e Indicadores Empíricos</h1>
+    <p class="chapter-lead">Uma teoria só se consolida quando pode ser testada na realidade. As hipóteses derivadas do modelo formal, combinadas com seus indicadores operacionais, constituem o programa empírico da TES.</p>
+  </div>
+
+  <h2 class="sec">11.1 As Oito Hipóteses Derivadas</h2>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>H</th><th>Hipótese</th><th>VI / VD</th><th>Método Sugerido</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-mono">H1</td>
+          <td>Maior autogestão (A) → maior sustentabilidade do EES</td>
+          <td>VI: índice de democratização / VD: sobrevivência (anos)</td>
+          <td>Regressão logística — dados SIES</td>
+        </tr>
+        <tr>
+          <td class="td-mono">H2</td>
+          <td>Maior integração (I) → maior desempenho global</td>
+          <td>VI: índice de integração / VD: índice de desempenho composto (R)</td>
+          <td>Modelo equações estruturais (SEM)</td>
+        </tr>
+        <tr>
+          <td class="td-mono">H3</td>
+          <td>Redes densas (N) → maior acesso a finanças e mercados</td>
+          <td>VI: densidade de rede / VD: F e receita anual</td>
+          <td>Análise de redes + regressão OLS</td>
+        </tr>
+        <tr>
+          <td class="td-mono">H4</td>
+          <td>Acesso a crédito solidário (F) → maior sobrevivência</td>
+          <td>VI: acesso a crédito solidário / VD: anos de operação</td>
+          <td>Regressão logística com controles</td>
+        </tr>
+        <tr>
+          <td class="td-mono">H5</td>
+          <td>Enraizamento (T) → maior resiliência a choques externos</td>
+          <td>VI: % insumos locais + anos no território / VD: estabilidade (painel)</td>
+          <td>Painel longitudinal (dados SIES)</td>
+        </tr>
+        <tr>
+          <td class="td-mono">H6</td>
+          <td>Formação solidária → maior qualidade de A e S</td>
+          <td>VI: horas formação/membro/ano / VD: índice A e índice S</td>
+          <td>Análise fatorial + regressão</td>
+        </tr>
+        <tr>
+          <td class="td-mono">H7</td>
+          <td>Alta S → maior equidade distributiva interna</td>
+          <td>VI: índice S / VD: Gini interno das retiradas</td>
+          <td>Regressão — dados financeiros + questionário</td>
+        </tr>
+        <tr>
+          <td class="td-mono">H8</td>
+          <td>Alta C sem contrapartida → deriva para lógica capitalista</td>
+          <td>VI: índice C / VD: queda em S e A ao longo do tempo</td>
+          <td>Painel longitudinal + análise qualitativa de trajetórias</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sec">11.2 Indicadores por Variável</h2>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Variável</th><th>Indicadores Empíricos Principais</th><th>Fontes de Dados</th></tr></thead>
+      <tbody>
+        <tr><td class="td-key">A — Autogestão</td><td>% decisões em assembleia; frequência assembleias/ano; rotatividade de liderança; % membros participantes em deliberações; índice de prestação de contas</td><td>Questionário, atas, registros internos</td></tr>
+        <tr><td class="td-key">I — Integração</td><td>N.º de campos com conexão ativa; índice composto de integração (análise fatorial); avaliação qualitativa de sinergias entre campos</td><td>Questionário, análise de redes, etnografia</td></tr>
+        <tr><td class="td-key">N — Redes</td><td>N.º de parcerias ativas; participação em fóruns/redes; volume de trocas intrarede (R$); densidade e reciprocidade da rede</td><td>Questionário, análise de redes, FBES</td></tr>
+        <tr><td class="td-key">F — Finanças</td><td>Acesso a crédito solidário (S/N; R$); diversidade de fontes; uso de moeda social/fundo rotativo; taxa de reinvestimento coletivo; inadimplência</td><td>Questionário, balancete, BCD/cooperativa de crédito</td></tr>
+        <tr><td class="td-key">T — Território</td><td>% insumos locais; % vendas locais; anos no território; vínculos comunitários ativos; participação em iniciativas de desenvolvimento local</td><td>Questionário, notas fiscais, cadastros</td></tr>
+        <tr><td class="td-key">S — Racionalidade</td><td>Índice de coerência valores-práticas; critérios de distribuição; mecanismo de resolução de conflitos; cultura organizacional avaliada por escala</td><td>Questionário + observação + entrevistas</td></tr>
+        <tr><td class="td-key">C — Pressão cap.</td><td>Índice de concorrência do setor; custo de conformidade regulatória; dependência de mercados externos; grau de isomorfismo (avaliação qualitativa)</td><td>Dados setoriais + questionário + análise documental</td></tr>
+        <tr><td class="td-key">R — Resultado</td><td>Renda média dos membros; Gini interno; anos de operação; índice de qualidade de vida; grau de autonomia coletiva (escala composta)</td><td>Questionário, balancete, dados IBGE</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sec">11.3 Instrumento de Pesquisa — Estrutura do Questionário</h2>
+  <p>Para operacionalizar as hipóteses em campo, propõe-se um questionário estruturado em dez blocos, aplicável aos responsáveis de EES em amostras representativas:</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Bloco</th><th>Variável</th><th>Conteúdo Principal</th></tr></thead>
+      <tbody>
+        <tr><td class="td-mono">A</td><td>Identificação</td><td>Forma jurídica, atividade, localização, fundação, n.º membros (por gênero, raça, faixa etária), receita anual</td></tr>
+        <tr><td class="td-mono">B</td><td>A — Autogestão</td><td>Frequência assembleias; % decisões coletivas; rotatividade diretoria; mecanismos de prestação de contas</td></tr>
+        <tr><td class="td-mono">C</td><td>F — Finanças</td><td>Fontes de financiamento; volume crédito (R$); uso de moeda social; destino das sobras (% distribuído/fundo/comunidade)</td></tr>
+        <tr><td class="td-mono">D</td><td>Comercialização</td><td>Canais de venda; % receita por canal; preço recebido vs. mercado convencional; acesso PAA/PNAE</td></tr>
+        <tr><td class="td-mono">E</td><td>N — Redes</td><td>Participação em redes/fóruns; n.º empreendimentos com relações comerciais; parcerias com ITCPs</td></tr>
+        <tr><td class="td-mono">F</td><td>T — Território</td><td>% insumos locais; % receita local; participação em conselhos e iniciativas de desenvolvimento</td></tr>
+        <tr><td class="td-mono">G</td><td>Tecnologia</td><td>Uso de tecnologias sociais; dependência de assistência externa; práticas ambientalmente sustentáveis</td></tr>
+        <tr><td class="td-mono">H</td><td>Formação</td><td>N.º atividades formativas/ano; % membros participantes; temas (técnico, organizativo, político, ambiental)</td></tr>
+        <tr><td class="td-mono">I</td><td>Políticas públicas</td><td>Políticas acessadas (lista estruturada); avaliação de impacto (escala Likert); dificuldades de acesso</td></tr>
+        <tr><td class="td-mono">J</td><td>Transversais</td><td>Distribuição de cargos por gênero/raça; políticas internas de equidade; práticas agroecológicas; saberes tradicionais</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 12 — POLÍTICAS PÚBLICAS
+══════════════════════════════════════════════════════ -->
+<section id="cap12" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">13 · Capítulo 12</span>
+    <h1 class="chapter-title">Políticas Públicas e Planejamento Institucional</h1>
+    <p class="chapter-lead">A teoria não é apenas descritiva — é prescritiva. O modelo formal permite derivar uma agenda política estruturada e um modelo de avaliação de impacto baseados em evidências.</p>
+  </div>
+
+  <h2 class="sec">12.1 O Princípio Político Derivado do Modelo</h2>
+
+  <div class="prop green-border" data-n="">
+    <span class="prop-tag">Proposição de Política Pública</span>
+    <p class="prop-text">A eficácia de uma política pública de ES é proporcional ao número de variáveis do modelo que ela fortalece simultaneamente. Políticas que atuam em apenas uma variável produzem resultados limitados e não sustentados. Políticas integradas — que articulam A, I, N, F e T — produzem transformação estrutural. O critério de avaliação deve ser sempre o impacto sobre R.</p>
+  </div>
+
+  <h2 class="sec">12.2 Diretrizes por Campo Estrutural</h2>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Campo</th><th>Variável</th><th>Diretrizes de Política</th></tr></thead>
+      <tbody>
+        <tr><td class="td-key">Trabalho e Produção</td><td class="td-mono">A</td><td>Simplificação do marco legal das cooperativas populares; programa de recuperação de empresas por trabalhadores; reconhecimento jurídico de EES informais; editais com critérios qualitativos solidários</td></tr>
+        <tr><td class="td-key">Finanças Solidárias</td><td class="td-mono">F</td><td>Fundo Nacional de Finanças Solidárias; fomento aos BCDs; regulamentação de cooperativas de crédito populares; incentivos a fundos rotativos e moedas sociais</td></tr>
+        <tr><td class="td-key">Comercialização</td><td class="td-mono">N, I</td><td>Ampliação do PAA e PNAE com cota exclusiva para EES; programa de feiras municipais; marketplace solidário público; regulamentação do comércio justo</td></tr>
+        <tr><td class="td-key">Redes</td><td class="td-mono">N, I</td><td>Financiamento estável do FBES e redes estaduais; arranjos produtivos solidários locais; programa de intercâmbio entre redes nacionais e internacionais</td></tr>
+        <tr><td class="td-key">Territorialidade</td><td class="td-mono">T, I</td><td>Política de Desenvolvimento Territorial Solidário microrregional; integração da ES nos planos diretores; reconhecimento de Territórios Solidários como unidade de planejamento</td></tr>
+        <tr><td class="td-key">Tecnociência</td><td class="td-mono">I</td><td>Fomento ao desenvolvimento de TS (FINEP, CNPq, BNDES); programa de adequação sociotécnica; integração da ES na política de CTI</td></tr>
+        <tr><td class="td-key">Educação</td><td class="td-mono">A, S</td><td>Financiamento permanente das ITCPs; ES nos currículos de educação básica, técnica e superior; programa nacional de formação em autogestão; certificação de competências solidárias</td></tr>
+        <tr><td class="td-key">Marco Institucional</td><td class="td-mono">C↓</td><td>Lei Orgânica da ES; Secretaria com orçamento vinculado; atualização do SIES; Conselho Nacional de ES com representação paritária</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sec">12.3 Modelo de Avaliação de Políticas Públicas</h2>
+  <p>Para avaliar o impacto das políticas de ES, propõe-se um modelo trifásico baseado diretamente nas variáveis da TES:</p>
+
+  <ol class="ol-styled">
+    <li><strong>Avaliação de Processo:</strong> cobertura (quantos EES foram atendidos?); adequação (as políticas respondem às necessidades reais?); participação (os sujeitos da ES participaram da formulação e implementação?);</li>
+    <li><strong>Avaliação de Resultados:</strong> impacto direto nos indicadores dos campos — aumento da renda, melhoria da qualidade da autogestão, ampliação do acesso a mercados, fortalecimento das redes;</li>
+    <li><strong>Avaliação de Impacto:</strong> efeitos sistêmicos de médio e longo prazo — aumento do grau de integração (I) nos territórios; mudanças nas condições de vida das comunidades; contribuição para a construção de Territórios Solidários; reversão de desigualdades de gênero, raça e classe.</li>
+  </ol>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CAP 13 — AGENDA DE PESQUISA
+══════════════════════════════════════════════════════ -->
+<section id="cap13" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">14 · Capítulo 13</span>
+    <h1 class="chapter-title">Agenda de Pesquisa</h1>
+    <p class="chapter-lead">Uma teoria científica se consolida não apenas pela sua coerência interna, mas pela agenda de pesquisa que gera. A TES propõe um programa de investigação estruturado por horizonte temporal e por prioridade teórica.</p>
+  </div>
+
+  <h2 class="sec">13.1 Pesquisas Prioritárias de Curto Prazo (1–3 anos)</h2>
+  <ol class="ol-styled">
+    <li><strong>Atualização e análise do SIES:</strong> o Sistema de Informações em Economia Solidária precisa ser atualizado e ampliado com as novas variáveis derivadas dos indicadores da TES, e analisado com os métodos propostos no Capítulo 11;</li>
+    <li><strong>Estudos de caso comparativos sobre integração sistêmica:</strong> seleção de territórios com diferentes graus de I para verificação qualitativa da Proposição 2;</li>
+    <li><strong>Mapeamento das finanças solidárias:</strong> levantamento atualizado dos BCDs, cooperativas de crédito solidário e fundos rotativos, com dados quantitativos sobre volume de recursos;</li>
+    <li><strong>Análise de impacto do PAA e PNAE:</strong> avaliação econométrica do impacto das compras públicas sobre a renda, sustentabilidade e autogestão dos EES.</li>
+  </ol>
+
+  <h2 class="sec">13.2 Pesquisas de Médio Prazo (3–7 anos)</h2>
+  <ol class="ol-styled">
+    <li><strong>Construção e validação do Índice de Integração Sistêmica (IIS):</strong> desenvolvimento de instrumento padronizado, com aplicação em amostra nacional representativa;</li>
+    <li><strong>Estudo longitudinal sobre trajetórias de EES:</strong> acompanhamento de uma coorte de empreendimentos por ao menos 5 anos para análise das trajetórias de crescimento, estagnação ou dissolução;</li>
+    <li><strong>Comparações internacionais:</strong> estudos comparativos com experiências na Argentina, Uruguai, Québec e Pays Basque (Mondragón) para verificar a universalidade e especificidades do modelo.</li>
+  </ol>
+
+  <h2 class="sec">13.3 Lacunas Teóricas Prioritárias</h2>
+  <ul class="ul-styled navy">
+    <li>A relação entre ES e Economia Feminista: como integrar a crítica da economia do cuidado no modelo formal?</li>
+    <li>ES e capitalismo de plataforma: possibilidades e limites das cooperativas de plataforma no contexto da gig economy;</li>
+    <li>Autogestão indígena e povos originários: como ela dialoga com (e se distingue de) os princípios da ES?</li>
+    <li>ES e transição ecológica: como os EES podem contribuir para a descarbonização da economia?</li>
+    <li>Digitalização da ES: como blockchain, inteligência artificial e plataformas cooperativas podem fortalecer — ou ameaçar — os princípios da ES?</li>
+  </ul>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     CONCLUSÃO
+══════════════════════════════════════════════════════ -->
+<section id="conclusao" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">15 · Conclusão</span>
+    <h1 class="chapter-title">Uma Teoria para Transformar a Realidade</h1>
+    <p class="chapter-lead">O que foi construído e por que importa — para a ciência, para as políticas públicas e para os sujeitos da Economia Solidária.</p>
+  </div>
+
+  <h2 class="sec">O que foi construído</h2>
+  <p>Esta obra construiu uma Teoria da Economia Solidária com os atributos de um programa científico robusto: um objeto claramente delimitado; variáveis precisamente definidas; uma equação central que expressa as relações causais fundamentais; proposições derivadas logicamente; hipóteses testáveis empiricamente; e indicadores para operacionalização.</p>
+
+  <p>A equação R = f(S · [A + I + N + F + T] − C) não é uma fórmula matemática no sentido estrito — é uma condensação teórica. Em poucas letras, carrega décadas de produção empírica e conceitual de Singer, Gaiger, Laville, Polanyi, Coraggio, Freire, Santos e muitos outros. Cada letra é um campo de pesquisa; cada relação entre letras é uma hipótese; o conjunto é uma teoria.</p>
+
+  <h2 class="sec">As Três Contribuições Originais</h2>
+
+  <div class="callout blue">
+    <div class="callout-header">Contribuição 1 — Formalização de S como Mediador</div>
+    <div class="callout-body">A Racionalidade Solidária havia sido descrita como valor ou princípio, mas nunca formalizada como variável mediadora que multiplica o efeito das variáveis estruturais. Isso explica por que empreendimentos com a mesma estrutura formal têm desempenhos radicalmente distintos.</div>
+  </div>
+
+  <div class="callout green" style="margin-top:.8em">
+    <div class="callout-header">Contribuição 2 — Centralidade de I como Meta-Variável</div>
+    <div class="callout-body">A literatura descrevia os campos estruturais da ES, mas não formalizava sua integração como variável autônoma de poder explicativo próprio. A proposição de que I é a variável de maior impacto sobre R — e que políticas eficazes são aquelas que elevam I — é contribuição original com implicações diretas para o planejamento de políticas.</div>
+  </div>
+
+  <div class="callout gold" style="margin-top:.8em">
+    <div class="callout-header">Contribuição 3 — C como Variável Estrutural, não apenas Contexto</div>
+    <div class="callout-body">A pressão capitalista havia sido descrita como contexto ou obstáculo, mas nunca incorporada formalmente com mecanismos específicos (redução de S, fragmentação de I, isomorfismo). Isso permite analisar as contradições da ES — e suas estratégias de resistência — de forma sistemática e prescritiva.</div>
+  </div>
+
+  <h2 class="sec">Para Pesquisadores</h2>
+  <p>A TES oferece um programa científico com núcleo duro, cinturão protetor e heurística positiva. Pesquisadores podem testar, refinar, contestar e expandir a teoria — é essa dinâmica que consolida um campo científico. As hipóteses e os indicadores propostos são convites explícitos à investigação empírica.</p>
+
+  <h2 class="sec">Para Gestores Públicos</h2>
+  <p>A TES oferece uma lógica de intervenção clara: políticas eficazes fortalecem simultaneamente A, I, N, F e T, sob o guarda-chuva de S, e reduzem sistemicamente C. O modelo de diagnóstico (Capítulo 9) permite avaliar qualquer EES ou território com base nesse referencial e prescrever intervenções específicas e integradas.</p>
+
+  <h2 class="sec">Para os Sujeitos da ES</h2>
+  <p>A TES oferece uma linguagem para que trabalhadores e comunidades entendam sua posição no sistema, identifiquem suas fragilidades e formulem estratégias de fortalecimento. Uma teoria da ES que não é acessível e útil para os sujeitos da ES perdeu sua razão de ser.</p>
+
+  <div class="eq-box" style="margin-top:3em">
+    <div class="eq-tag">Síntese Definitiva da Teoria da Economia Solidária</div>
+    <div class="eq-main">R = f ( S · [A + I + N + F + T] − C )</div>
+    <div class="eq-desc">A Economia Solidária gera reprodução ampliada da vida quando seus elementos estruturais — autogestão, integração sistêmica, redes, finanças e território — se articulam sob racionalidade solidária, sendo limitada pelas pressões do sistema capitalista.</div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     REFERÊNCIAS
+══════════════════════════════════════════════════════ -->
+<section id="referencias" class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-num">◈ Referências Bibliográficas</span>
+    <h1 class="chapter-title">Fontes e Autores de Referência</h1>
+  </div>
+
+  <div class="ref-section">
+    <h3>Obras Fundacionais da Economia Solidária</h3>
+    <div class="ref-item">SINGER, Paul. <em>Introdução à Economia Solidária</em>. São Paulo: Editora Fundação Perseu Abramo, 2002.</div>
+    <div class="ref-item">SINGER, Paul; SOUZA, André Ricardo de (Orgs.). <em>A Economia Solidária no Brasil: a autogestão como resposta ao desemprego</em>. São Paulo: Contexto, 2000.</div>
+    <div class="ref-item">GAIGER, Luiz Inácio (Org.). <em>Sentidos e Experiências da Economia Solidária no Brasil</em>. Porto Alegre: Editora da UFRGS, 2004.</div>
+    <div class="ref-item">GAIGER, Luiz Inácio. A Economia Solidária e o Projeto de Outra Mundialização. <em>Dados — Revista de Ciências Sociais</em>, v. 47, n. 4, 2004.</div>
+    <div class="ref-item">GAIGER, L. I. et al. <em>A Economia Solidária no Brasil: uma análise de dados nacionais</em>. São Leopoldo: Oikos, 2014.</div>
+  </div>
+
+  <div class="ref-section">
+    <h3>Teoria Econômica e Social de Base</h3>
+    <div class="ref-item">POLANYI, Karl. <em>A Grande Transformação: as origens da nossa época</em>. Rio de Janeiro: Campus, 2000 [1944].</div>
+    <div class="ref-item">LAVILLE, Jean-Louis. <em>L'économie solidaire: une perspective internationale</em>. Paris: Hachette Littératures, 2007.</div>
+    <div class="ref-item">LAVILLE, J.-L.; GAIGER, L. I. Économie solidaire. In: LAVILLE, J.-L.; CATTANI, A. D. (Orgs.). <em>Dictionnaire de l'autre économie</em>. Paris: Gallimard, 2006.</div>
+    <div class="ref-item">CORAGGIO, José Luis. <em>Economia Social e Solidária: o trabalho antes do capital</em>. São Paulo: Cortez, 2011.</div>
+    <div class="ref-item">França FILHO, G. C.; LAVILLE, J.-L. <em>A Economia Solidária: uma abordagem internacional</em>. Porto Alegre: UFRGS, 2004.</div>
+  </div>
+
+  <div class="ref-section">
+    <h3>Epistemologia e Pensamento Crítico</h3>
+    <div class="ref-item">SANTOS, Boaventura de Sousa (Org.). <em>Produzir para Viver: os caminhos da produção não capitalista</em>. Rio de Janeiro: Civilização Brasileira, 2002.</div>
+    <div class="ref-item">FREIRE, Paulo. <em>Pedagogia do Oprimido</em>. Rio de Janeiro: Paz e Terra, 1974.</div>
+    <div class="ref-item">QUIJANO, Aníbal. Colonialidad del poder, eurocentrismo y América Latina. In: LANDER, E. (Org.). <em>La colonialidad del saber</em>. Buenos Aires: CLACSO, 2000.</div>
+    <div class="ref-item">LAKATOS, Imre. <em>The Methodology of Scientific Research Programmes</em>. Cambridge: Cambridge University Press, 1978.</div>
+  </div>
+
+  <div class="ref-section">
+    <h3>Tecnologia Social e Inovação</h3>
+    <div class="ref-item">DAGNINO, Renato (Org.). <em>Tecnologia Social: ferramenta para construir outra sociedade</em>. Campinas: IG/UNICAMP, 2009.</div>
+    <div class="ref-item">MANCE, Euclides André. <em>A Revolução das Redes</em>. Petrópolis: Vozes, 1999.</div>
+    <div class="ref-item">REDE DE TECNOLOGIA SOCIAL (RTS). <em>Tecnologia Social: uma estratégia para o desenvolvimento</em>. Rio de Janeiro: RTS, 2004.</div>
+  </div>
+
+  <div class="ref-section">
+    <h3>Gênero, Raça e Dimensões Transversais</h3>
+    <div class="ref-item">FARIA, Nalu; NOBRE, Miriam (Orgs.). <em>Economia Feminista</em>. São Paulo: SOF, 2003.</div>
+  </div>
+
+  <div class="ref-section">
+    <h3>Políticas Públicas e Fontes Institucionais</h3>
+    <div class="ref-item">BRASIL. <em>Atlas da Economia Solidária no Brasil</em>. Brasília: MTE/SENAES, 2006 e 2013.</div>
+    <div class="ref-item">BRASIL. <em>Sistema de Informações em Economia Solidária — SIES</em>. Brasília: MTE/SENAES, 2007–2013.</div>
+    <div class="ref-item">INSTITUTO PALMAS. <em>Banco Palmas: 15 anos de luta por justiça econômica e transformação social</em>. Fortaleza: Instituto Palmas, 2013.</div>
+    <div class="ref-item">IPEA. <em>Situação do Trabalho no Brasil na Primeira Década dos Anos 2000</em>. Brasília: IPEA, 2012.</div>
+    <div class="ref-item">LECHAT, Noelle M. P. Trajetórias Intelectuais e o Campo da Economia Solidária no Brasil. Tese de doutorado. UNICAMP, 2004.</div>
+  </div>
+
+  <hr class="sec-rule">
+  <p style="text-align:center;font-family:'Crimson Pro',serif;font-size:.9rem;color:var(--ink-lt);font-style:italic;margin-top:2em">
+    Teoria da Economia Solidária — E-Book de Referência · Versão 2025<br>
+    Construído sobre a produção científica acumulada do campo, em diálogo com Singer, Gaiger, Laville, Polanyi, Coraggio, Freire, Santos e a prática dos empreendimentos solidários brasileiros.
+  </p>
+</section>
+
+</body>
+</html>
+
