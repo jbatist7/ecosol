@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apostila — Diagnóstico Estratégico de Economia Solidária</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --papel:       #faf6ee;
+  --papel-dk:    #f2ebe0;
+  --papel-md:    #e8dfd0;
+  --branco:      #fff;
+
+  --verde-tinta: #1a3626;
+  --verde-deep:  #243e2e;
+  --verde-med:   #2d6045;
+  --verde-vivo:  #3d8a5e;
+  --verde-pale:  #c8e0d0;
+  --verde-bg:    #edf6f1;
+
+  --terra:       #a83800;
+  --terra-lt:    #f5ede6;
+  --terra-med:   #d44f10;
+
+  --ouro:        #8c6008;
+  --ouro-lt:     #fdf0cc;
+  --ouro-med:    #d4960a;
+
+  --tinta:       #1a1e1c;
+  --tinta-med:   #2e3830;
+  --cinza:       #4a5a50;
+  --cinza-lt:    #7a8c82;
+  --linha:       #d8cfc0;
+
+  --azul:        #1a3e5e;
+  --azul-lt:     #e6f0f8;
+  --roxo:        #3e1870;
+  --roxo-lt:     #f0eaf8;
+
+  --font-disp: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+
+  --shadow-sm: 0 2px 10px rgba(26,54,38,.08);
+  --shadow-md: 0 6px 24px rgba(26,54,38,.12);
+  --shadow-lg: 0 12px 40px rgba(26,54,38,.16);
+
+  --nav-w: 260px;
+  --trans: .2s ease;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--papel);
+  color: var(--tinta);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════
+   NAVEGAÇÃO LATERAL
+═══════════════════════════════════════════════════════ */
+.nav-aside {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--nav-w);
+  height: 100vh;
+  background: var(--verde-tinta);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 100;
+  transition: transform var(--trans);
+}
+.nav-brand {
+  padding: 28px 22px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.nav-brand-sigla {
+  font-family: var(--font-disp);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ouro-med);
+  margin-bottom: 6px;
+}
+.nav-brand-title {
+  font-family: var(--font-disp);
+  font-size: 16px; font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+.nav-lista {
+  list-style: none;
+  padding: 14px 0 30px;
+  flex: 1;
+}
+.nav-lista li a {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 22px;
+  text-decoration: none;
+  font-size: 13px; font-weight: 400;
+  color: rgba(255,255,255,.6);
+  transition: color var(--trans), background var(--trans);
+  line-height: 1.4;
+  border-left: 3px solid transparent;
+}
+.nav-lista li a:hover,
+.nav-lista li a.ativo {
+  color: #fff;
+  background: rgba(255,255,255,.07);
+  border-left-color: var(--ouro-med);
+}
+.nav-lista li a .nav-num {
+  font-size: 10px; font-weight: 700;
+  color: var(--ouro-med);
+  min-width: 18px;
+  padding-top: 2px;
+  font-family: var(--font-disp);
+  flex-shrink: 0;
+}
+.nav-sep {
+  height: 1px; background: rgba(255,255,255,.08);
+  margin: 8px 22px;
+}
+.nav-footer {
+  padding: 14px 22px 20px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  font-size: 11px; color: rgba(255,255,255,.3);
+  line-height: 1.7;
+}
+
+/* Hambúrguer mobile */
+.nav-toggle {
+  display: none;
+  position: fixed; top: 14px; left: 14px; z-index: 200;
+  width: 42px; height: 42px;
+  background: var(--verde-tinta);
+  border: none; border-radius: var(--r-md);
+  cursor: pointer; color: #fff;
+  align-items: center; justify-content: center;
+  font-size: 20px;
+  box-shadow: var(--shadow-md);
+}
+.nav-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(0,0,0,.45);
+}
+
+/* ═══════════════════════════════════════════════════════
+   CONTEÚDO PRINCIPAL
+═══════════════════════════════════════════════════════ */
+.main-content {
+  margin-left: var(--nav-w);
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════════════════════
+   CAPA
+═══════════════════════════════════════════════════════ */
+#capa {
+  background: var(--verde-tinta);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 60px 60px;
+}
+#capa::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 30%, rgba(61,138,94,.2), transparent),
+    radial-gradient(ellipse 50% 70% at 90% 70%, rgba(45,96,69,.25), transparent);
+  pointer-events: none;
+}
+#capa::after {
+  content: '';
+  position: absolute;
+  right: -60px; top: 50%;
+  transform: translateY(-50%);
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.06);
+  pointer-events: none;
+}
+.capa-edicao {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: var(--ouro-med);
+  margin-bottom: 28px;
+  position: relative;
+}
+.capa-edicao::before {
+  content: '';
+  display: inline-block; width: 32px; height: 1px;
+  background: var(--ouro-med);
+  margin-right: 12px; vertical-align: middle;
+}
+.capa-titulo {
+  font-family: var(--font-disp);
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  position: relative;
+  max-width: 640px;
+}
+.capa-titulo em {
+  font-style: italic;
+  color: var(--ouro-med);
+}
+.capa-subtitulo {
+  font-size: 18px; font-weight: 300;
+  color: rgba(255,255,255,.65);
+  max-width: 500px;
+  margin-bottom: 48px;
+  line-height: 1.65;
+  position: relative;
+}
+.capa-formula {
+  display: inline-block;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--r-lg);
+  padding: 14px 28px;
+  font-family: 'Courier New', monospace;
+  font-size: 17px; font-weight: 700;
+  color: #fff; letter-spacing: .04em;
+  position: relative;
+  margin-bottom: 52px;
+}
+.capa-formula span { color: var(--ouro-med); }
+.capa-indice {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  position: relative;
+}
+.capa-chip {
+  background: rgba(255,255,255,.09);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 30px;
+  padding: 5px 14px;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.7);
+  letter-spacing: .04em;
+}
+.capa-linha {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--ouro-med) 0%, var(--verde-vivo) 60%, transparent 100%);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SEÇÕES
+═══════════════════════════════════════════════════════ */
+.secao {
+  padding: 72px 60px;
+  border-bottom: 1px solid var(--linha);
+  position: relative;
+}
+.secao:last-child { border-bottom: none; }
+.secao-alt { background: var(--papel-dk); }
+
+.secao-header {
+  margin-bottom: 44px;
+}
+.cap-num {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--verde-vivo);
+  margin-bottom: 14px;
+}
+.cap-num::before {
+  content: '';
+  display: inline-block; width: 24px; height: 2px;
+  background: var(--verde-vivo);
+}
+.secao-titulo {
+  font-family: var(--font-disp);
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--tinta);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.secao-titulo em { font-style: italic; color: var(--verde-med); }
+.secao-lead {
+  font-size: 17px; line-height: 1.75;
+  color: var(--cinza);
+  max-width: 640px;
+  font-weight: 400;
+  border-left: 3px solid var(--verde-pale);
+  padding-left: 18px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   COMPONENTES DE CONTEÚDO
+═══════════════════════════════════════════════════════ */
+
+/* Parágrafo corpo */
+.corpo {
+  font-size: 15.5px; line-height: 1.8;
+  color: var(--tinta-med);
+  max-width: 700px;
+  margin-bottom: 20px;
+}
+.corpo strong { color: var(--tinta); font-weight: 600; }
+.corpo em { font-style: italic; }
+
+/* Citação de destaque */
+.pull-quote {
+  margin: 36px 0;
+  padding: 26px 32px;
+  border-left: 5px solid var(--ouro-med);
+  background: var(--ouro-lt);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  max-width: 680px;
+}
+.pull-quote p {
+  font-family: var(--font-disp);
+  font-size: 19px; font-style: italic;
+  color: var(--tinta);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.pull-quote cite {
+  font-size: 12px; font-weight: 600;
+  color: var(--ouro);
+  letter-spacing: .08em; text-transform: uppercase;
+  font-style: normal;
+}
+
+/* Caixa de atenção */
+.caixa {
+  border-radius: var(--r-lg);
+  padding: 20px 24px;
+  margin: 22px 0;
+  max-width: 700px;
+}
+.caixa.verde  { background: var(--verde-bg); border: 1px solid var(--verde-pale); }
+.caixa.terra  { background: var(--terra-lt); border: 1px solid #f0c0a0; }
+.caixa.ouro   { background: var(--ouro-lt);  border: 1px solid #e0c870; }
+.caixa.azul   { background: var(--azul-lt);  border: 1px solid #b0cce0; }
+.caixa.roxo   { background: var(--roxo-lt);  border: 1px solid #c8b0e8; }
+.caixa-titulo {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .14em;
+  margin-bottom: 8px;
+}
+.caixa.verde .caixa-titulo  { color: var(--verde-med); }
+.caixa.terra .caixa-titulo  { color: var(--terra); }
+.caixa.ouro  .caixa-titulo  { color: var(--ouro); }
+.caixa.azul  .caixa-titulo  { color: var(--azul); }
+.caixa.roxo  .caixa-titulo  { color: var(--roxo); }
+.caixa p { font-size: 14.5px; line-height: 1.75; color: var(--tinta-med); }
+.caixa p + p { margin-top: 8px; }
+.caixa p strong { color: var(--tinta); font-weight: 600; }
+
+/* Lista */
+.lista {
+  list-style: none;
+  max-width: 700px;
+  margin: 16px 0;
+}
+.lista li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 15px; line-height: 1.75; color: var(--tinta-med);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.lista li:last-child { border-bottom: none; }
+.lista li::before {
+  content: '→';
+  color: var(--verde-vivo); font-size: 13px;
+  margin-top: 3px; flex-shrink: 0;
+}
+.lista.num { counter-reset: lista-cnt; }
+.lista.num li::before {
+  content: counter(lista-cnt);
+  counter-increment: lista-cnt;
+  width: 22px; height: 22px; flex-shrink: 0;
+  background: var(--verde-bg);
+  color: var(--verde-med);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  margin-top: 3px;
+}
+.lista li strong { color: var(--tinta); font-weight: 600; }
+
+/* ═══════════════════════════════════════════════════════
+   FÓRMULA VISUAL
+═══════════════════════════════════════════════════════ */
+.formula-bloco {
+  background: var(--verde-tinta);
+  border-radius: var(--r-xl);
+  padding: 36px 40px;
+  margin: 32px 0;
+  max-width: 700px;
+  position: relative;
+  overflow: hidden;
+}
+.formula-bloco::before {
+  content: '';
+  position: absolute;
+  right: -40px; bottom: -40px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.06);
+}
+.formula-bloco .f-label {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 10px;
+}
+.formula-bloco .f-eq {
+  font-family: 'Courier New', monospace;
+  font-size: 22px; font-weight: 700;
+  color: #fff; letter-spacing: .05em;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.formula-bloco .f-eq .dest { color: var(--ouro-med); }
+.formula-partes {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px; margin-top: 8px;
+}
+.f-parte {
+  background: rgba(255,255,255,.07);
+  border-radius: var(--r-md);
+  padding: 10px 12px;
+}
+.f-parte .fp-letra {
+  font-family: var(--font-disp);
+  font-size: 22px; font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.f-parte .fp-nome {
+  font-size: 11px; color: rgba(255,255,255,.55);
+  font-weight: 500; line-height: 1.35;
+}
+.f-parte.med { border-top: 2px solid var(--ouro-med); }
+.f-parte.pos { border-top: 2px solid var(--verde-vivo); }
+.f-parte.neg { border-top: 2px solid var(--terra-med); }
+.f-parte.med .fp-letra { color: var(--ouro-med); }
+.f-parte.pos .fp-letra { color: #7ccc9a; }
+.f-parte.neg .fp-letra { color: #f08070; }
+
+/* ═══════════════════════════════════════════════════════
+   CARDS DE VARIÁVEL
+═══════════════════════════════════════════════════════ */
+.vars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px;
+  margin: 32px 0;
+  max-width: 860px;
+}
+.var-card {
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  border-radius: var(--r-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--trans);
+}
+.var-card:hover { box-shadow: var(--shadow-md); }
+.var-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  border-radius: var(--r-lg) 0 0 var(--r-lg);
+}
+.var-card.med::before { background: var(--ouro-med); }
+.var-card.pos::before { background: var(--verde-vivo); }
+.var-card.neg::before { background: var(--terra-med); }
+
+.vc-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.vc-letra {
+  font-family: var(--font-disp);
+  font-size: 44px; font-weight: 900;
+  line-height: 1;
+}
+.var-card.med .vc-letra { color: var(--ouro); }
+.var-card.pos .vc-letra { color: var(--verde-vivo); }
+.var-card.neg .vc-letra { color: var(--terra); }
+
+.vc-tipo {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px;
+}
+.var-card.med .vc-tipo { background: var(--ouro-lt); color: var(--ouro); }
+.var-card.pos .vc-tipo { background: var(--verde-bg); color: var(--verde-med); }
+.var-card.neg .vc-tipo { background: var(--terra-lt); color: var(--terra); }
+
+.vc-nome {
+  font-family: var(--font-disp);
+  font-size: 17px; font-weight: 700;
+  color: var(--tinta);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.vc-desc {
+  font-size: 13.5px; line-height: 1.7;
+  color: var(--cinza);
+}
+.vc-escala {
+  display: flex; justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--linha);
+  font-size: 11.5px;
+}
+.vc-esc-min, .vc-esc-max { color: var(--cinza-lt); font-weight: 500; }
+.vc-esc-track {
+  flex: 1; height: 4px; border-radius: 2px;
+  background: linear-gradient(90deg, #e0d0b8 0%, var(--verde-vivo) 100%);
+  margin: 0 10px;
+}
+.var-card.neg .vc-esc-track {
+  background: linear-gradient(90deg, var(--verde-vivo) 0%, var(--terra-med) 100%);
+}
+
+/* ═══════════════════════════════════════════════════════
+   ESCALA DE PONTUAÇÃO
+═══════════════════════════════════════════════════════ */
+.escala-vis {
+  max-width: 700px;
+  margin: 28px 0;
+}
+.escala-titulo {
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .14em;
+  color: var(--cinza-lt); margin-bottom: 14px;
+}
+.escala-linha {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.escala-faixa {
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  border: 1px solid;
+}
+.escala-faixa.f1 { background: #fff4f0; border-color: #f0b8a0; }
+.escala-faixa.f2 { background: var(--ouro-lt); border-color: #e0c868; }
+.escala-faixa.f3 { background: var(--azul-lt); border-color: #b0c8e0; }
+.escala-faixa.f4 { background: var(--roxo-lt); border-color: #c0a8e0; }
+.ef-num {
+  font-size: 11px; font-weight: 700;
+  margin-bottom: 4px;
+}
+.escala-faixa.f1 .ef-num { color: var(--terra); }
+.escala-faixa.f2 .ef-num { color: var(--ouro); }
+.escala-faixa.f3 .ef-num { color: var(--azul); }
+.escala-faixa.f4 .ef-num { color: var(--roxo); }
+.ef-label {
+  font-size: 13px; font-weight: 700;
+  margin-bottom: 3px; color: var(--tinta);
+}
+.ef-desc {
+  font-size: 11.5px; color: var(--cinza); line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TIPOS
+═══════════════════════════════════════════════════════ */
+.tipos-lista {
+  max-width: 860px;
+  display: flex; flex-direction: column; gap: 18px;
+  margin: 28px 0;
+}
+.tipo-bloco {
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--trans);
+}
+.tipo-bloco:hover { box-shadow: var(--shadow-md); }
+.tipo-head {
+  display: flex; align-items: stretch;
+}
+.tipo-id {
+  min-width: 90px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 20px 14px;
+  text-align: center;
+}
+.tipo-id-num {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  margin-bottom: 4px;
+  opacity: .7;
+}
+.tipo-id-sigla {
+  font-family: var(--font-disp);
+  font-size: 32px; font-weight: 900;
+  line-height: 1;
+}
+.tipo-info {
+  flex: 1;
+  padding: 18px 22px;
+  display: flex; flex-direction: column; justify-content: center;
+  border-left: 1px solid rgba(0,0,0,.06);
+}
+.tipo-nome {
+  font-family: var(--font-disp);
+  font-size: 19px; font-weight: 700;
+  color: var(--tinta);
+  margin-bottom: 5px;
+}
+.tipo-cond {
+  font-family: 'Courier New', monospace;
+  font-size: 12px; font-weight: 600;
+  color: var(--cinza-lt);
+  margin-bottom: 6px;
+}
+.tipo-desc-head {
+  font-size: 14px; line-height: 1.65;
+  color: var(--cinza);
+}
+.tipo-body {
+  padding: 0 22px 20px 22px;
+  display: none;
+}
+.tipo-body.aberto { display: block; }
+.tipo-body-inner {
+  padding-top: 16px;
+  border-top: 1px dashed var(--linha);
+}
+.tipo-body-inner .corpo { max-width: 100%; }
+.tipo-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: none; border: none; cursor: pointer;
+  font-size: 12px; font-weight: 600;
+  padding: 8px 22px 14px;
+  color: var(--verde-vivo);
+  font-family: var(--font-body);
+  transition: color var(--trans);
+}
+.tipo-btn:hover { color: var(--verde-tinta); }
+.tipo-btn .seta { transition: transform var(--trans); }
+.tipo-btn.aberto .seta { transform: rotate(180deg); }
+
+/* Cores por tipo */
+.tipo-bloco.t1  .tipo-id { background: var(--verde-tinta); color: #fff; }
+.tipo-bloco.tw  .tipo-id { background: #7a2800; color: #fff; }
+.tipo-bloco.t2  .tipo-id { background: var(--azul); color: #fff; }
+.tipo-bloco.t3  .tipo-id { background: #5e3a00; color: #fff; }
+.tipo-bloco.t4  .tipo-id { background: var(--roxo); color: #fff; }
+.tipo-bloco.t5a .tipo-id { background: #6a0800; color: #fff; }
+.tipo-bloco.t5b .tipo-id { background: #2e3830; color: #fff; }
+.tipo-bloco.t1  .tipo-id .tipo-id-num { color: #7ccc9a; }
+.tipo-bloco.tw  .tipo-id .tipo-id-num { color: #f0a080; }
+.tipo-bloco.t2  .tipo-id .tipo-id-num { color: #90c4e8; }
+.tipo-bloco.t3  .tipo-id .tipo-id-num { color: #d4a830; }
+.tipo-bloco.t4  .tipo-id .tipo-id-num { color: #c0a0e0; }
+.tipo-bloco.t5a .tipo-id .tipo-id-num { color: #f09090; }
+.tipo-bloco.t5b .tipo-id .tipo-id-num { color: #a0b0a8; }
+
+/* ═══════════════════════════════════════════════════════
+   PASSOS / PROCESSO
+═══════════════════════════════════════════════════════ */
+.passos-lista {
+  max-width: 700px;
+  counter-reset: passo;
+  margin: 28px 0;
+}
+.passo {
+  display: flex; gap: 18px;
+  padding: 0 0 28px 0;
+  position: relative;
+}
+.passo::after {
+  content: '';
+  position: absolute;
+  left: 19px; top: 42px; bottom: 0;
+  width: 2px;
+  background: var(--verde-pale);
+}
+.passo:last-child::after { display: none; }
+.passo:last-child { padding-bottom: 0; }
+.passo-num {
+  width: 40px; height: 40px; flex-shrink: 0;
+  background: var(--verde-med);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-disp);
+  font-size: 16px; font-weight: 700; color: #fff;
+  box-shadow: 0 0 0 4px var(--verde-bg);
+  position: relative; z-index: 1;
+  margin-top: 2px;
+}
+.passo-corpo { flex: 1; }
+.passo-titulo {
+  font-family: var(--font-disp);
+  font-size: 17px; font-weight: 700;
+  color: var(--tinta);
+  margin-bottom: 6px;
+}
+.passo-texto {
+  font-size: 14.5px; line-height: 1.75;
+  color: var(--cinza);
+}
+
+/* ═══════════════════════════════════════════════════════
+   EXEMPLO PRÁTICO
+═══════════════════════════════════════════════════════ */
+.exemplo-card {
+  background: var(--verde-tinta);
+  border-radius: var(--r-xl);
+  padding: 30px 34px;
+  margin: 28px 0;
+  max-width: 700px;
+  position: relative; overflow: hidden;
+}
+.exemplo-card::before {
+  content: '';
+  position: absolute; right: 0; top: 0; bottom: 0; width: 4px;
+  background: linear-gradient(180deg, var(--ouro-med) 0%, var(--verde-vivo) 100%);
+}
+.exemplo-label {
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ouro-med); margin-bottom: 12px;
+}
+.exemplo-nome {
+  font-family: var(--font-disp);
+  font-size: 20px; font-weight: 700; color: #fff;
+  margin-bottom: 18px;
+}
+.exemplo-vars {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 18px;
+}
+.evar {
+  background: rgba(255,255,255,.1);
+  border-radius: var(--r-md);
+  padding: 6px 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px; font-weight: 700;
+  color: #fff;
+}
+.evar.deq { color: #f08070; }
+.exemplo-calc {
+  background: rgba(0,0,0,.2);
+  border-radius: var(--r-md);
+  padding: 14px 18px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px; color: var(--ouro-med);
+  letter-spacing: .03em;
+  margin-bottom: 14px;
+}
+.exemplo-res {
+  font-size: 14px; line-height: 1.75;
+  color: rgba(255,255,255,.75);
+}
+.exemplo-res strong { color: #7ccc9a; }
+
+/* ═══════════════════════════════════════════════════════
+   TABELA DE REFERÊNCIA
+═══════════════════════════════════════════════════════ */
+.tabela-ref {
+  max-width: 700px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--linha);
+  margin: 22px 0;
+  box-shadow: var(--shadow-sm);
+}
+.tabela-ref table {
+  width: 100%; border-collapse: collapse;
+  font-size: 14px;
+}
+.tabela-ref thead tr {
+  background: var(--verde-tinta); color: #fff;
+}
+.tabela-ref thead th {
+  padding: 12px 16px; text-align: left;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+}
+.tabela-ref tbody tr {
+  border-bottom: 1px solid var(--linha);
+  transition: background var(--trans);
+}
+.tabela-ref tbody tr:last-child { border-bottom: none; }
+.tabela-ref tbody tr:hover { background: var(--verde-bg); }
+.tabela-ref td {
+  padding: 11px 16px;
+  line-height: 1.5; color: var(--tinta-med);
+  vertical-align: top;
+}
+.tabela-ref td:first-child {
+  font-family: var(--font-disp);
+  font-size: 17px; font-weight: 700;
+  color: var(--verde-vivo);
+  white-space: nowrap;
+}
+.tabela-ref td strong { color: var(--tinta); font-weight: 600; }
+
+/* ═══════════════════════════════════════════════════════
+   FAQ
+═══════════════════════════════════════════════════════ */
+.faq-lista {
+  max-width: 700px;
+  margin: 22px 0;
+}
+.faq-item {
+  border-bottom: 1px solid var(--linha);
+}
+.faq-item:last-child { border-bottom: none; }
+.faq-pergunta {
+  width: 100%; background: none; border: none; cursor: pointer;
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 18px 0;
+  text-align: left;
+  font-family: var(--font-body);
+}
+.faq-pergunta:hover .fq-texto { color: var(--verde-med); }
+.fq-icone {
+  width: 24px; height: 24px; flex-shrink: 0;
+  background: var(--verde-bg);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: var(--verde-med);
+  transition: transform var(--trans), background var(--trans);
+  margin-top: 1px;
+}
+.faq-item.aberto .fq-icone {
+  background: var(--verde-med); color: #fff;
+  transform: rotate(45deg);
+}
+.fq-texto {
+  font-size: 15.5px; font-weight: 600;
+  color: var(--tinta); transition: color var(--trans);
+  line-height: 1.45;
+}
+.faq-resposta {
+  display: none;
+  padding: 0 0 18px 36px;
+}
+.faq-resposta.aberta { display: block; }
+.faq-resposta p {
+  font-size: 14.5px; line-height: 1.8;
+  color: var(--cinza);
+}
+.faq-resposta p + p { margin-top: 10px; }
+.faq-resposta p strong { color: var(--tinta); font-weight: 600; }
+
+/* ═══════════════════════════════════════════════════════
+   GLOSSÁRIO
+═══════════════════════════════════════════════════════ */
+.glossario-grid {
+  max-width: 860px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin: 22px 0;
+}
+.gloss-item {
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  border-radius: var(--r-lg);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+}
+.gloss-termo {
+  font-family: var(--font-disp);
+  font-size: 16px; font-weight: 700;
+  color: var(--verde-med);
+  margin-bottom: 6px;
+}
+.gloss-def {
+  font-size: 13.5px; line-height: 1.7;
+  color: var(--cinza);
+}
+
+/* ═══════════════════════════════════════════════════════
+   RODAPÉ
+═══════════════════════════════════════════════════════ */
+.rodape-doc {
+  background: var(--verde-tinta);
+  padding: 48px 60px;
+  text-align: center;
+}
+.rodape-doc .rd-titulo {
+  font-family: var(--font-disp);
+  font-size: 22px; font-weight: 700;
+  color: #fff; margin-bottom: 10px;
+}
+.rodape-doc .rd-formula {
+  font-family: 'Courier New', monospace;
+  font-size: 16px; font-weight: 700;
+  color: var(--ouro-med); margin-bottom: 20px;
+  letter-spacing: .04em;
+}
+.rodape-doc .rd-texto {
+  font-size: 13px; color: rgba(255,255,255,.4);
+  line-height: 1.8; max-width: 520px; margin: 0 auto;
+}
+.rodape-doc .rd-linha {
+  width: 60px; height: 2px;
+  background: var(--ouro-med);
+  margin: 20px auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   BOTÃO TOPO E PRINT
+═══════════════════════════════════════════════════════ */
+.btn-topo {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 46px; height: 46px;
+  background: var(--verde-med);
+  color: #fff; border: none;
+  border-radius: 50%; cursor: pointer; font-size: 18px;
+  box-shadow: var(--shadow-md);
+  transition: background var(--trans), transform var(--trans);
+  z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-topo:hover { background: var(--verde-tinta); transform: translateY(-2px); }
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVO
+═══════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  :root { --nav-w: 0px; }
+  .nav-aside {
+    transform: translateX(-260px);
+    width: 260px;
+  }
+  .nav-aside.aberto {
+    transform: translateX(0);
+  }
+  .nav-overlay.visivel { display: block; }
+  .nav-toggle { display: flex; }
+  .main-content { margin-left: 0; }
+  .secao { padding: 60px 28px; }
+  #capa { padding: 80px 28px 52px; }
+  .rodape-doc { padding: 40px 28px; }
+}
+@media (max-width: 600px) {
+  .secao { padding: 48px 20px; }
+  #capa { padding: 72px 20px 44px; }
+  .formula-bloco { padding: 24px 22px; }
+  .formula-bloco .f-eq { font-size: 16px; }
+  .escala-linha { grid-template-columns: 1fr 1fr; }
+  .vars-grid { grid-template-columns: 1fr; }
+  .tipo-id { min-width: 72px; }
+  .tipo-id-sigla { font-size: 26px; }
+  .tipo-nome { font-size: 16px; }
+  .rodape-doc { padding: 36px 20px; }
+  .exemplo-card { padding: 22px 20px; }
+  .pull-quote { padding: 20px 22px; }
+  .pull-quote p { font-size: 17px; }
+  .tabela-ref { overflow-x: auto; }
+  .glossario-grid { grid-template-columns: 1fr; }
+  .btn-topo { bottom: 16px; right: 16px; }
+  .capa-titulo { font-size: 2.2rem; }
+}
+
+/* Animações de entrada */
+.secao { animation: aparece .5s ease both; }
+@keyframes aparece {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Hambúrguer ── -->
+<button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">☰</button>
+<div class="nav-overlay" id="overlay" onclick="toggleNav()"></div>
+
+<!-- ══ NAVEGAÇÃO ══ -->
+<nav class="nav-aside" id="navAside">
+  <div class="nav-brand">
+    <div class="nav-brand-sigla">TES · Apostila 2025</div>
+    <div class="nav-brand-title">Diagnóstico Estratégico de Economia Solidária</div>
+  </div>
+  <ul class="nav-lista">
+    <li><a href="#capa" onclick="fechaNav()"><span class="nav-num">—</span> Capa</a></li>
+    <div class="nav-sep"></div>
+    <li><a href="#intro" onclick="fechaNav()"><span class="nav-num">1</span> O que é esta ferramenta</a></li>
+    <li><a href="#formula" onclick="fechaNav()"><span class="nav-num">2</span> A fórmula explicada</a></li>
+    <li><a href="#variaveis" onclick="fechaNav()"><span class="nav-num">3</span> As oito variáveis</a></li>
+    <li><a href="#como-pontuar" onclick="fechaNav()"><span class="nav-num">4</span> Como pontuar com honestidade</a></li>
+    <li><a href="#lendo" onclick="fechaNav()"><span class="nav-num">5</span> Lendo os resultados</a></li>
+    <li><a href="#tipos" onclick="fechaNav()"><span class="nav-num">6</span> Os sete tipos de empreendimento</a></li>
+    <li><a href="#uso-coletivo" onclick="fechaNav()"><span class="nav-num">7</span> Uso coletivo em assembleias</a></li>
+    <li><a href="#exemplo" onclick="fechaNav()"><span class="nav-num">8</span> Exemplo prático</a></li>
+    <li><a href="#faq" onclick="fechaNav()"><span class="nav-num">9</span> Perguntas frequentes</a></li>
+    <li><a href="#glossario" onclick="fechaNav()"><span class="nav-num">10</span> Glossário</a></li>
+  </ul>
+  <div class="nav-footer">
+    Teoria da Economia Solidária · Ferramenta educativa de uso livre para redes e movimentos solidários.
+  </div>
+</nav>
+
+<!-- ══ CONTEÚDO PRINCIPAL ══ -->
+<div class="main-content">
+
+<!-- ── CAPA ── -->
+<section id="capa">
+  <div class="capa-edicao">Apostila de uso e orientação · 2025</div>
+  <h1 class="capa-titulo">Diagnóstico<br>Estratégico de<br><em>Economia Solidária</em></h1>
+  <p class="capa-subtitulo">Um guia completo para compreender, aplicar e interpretar a ferramenta de avaliação de empreendimentos solidários baseada na Teoria da Economia Solidária.</p>
+  <div class="capa-formula">R = f ( S · [A + <span>W</span> + I + N + F + T] − C )</div>
+  <div class="capa-indice">
+    <span class="capa-chip">1 · O que é</span>
+    <span class="capa-chip">2 · A fórmula</span>
+    <span class="capa-chip">3 · As variáveis</span>
+    <span class="capa-chip">4 · Como pontuar</span>
+    <span class="capa-chip">5 · Os tipos</span>
+    <span class="capa-chip">6 · Uso coletivo</span>
+    <span class="capa-chip">7 · Exemplo</span>
+    <span class="capa-chip">8 · FAQ</span>
+  </div>
+  <div class="capa-linha"></div>
+</section>
+
+<!-- ── 1. O QUE É ESTA FERRAMENTA ── -->
+<section class="secao" id="intro">
+  <div class="secao-header">
+    <div class="cap-num">Capítulo 1</div>
+    <h2 class="secao-titulo">O que é esta <em>ferramenta</em></h2>
+    <p class="secao-lead">Uma bússola para empreendimentos solidários: não diz onde você deve chegar, mas mostra com clareza onde você está — e por quê.</p>
+  </div>
+
+  <p class="corpo">O Diagnóstico Estratégico de Economia Solidária é uma ferramenta educativa e analítica desenvolvida a partir da Teoria da Economia Solidária (TES). Seu objetivo é ajudar empreendimentos econômicos solidários (EES), movimentos sociais, incubadoras e formadores a avaliarem, de forma sistemática e honesta, o estado atual de uma organização solidária.</p>
+
+  <p class="corpo">A ferramenta não substitui o debate coletivo — ela o alimenta. Quando usada em assembleia, facilita conversas difíceis que muitas vezes não acontecem por falta de uma linguagem compartilhada.</p>
+
+  <div class="pull-quote">
+    <p>"Pontuação honesta tem mais valor do que pontuação alta. O diagnóstico que revela fragilidades reais é infinitamente mais útil do que o diagnóstico que confirma o que o grupo quer ouvir."</p>
+    <cite>Princípio central da ferramenta</cite>
+  </div>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:28px 0 14px;color:var(--tinta);">Para quem é esta ferramenta?</h3>
+  <ul class="lista">
+    <li><strong>Cooperativas e associações</strong> que querem fazer um autodiagnóstico periódico e orientar seu planejamento</li>
+    <li><strong>Grupos informais em processo de formalização</strong> que precisam entender em que patamar se encontram</li>
+    <li><strong>Incubadoras e ITCPs</strong> que acompanham empreendimentos e precisam de um instrumento comparável e padronizado</li>
+    <li><strong>Facilitadores de processos formativos</strong> que usam a ferramenta como ponto de partida para rodadas de educação popular</li>
+    <li><strong>Redes e fóruns de ES</strong> que querem mapear coletivamente o estado dos empreendimentos da rede</li>
+    <li><strong>Pesquisadores e extensionistas</strong> que precisam de um protocolo de avaliação baseado na teoria</li>
+  </ul>
+
+  <div class="caixa verde">
+    <div class="caixa-titulo">O que a ferramenta não é</div>
+    <p>Não é um questionário de certificação, nem um ranking competitivo entre empreendimentos. Não existe "nota de corte" para ser considerado solidário. O resultado é sempre um ponto de partida para reflexão — nunca uma sentença.</p>
+  </div>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:28px 0 14px;color:var(--tinta);">O que você vai encontrar nesta apostila</h3>
+  <p class="corpo">Esta apostila explica cada componente da ferramenta com profundidade, oferece orientações práticas para sua aplicação individual e coletiva, apresenta exemplos concretos e responde às dúvidas mais frequentes de quem a utiliza pela primeira vez.</p>
+</section>
+
+<!-- ── 2. A FÓRMULA ── -->
+<section class="secao secao-alt" id="formula">
+  <div class="secao-header">
+    <div class="cap-num">Capítulo 2</div>
+    <h2 class="secao-titulo">A fórmula <em>explicada</em></h2>
+    <p class="secao-lead">Uma equação não é uma receita — é uma forma de tornar visíveis as forças que agem sobre um empreendimento solidário.</p>
+  </div>
+
+  <div class="formula-bloco">
+    <div class="f-label">Fórmula central da TES — versão revisada 2025</div>
+    <div class="f-eq">R = f ( <span class="dest">S</span> · [A + W + I + N + F + T] − C )</div>
+    <div class="formula-partes">
+      <div class="f-parte med">
+        <div class="fp-letra">S</div>
+        <div class="fp-nome">Racionalidade solidária — mediador</div>
+      </div>
+      <div class="f-parte pos">
+        <div class="fp-letra">A</div>
+        <div class="fp-nome">Autogestão real</div>
+      </div>
+      <div class="f-parte pos">
+        <div class="fp-letra">W</div>
+        <div class="fp-nome">Trabalho emancipatório</div>
+      </div>
+      <div class="f-parte pos">
+        <div class="fp-letra">I</div>
+        <div class="fp-nome">Integração sistêmica</div>
+      </div>
+      <div class="f-parte pos">
+        <div class="fp-letra">N</div>
+        <div class="fp-nome">Densidade de redes</div>
+      </div>
+      <div class="f-parte pos">
+        <div class="fp-letra">F</div>
+        <div class="fp-nome">Finanças solidárias</div>
+      </div>
+      <div class="f-parte pos">
+        <div class="fp-letra">T</div>
+        <div class="fp-nome">Territorialidade</div>
+      </div>
+      <div class="f-parte neg">
+        <div class="fp-letra">C</div>
+        <div class="fp-nome">Pressão capitalista — tensão</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="corpo">A fórmula captura a ideia central da Teoria da Economia Solidária: o resultado solidário real de um empreendimento não depende apenas de ter boas práticas isoladas, mas da sinergia entre elas — mediada pela qualidade da racionalidade solidária que as atravessa, e subtraída pela pressão do sistema capitalista sobre a organização.</p>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:28px 0 14px;color:var(--tinta);">Como a fórmula funciona na prática</h3>
+
+  <p class="corpo"><strong>O papel de S como mediador:</strong> S não é somado aos demais — ele multiplica a soma. Isso significa que, se S = 0 (nenhuma racionalidade solidária), o resultado R será sempre negativo independentemente de qualquer outro valor. Por isso, S é a variável mais crítica do sistema: ela representa o quanto os valores solidários realmente orientam as decisões cotidianas do grupo.</p>
+
+  <div class="caixa terra">
+    <div class="caixa-titulo">⚠ Atenção ao efeito de S</div>
+    <p>S = 5 significa que metade do potencial das variáveis estruturais é aproveitado. S = 8 significa 80%. S = 10 significa 100%. Um empreendimento com A + W + I + N + F + T = 48 e S = 5 tem o mesmo resultado de um empreendimento com soma estrutural de 24 e S = 10. <strong>S baixo desperdiça potencial.</strong></p>
+  </div>
+
+  <p class="corpo"><strong>As variáveis estruturais (A, W, I, N, F, T)</strong> são somadas porque se complementam e se reforçam. Um empreendimento pode ter N alto mesmo com F baixo — cada dimensão contribui independentemente, mas a soma total é o que importa para a fórmula.</p>
+
+  <p class="corpo"><strong>C subtrai diretamente:</strong> A pressão capitalista não é mediada por S — ela age diretamente sobre o resultado. Isso reflete a realidade: por mais coesa que seja a cultura solidária do grupo, a pressão externa corrói o resultado. C = 8 significa que oito pontos inteiros são subtraídos de R.</p>
+
+  <div class="caixa ouro">
+    <div class="caixa-titulo">💡 Cálculo passo a passo</div>
+    <p><strong>1.</strong> Some as seis variáveis estruturais: A + W + I + N + F + T</p>
+    <p><strong>2.</strong> Divida S por 10 para obter o mediador decimal (ex: S = 7 → 0,70)</p>
+    <p><strong>3.</strong> Multiplique: mediador × soma estrutural</p>
+    <p><strong>4.</strong> Subtraia C: esse é o seu R</p>
+    <p><strong>Exemplo:</strong> A=6, W=5, I=6, N=4, F=4, T=7 → soma = 32. S=7 → 0,70. R = 0,70 × 32 − 5 (C) = 22,4 − 5 = <strong>17,4</strong></p>
+  </div>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:28px 0 14px;color:var(--tinta);">Interpretando o valor de R</h3>
+
+  <div class="escala-vis">
+    <div class="escala-titulo">Referências de R — o que cada faixa significa</div>
+    <div class="escala-linha">
+      <div class="escala-faixa f1">
+        <div class="ef-num">R &lt; 0</div>
+        <div class="ef-label">Negativo</div>
+        <div class="ef-desc">Pressão capitalista supera a capacidade solidária atual</div>
+      </div>
+      <div class="escala-faixa f2">
+        <div class="ef-num">0 a 11</div>
+        <div class="ef-label">Baixo a moderado</div>
+        <div class="ef-desc">Bases existem mas ainda são frágeis; há potencial a desenvolver</div>
+      </div>
+      <div class="escala-faixa f3">
+        <div class="ef-num">12 a 34</div>
+        <div class="ef-label">Bom a excelente</div>
+        <div class="ef-desc">Empreendimento solidário em consolidação ou funcionamento pleno</div>
+      </div>
+      <div class="escala-faixa f4">
+        <div class="ef-num">≥ 35</div>
+        <div class="ef-label">Extraordinário</div>
+        <div class="ef-desc">Referência de economia solidária — raro e valioso</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. AS VARIÁVEIS ── -->
+<section class="secao" id="variaveis">
+  <div class="secao-header">
+    <div class="cap-num">Capítulo 3</div>
+    <h2 class="secao-titulo">As oito <em>variáveis</em></h2>
+    <p class="secao-lead">Cada variável captura uma dimensão essencial da vida solidária. Conhecê-las em profundidade é o pré-requisito para pontuar com honestidade.</p>
+  </div>
+
+  <p class="corpo">As variáveis da TES não são simples indicadores de desempenho. Cada uma representa uma dimensão teórica da Economia Solidária — e a maneira como você as interpreta ao pontuar revela tanto sobre o seu grupo quanto os números em si. Leia cada descrição antes de ajustar o controle deslizante.</p>
+
+  <h3 style="font-family:var(--font-disp);font-size:19px;font-weight:700;margin:28px 0 16px;color:var(--ouro);">S — Mediador do sistema</h3>
+  <div class="vars-grid" style="grid-template-columns:1fr;">
+    <div class="var-card med" style="max-width:700px;">
+      <div class="vc-header">
+        <div class="vc-letra">S</div>
+        <span class="vc-tipo">Mediador — multiplica tudo</span>
+      </div>
+      <div class="vc-nome">Racionalidade Solidária</div>
+      <div class="vc-desc">Não avalia intenções, mas coerência real entre discurso e prática. Quanto os valores solidários orientam, de fato, as decisões cotidianas do grupo? Como se distribui o resultado, como se resolve conflito, como se recebe um membro novo, como o grupo reage à pressão por lucro?</div>
+      <div class="vc-escala">
+        <span class="vc-esc-min">0 = ausente</span>
+        <div class="vc-esc-track"></div>
+        <span class="vc-esc-max">10 = plena</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="caixa ouro">
+    <div class="caixa-titulo">Como testar S com o grupo</div>
+    <p>Pergunte nas últimas três decisões grandes do grupo: quais foram os critérios usados? Se a resposta é sempre rentabilidade ou conveniência de quem lidera, S está superestimado. Se os critérios incluíam bem-estar dos membros, equidade e impacto comunitário — S está mais alto. <strong>Confiança e transparência habitual são bons indicadores de S real.</strong></p>
+  </div>
+
+  <h3 style="font-family:var(--font-disp);font-size:19px;font-weight:700;margin:32px 0 16px;color:var(--verde-med);">Variáveis estruturais — A, W, I, N, F, T</h3>
+  <p class="corpo">Estas seis variáveis compõem a soma que será mediada por S. Quanto maior a soma, maior o potencial do empreendimento — desde que S seja alto o suficiente para convertê-lo em resultado real.</p>
+
+  <div class="vars-grid">
+    <div class="var-card pos">
+      <div class="vc-header">
+        <div class="vc-letra">A</div>
+        <span class="vc-tipo">Estrutural</span>
+      </div>
+      <div class="vc-nome">Autogestão Real</div>
+      <div class="vc-desc">Não é se existe assembleia no estatuto — é se a assembleia decide coisas realmente importantes. As últimas três decisões grandes: tomadas por quem? Se a resposta é sempre a mesma pessoa, A está superestimado. Autogestão formal sem autogestão real é hierarquia com outro nome.</div>
+      <div class="vc-escala">
+        <span class="vc-esc-min">0 = hierarquia</span>
+        <div class="vc-esc-track"></div>
+        <span class="vc-esc-max">10 = democracia plena</span>
+      </div>
+    </div>
+    <div class="var-card pos">
+      <div class="vc-header">
+        <div class="vc-letra">W</div>
+        <span class="vc-tipo">Estrutural</span>
+      </div>
+      <div class="vc-nome">Centralidade do Trabalho Emancipatório</div>
+      <div class="vc-desc">Avalia quatro dimensões: condições dignas de trabalho; divisão equitativa das tarefas (atenção a padrões de gênero e raça); trabalho como desenvolvimento humano; e dignidade percebida pelos membros. Se há exploração disfarçada de solidariedade, W está alto demais.</div>
+      <div class="vc-escala">
+        <span class="vc-esc-min">0 = degradante</span>
+        <div class="vc-esc-track"></div>
+        <span class="vc-esc-max">10 = emancipatório pleno</span>
+      </div>
+    </div>
+    <div class="var-card pos">
+      <div class="vc-header">
+        <div class="vc-letra">I</div>
+        <span class="vc-tipo">Meta-variável</span>
+      </div>
+      <div class="vc-nome">Integração Sistêmica</div>
+      <div class="vc-desc">Mede se os campos do empreendimento conversam entre si. Produção, comercialização, finanças, formação: funcionam em silo ou se articulam? O que acontece na produção muda o que acontece nas finanças? I alto multiplica o efeito das outras variáveis. I baixo as enfraquece.</div>
+      <div class="vc-escala">
+        <span class="vc-esc-min">0 = silos</span>
+        <div class="vc-esc-track"></div>
+        <span class="vc-esc-max">10 = plenamente integrado</span>
+      </div>
+    </div>
+    <div class="var-card pos">
+      <div class="vc-header">
+        <div class="vc-letra">N</div>
+        <span class="vc-tipo">Estrutural</span>
+      </div>
+      <div class="vc-nome">Densidade de Redes</div>
+      <div class="vc-desc">Não conta contatos — mede qualidade e reciprocidade. Se o empreendimento enfrentar uma crise amanhã, quantos parceiros vão ajudar de fato? Essa resposta define N melhor do que qualquer lista de grupos de WhatsApp. Redes densas têm trocas regulares e apoio mútuo real.</div>
+      <div class="vc-escala">
+        <span class="vc-esc-min">0 = isolado</span>
+        <div class="vc-esc-track"></div>
+        <span class="vc-esc-max">10 = rede densa</span>
+      </div>
+    </div>
+    <div class="var-card pos">
+      <div class="vc-header">
+        <div class="vc-letra">F</div>
+        <span class="vc-tipo">Estrutural</span>
+      </div>
+      <div class="vc-nome">Finanças Solidárias</div>
+      <div class="vc-desc">Não avalia se tem dinheiro — avalia se acessa instrumentos financeiros adequados à lógica solidária. EES que sobrevive de empréstimo com juros abusivos tem F baixo mesmo funcionando hoje. Se precisar de crédito para crescer, de onde vem? Se a resposta for banco convencional, F está comprometido.</div>
+      <div class="vc-escala">
+        <span class="vc-esc-min">0 = sem acesso</span>
+        <div class="vc-esc-track"></div>
+        <span class="vc-esc-max">10 = pleno acesso solidário</span>
+      </div>
+    </div>
+    <div class="var-card pos">
+      <div class="vc-header">
+        <div class="vc-letra">T</div>
+        <span class="vc-tipo">Estrutural</span>
+      </div>
+      <div class="vc-nome">Territorialidade</div>
+      <div class="vc-desc">Não é onde o empreendimento está localizado — é o quanto ele pertence àquele lugar. Compra insumos locais? Vende para a comunidade? Preserva saberes e cultura do território? Participa do desenvolvimento local? T alto significa que a comunidade protege o empreendimento quando o mercado ataca.</div>
+      <div class="vc-escala">
+        <span class="vc-esc-min">0 = sem raízes</span>
+        <div class="vc-esc-track"></div>
+        <span class="vc-esc-max">10 = profundamente enraizado</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--font-disp);font-size:19px;font-weight:700;margin:32px 0 16px;color:var(--terra);">C — Fator de tensão</h3>
+  <div class="vars-grid" style="grid-template-columns:1fr;">
+    <div class="var-card neg" style="max-width:700px;">
+      <div class="vc-header">
+        <div class="vc-letra">C</div>
+        <span class="vc-tipo">Tensão — lógica invertida</span>
+      </div>
+      <div class="vc-nome">Pressão Capitalista</div>
+      <div class="vc-desc">Mede forças externas do sistema capitalista sobre o empreendimento: concorrência predatória, burocracia desproporcional, ausência de políticas públicas de apoio, pressão para "agir como empresa". Aqui, pontuação baixa é boa. C = 2 é favorável. C = 9 é emergência.</div>
+      <div class="vc-escala">
+        <span class="vc-esc-min">0 = sem pressão ✓</span>
+        <div class="vc-esc-track"></div>
+        <span class="vc-esc-max">10 = extrema ✗</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="caixa terra">
+    <div class="caixa-titulo">⚠ Lógica invertida em C</div>
+    <p>C é a única variável em que uma pontuação alta é ruim. Quando você ajusta o controle de C para um valor elevado, está dizendo que o empreendimento enfrenta pressão externa intensa. <strong>Não confunda resistência interna com ausência de pressão.</strong> O grupo pode ser muito resiliente E ao mesmo tempo estar sob forte pressão externa — nesse caso, C ainda é alto.</p>
+  </div>
+
+  <div class="tabela-ref">
+    <table>
+      <thead>
+        <tr>
+          <th>Var.</th>
+          <th>Nome</th>
+          <th>Papel na fórmula</th>
+          <th>Pergunta-chave</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>S</td>
+          <td><strong>Racionalidade solidária</strong></td>
+          <td>Mediador (multiplica)</td>
+          <td>O que de fato orienta nossas decisões — valores ou conveniência?</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td><strong>Autogestão real</strong></td>
+          <td>Estrutural (somado)</td>
+          <td>As últimas três decisões grandes: quem as tomou?</td>
+        </tr>
+        <tr>
+          <td>W</td>
+          <td><strong>Trabalho emancipatório</strong></td>
+          <td>Estrutural (somado)</td>
+          <td>Quem faz as tarefas mais pesadas e menos valorizadas?</td>
+        </tr>
+        <tr>
+          <td>I</td>
+          <td><strong>Integração sistêmica</strong></td>
+          <td>Meta-var. (amplifica)</td>
+          <td>O que acontece na produção afeta as finanças?</td>
+        </tr>
+        <tr>
+          <td>N</td>
+          <td><strong>Densidade de redes</strong></td>
+          <td>Estrutural (somado)</td>
+          <td>Quem nos ajudaria de verdade se tivéssemos uma crise hoje?</td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td><strong>Finanças solidárias</strong></td>
+          <td>Estrutural (somado)</td>
+          <td>Se precisarmos de crédito, de onde vem?</td>
+        </tr>
+        <tr>
+          <td>T</td>
+          <td><strong>Territorialidade</strong></td>
+          <td>Estrutural (somado)</td>
+          <td>A comunidade ao redor nos protegeria numa crise?</td>
+        </tr>
+        <tr>
+          <td>C</td>
+          <td><strong>Pressão capitalista</strong></td>
+          <td>Tensão (subtraído)</td>
+          <td>Quanta energia gastamos resistindo ao sistema em vez de crescer?</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── 4. COMO PONTUAR ── -->
+<section class="secao secao-alt" id="como-pontuar">
+  <div class="secao-header">
+    <div class="cap-num">Capítulo 4</div>
+    <h2 class="secao-titulo">Como pontuar com <em>honestidade</em></h2>
+    <p class="secao-lead">O erro mais comum ao usar a ferramenta é pontuar o que o grupo aspira ser, não o que de fato é. Pontuar aspirações não produz diagnóstico — produz autoengano.</p>
+  </div>
+
+  <div class="pull-quote">
+    <p>"Avaliar onde estamos exige a coragem de ver o que não queremos ver. Mas é exatamente essa visão que nos permite mudar."</p>
+    <cite>Princípio de autoavaliação honesta</cite>
+  </div>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:28px 0 16px;color:var(--tinta);">Os erros mais frequentes</h3>
+
+  <ul class="lista">
+    <li><strong>Pontuar intenções, não práticas:</strong> "Queremos ser autogestionários" não é A alto. "Nossas assembleias decidem salários, contratos e admissões" pode ser A alto.</li>
+    <li><strong>Confundir forma jurídica com conteúdo:</strong> Ser cooperativa registrada não garante nenhum ponto em nenhuma variável. O que conta é o que acontece no dia a dia.</li>
+    <li><strong>Subestimar C por resistência interna:</strong> Mesmo grupos muito resilientes podem estar sob pressão capitalista extrema. As duas coisas coexistem.</li>
+    <li><strong>Ignorar W por ser variável "nova":</strong> W frequentemente é a variável mais superestimada — as hierarquias de gênero e raça na divisão do trabalho são invisíveis para quem está dentro delas.</li>
+    <li><strong>Pontuar o melhor período, não o atual:</strong> A ferramenta mede o presente. Se houve assembleia excelente há dois anos mas não há seis meses, A está mais baixo do que parece.</li>
+    <li><strong>Arredondar para cima por constrangimento coletivo:</strong> Quando usada em grupo, há pressão social para dar notas generosas. Use momentos de votação individual antes da discussão.</li>
+  </ul>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:32px 0 16px;color:var(--tinta);">Perguntas que ajudam a calibrar cada variável</h3>
+
+  <div class="caixa verde">
+    <div class="caixa-titulo">Para calibrar S — Racionalidade Solidária</div>
+    <p>Nas últimas três decisões importantes do grupo, os critérios usados foram explicitados para todos? Membros com menos poder tinham voz igual? Quando havia conflito entre rentabilidade e bem-estar de membros, o que prevaleceu?</p>
+  </div>
+
+  <div class="caixa verde">
+    <div class="caixa-titulo">Para calibrar A — Autogestão Real</div>
+    <p>Quem definiu o preço do último produto ou serviço lançado? Quem aprovou o último contrato ou parceria significativa? Há membros que "nunca faltam" às assembleias mas "nunca votam em nada que importe"?</p>
+  </div>
+
+  <div class="caixa verde">
+    <div class="caixa-titulo">Para calibrar W — Trabalho Emancipatório</div>
+    <p>Faça o exercício: liste as cinco tarefas mais pesadas ou menos valorizadas do grupo. Quem as faz? Se há um padrão (sempre mulheres, sempre as mesmas pessoas, sempre os mais novos), W está superestimado. Pergunte: "Alguém aqui se sente sobrecarregado em silêncio?"</p>
+  </div>
+
+  <div class="caixa verde">
+    <div class="caixa-titulo">Para calibrar N — Redes</div>
+    <p>Liste três empreendimentos ou organizações que o grupo tem contato regular. Houve troca real (produto, serviço, aprendizado, ajuda) nos últimos três meses com pelo menos dois deles? Se sim, N pode ser 5 ou mais. Se os contatos são apenas simbólicos, N está mais baixo.</p>
+  </div>
+
+  <div class="caixa terra">
+    <div class="caixa-titulo">⚠ Para calibrar C — pressão capitalista</div>
+    <p>C não mede o que o grupo faz — mede o que o sistema faz com o grupo. Mesmo grupos muito organizados podem ter C alto. Pense: quanto tempo e energia são gastos respondendo a burocracia, combatendo concorrência predatória, suprindo lacunas de políticas públicas inexistentes? Esse consumo de energia define C.</p>
+  </div>
+</section>
+
+<!-- ── 5. LENDO OS RESULTADOS ── -->
+<section class="secao" id="lendo">
+  <div class="secao-header">
+    <div class="cap-num">Capítulo 5</div>
+    <h2 class="secao-titulo">Lendo os <em>resultados</em></h2>
+    <p class="secao-lead">O número R é apenas a porta de entrada. O que importa é o padrão — como as variáveis se relacionam entre si e o que isso revela sobre o empreendimento.</p>
+  </div>
+
+  <p class="corpo">A ferramenta produz três saídas principais que devem ser lidas em conjunto: o valor de R, o mapa radar e o laudo diagnóstico com tipo e plano de ação. Cada uma ilumina uma dimensão diferente da situação do empreendimento.</p>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:28px 0 14px;color:var(--tinta);">O valor de R</h3>
+  <p class="corpo">R é a síntese quantitativa. Serve para comparar o empreendimento ao longo do tempo (o R de hoje versus o R daqui a seis meses) e para identificar a faixa de desenvolvimento geral. Mas atenção: dois empreendimentos com o mesmo R podem ter perfis completamente diferentes — por isso o mapa radar é essencial.</p>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:28px 0 14px;color:var(--tinta);">O mapa radar</h3>
+  <p class="corpo">O radar revela o perfil do empreendimento: quais dimensões estão desenvolvidas, quais estão atrofiadas e se há desequilíbrio entre elas. Um radar muito assimétrico (algumas variáveis altas, outras muito baixas) geralmente indica fragilidades estruturais que precisam ser tratadas antes de qualquer crescimento.</p>
+
+  <div class="caixa azul">
+    <div class="caixa-titulo">💡 Como ler o radar</div>
+    <p><strong>Radar equilibrado mas pequeno:</strong> empreendimento jovem ou em reconstrução — potencial de crescimento proporcional em todas as dimensões.</p>
+    <p><strong>Radar grande mas assimétrico:</strong> pontos fortes consolidados com gargalos críticos — o crescimento está bloqueado pelos pontos mais fracos.</p>
+    <p><strong>C grande no radar:</strong> a pressão externa está alta — o trabalho de fortalecimento interno tem limite enquanto C não for reduzido coletivamente.</p>
+  </div>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:28px 0 14px;color:var(--tinta);">As barras de progresso</h3>
+  <p class="corpo">As barras mostram cada variável individualmente com sua classificação (Crítico, Em construção, Consolidado, Referência para as positivas; e Favorável, Moderada, Alta, Crítica para C). Identifique sempre: qual é a variável mais baixa? Ela é frequentemente o gargalo que limita o crescimento das demais.</p>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:28px 0 14px;color:var(--tinta);">O laudo diagnóstico</h3>
+  <p class="corpo">O laudo identifica o Tipo de empreendimento com base na combinação das pontuações. Cada Tipo vem com uma descrição da situação, um diagnóstico das causas e um plano de ação com cinco passos concretos para os próximos 30 a 90 dias. O laudo é o ponto de partida para a discussão coletiva — não o ponto final.</p>
+
+  <div class="escala-vis">
+    <div class="escala-titulo">Classificação das variáveis positivas (S, A, W, I, N, F, T)</div>
+    <div class="escala-linha">
+      <div class="escala-faixa f1">
+        <div class="ef-num">0–3</div>
+        <div class="ef-label">Crítico</div>
+        <div class="ef-desc">Requer atenção urgente e ação imediata do grupo</div>
+      </div>
+      <div class="escala-faixa f2">
+        <div class="ef-num">4–6</div>
+        <div class="ef-label">Em construção</div>
+        <div class="ef-desc">Base existe, mas ainda incompleta e inconsistente</div>
+      </div>
+      <div class="escala-faixa f3">
+        <div class="ef-num">7–8</div>
+        <div class="ef-label">Consolidado</div>
+        <div class="ef-desc">Dimensão estável, com práticas regulares estabelecidas</div>
+      </div>
+      <div class="escala-faixa f4">
+        <div class="ef-num">9–10</div>
+        <div class="ef-label">Referência</div>
+        <div class="ef-desc">Pode inspirar e formar outros empreendimentos nessa dimensão</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. OS TIPOS ── -->
+<section class="secao secao-alt" id="tipos">
+  <div class="secao-header">
+    <div class="cap-num">Capítulo 6</div>
+    <h2 class="secao-titulo">Os sete tipos de <em>empreendimento</em></h2>
+    <p class="secao-lead">O diagnóstico não produz uma nota — produz um perfil. Cada tipo descreve uma configuração distinta de desafios e potenciais.</p>
+  </div>
+
+  <p class="corpo">Os sete tipos não são uma hierarquia de "bom para ruim" — são perfis de situação com características, desafios e prioridades distintos. Um empreendimento pode transitar entre tipos ao longo do tempo, e conhecer todos os perfis ajuda o grupo a se autoavaliar com mais precisão.</p>
+  <p class="corpo">Clique em cada tipo para ver a descrição completa, as causas típicas e os passos de ação.</p>
+
+  <div class="tipos-lista">
+
+    <!-- Tipo 1 -->
+    <div class="tipo-bloco t1">
+      <div class="tipo-head">
+        <div class="tipo-id">
+          <div class="tipo-id-num">Tipo</div>
+          <div class="tipo-id-sigla">1</div>
+        </div>
+        <div class="tipo-info">
+          <div class="tipo-nome">Solidário Pleno</div>
+          <div class="tipo-cond">S ≥ 7 · I ≥ 7 · W ≥ 6 · R ≥ 18</div>
+          <div class="tipo-desc-head">Alta performance solidária com equilíbrio entre dimensões. A solidariedade é coerente entre discurso e prática.</div>
+        </div>
+      </div>
+      <button class="tipo-btn" onclick="toggleTipo(this)"><span class="seta">▾</span> Ver análise completa</button>
+      <div class="tipo-body">
+        <div class="tipo-body-inner">
+          <p class="corpo">O empreendimento Tipo 1 é aquele em que a solidariedade não é apenas discurso: ela alcança as condições de trabalho, a democracia interna, a articulação com o ecossistema e a gestão financeira. Não precisa ser perfeito — mas é resiliente, sustentável e tem legitimidade real para inspirar outros.</p>
+          <p class="corpo">O que define o Tipo 1 não é a pontuação alta em todas as variáveis, mas a combinação específica de S alto (valores que de fato orientam), I alto (campos integrados) e W adequado (trabalho que respeita a dignidade humana). Sem esses três pilares simultaneamente, o resultado elevado pode ser transitório.</p>
+          <div class="caixa verde">
+            <div class="caixa-titulo">Prioridades para o Tipo 1</div>
+            <p>Sistematizar a experiência. Tornar-se polo formador. Articular-se com políticas públicas. Manter formação contínua — conquistas podem ser revertidas sem cuidado permanente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tipo W -->
+    <div class="tipo-bloco tw">
+      <div class="tipo-head">
+        <div class="tipo-id">
+          <div class="tipo-id-num">Tipo</div>
+          <div class="tipo-id-sigla">W</div>
+        </div>
+        <div class="tipo-info">
+          <div class="tipo-nome">Trabalho Invisibilizado</div>
+          <div class="tipo-cond">W ≤ 3 com S ≥ 5 ou A ≥ 5</div>
+          <div class="tipo-desc-head">A organização parece solidária, mas o trabalho concreto está degradado ou é desigual. Há exploração disfarçada de solidariedade.</div>
+        </div>
+      </div>
+      <button class="tipo-btn" onclick="toggleTipo(this)"><span class="seta">▾</span> Ver análise completa</button>
+      <div class="tipo-body">
+        <div class="tipo-body-inner">
+          <p class="corpo">É o tipo mais sutil e, por isso, mais perigoso. O grupo tem consciência solidária e boas práticas declaradas — mas não percebe as hierarquias que se reproduzem na divisão do trabalho cotidiano. Tarefas de limpeza, cuidado, logística e trabalho mais pesado ficam concentradas em mulheres, pessoas negras ou membros com menos poder simbólico dentro do grupo.</p>
+          <p class="corpo">A palavra "exploração" pode soar forte para um grupo que se considera solidário — mas é precisamente isso que acontece quando há sobrecarga sistemática sobre alguns membros sem reconhecimento ou redistribuição. A solidariedade que não alcança as condições concretas de quem trabalha não é plena.</p>
+          <div class="caixa terra">
+            <div class="caixa-titulo">Como identificar o Tipo W com honestidade</div>
+            <p>Faça o mapeamento coletivo das tarefas. Liste quem faz o quê. Observe padrões. Pergunte em reunião: "Alguém aqui se sente sobrecarregado em silêncio?" Se houve um silêncio constrangedor, a resposta provavelmente é sim.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tipo 2 -->
+    <div class="tipo-bloco t2">
+      <div class="tipo-head">
+        <div class="tipo-id">
+          <div class="tipo-id-num">Tipo</div>
+          <div class="tipo-id-sigla">2</div>
+        </div>
+        <div class="tipo-info">
+          <div class="tipo-nome">Solidário Fragmentado</div>
+          <div class="tipo-cond">A ≥ 7 e I &lt; 5</div>
+          <div class="tipo-desc-head">A governança interna é boa, mas o empreendimento está desconectado do ecossistema solidário e seus próprios campos não se articulam.</div>
+        </div>
+      </div>
+      <button class="tipo-btn" onclick="toggleTipo(this)"><span class="seta">▾</span> Ver análise completa</button>
+      <div class="tipo-body">
+        <div class="tipo-body-inner">
+          <p class="corpo">O Tipo 2 tem força interna — democracia real, membros comprometidos, boa cultura organizacional. O problema é que essa força não se converte em impacto porque as partes do empreendimento não conversam entre si, e o empreendimento não conversa com o ecossistema ao redor.</p>
+          <p class="corpo">Um exemplo clássico: cooperativa com excelente gestão democrática mas com setor de produção e setor de comercialização operando sem comunicação. O resultado é que a produção fabrica o que é mais fácil de fazer, não o que o mercado solidário precisa — e a comercialização vende o que encontra, não o que o grupo produz melhor.</p>
+          <div class="caixa azul">
+            <div class="caixa-titulo">Prioridade para o Tipo 2</div>
+            <p>Investir em I antes de qualquer outra coisa. Criar espaços formais de articulação entre os campos. Buscar feiras solidárias e redes de comercialização nos próximos 60 dias. A força de A pode ser usada para criar uma comissão de articulação externa.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tipo 3 -->
+    <div class="tipo-bloco t3">
+      <div class="tipo-head">
+        <div class="tipo-id">
+          <div class="tipo-id-num">Tipo</div>
+          <div class="tipo-id-sigla">3</div>
+        </div>
+        <div class="tipo-info">
+          <div class="tipo-nome">Subcapitalizado</div>
+          <div class="tipo-cond">F ≤ 3 e A ≥ 6</div>
+          <div class="tipo-desc-head">Boa organização, mas falta crônica de capital digno que impeça o crescimento. O grupo tem capacidade — não tem o instrumento certo.</div>
+        </div>
+      </div>
+      <button class="tipo-btn" onclick="toggleTipo(this)"><span class="seta">▾</span> Ver análise completa</button>
+      <div class="tipo-body">
+        <div class="tipo-body-inner">
+          <p class="corpo">O Tipo 3 está preso num ciclo onde a capacidade de produção e gestão existe, mas não cresce porque o acesso ao capital é inadequado ou inexistente. O crédito bancário convencional cobra juros altos, exige garantias que EES tipicamente não têm e tem prazos incompatíveis com ciclos solidários.</p>
+          <p class="corpo">Isso leva à subcapitalização crônica: máquinas velhas que não são substituídas, estoque que não pode crescer, oportunidades de mercado que são perdidas por falta de capital de giro. A solução não está em trabalhar mais — está em acessar os instrumentos certos.</p>
+          <div class="caixa ouro">
+            <div class="caixa-titulo">Instrumentos de finanças solidárias para buscar</div>
+            <p><strong>BCDs (Bancos Comunitários de Desenvolvimento):</strong> crédito em moeda social para o território. <strong>Fundos Rotativos Solidários:</strong> capital coletivo gerido pelo grupo. <strong>PAA e PNAE:</strong> se o grupo produz alimentos, são mercados garantidos com preço justo. <strong>Editais de fomento:</strong> secretarias de ES municipais e estaduais têm linhas específicas para EES.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tipo 4 -->
+    <div class="tipo-bloco t4">
+      <div class="tipo-head">
+        <div class="tipo-id">
+          <div class="tipo-id-num">Tipo</div>
+          <div class="tipo-id-sigla">4</div>
+        </div>
+        <div class="tipo-info">
+          <div class="tipo-nome">Cooperativismo Instrumental</div>
+          <div class="tipo-cond">S &lt; 4</div>
+          <div class="tipo-desc-head">A forma é cooperativa, mas o coração bate como empresa capitalista. Risco de isomorfismo: linguagem da ES sem a sua racionalidade.</div>
+        </div>
+      </div>
+      <button class="tipo-btn" onclick="toggleTipo(this)"><span class="seta">▾</span> Ver análise completa</button>
+      <div class="tipo-body">
+        <div class="tipo-body-inner">
+          <p class="corpo">O isomorfismo institucional é o processo pelo qual organizações alternativas acabam adotando as formas e a lógica das organizações dominantes para sobreviver no sistema. No campo da ES, isso significa cooperativas que se comportam como empresas, que centralizam poder, que distribuem sobras desigualmente, que tratam membros como funcionários.</p>
+          <p class="corpo">O Tipo 4 não é necessariamente um grupo mal-intencionado — é um grupo que não teve espaço ou oportunidade para internalizar a racionalidade solidária. A solução passa por processos formativos densos e por uma revisão honesta e coletiva dos valores fundadores.</p>
+          <div class="caixa roxo">
+            <div class="caixa-titulo">Como sair do Tipo 4</div>
+            <p>Educação popular é insubstituível aqui. Ao menos 4h mensais de formação por 6 meses. Revisão coletiva dos critérios de distribuição de resultados com total transparência. Busca de assessoria externa de uma organização de ES reconhecida.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tipo 5-A -->
+    <div class="tipo-bloco t5a">
+      <div class="tipo-head">
+        <div class="tipo-id">
+          <div class="tipo-id-num">Tipo</div>
+          <div class="tipo-id-sigla">5A</div>
+        </div>
+        <div class="tipo-info">
+          <div class="tipo-nome">Sob Ataque</div>
+          <div class="tipo-cond">C ≥ 8</div>
+          <div class="tipo-desc-head">Pressão externa extrema consumindo a capacidade solidária. A resposta precisa ser coletiva e política — não apenas gerencial.</div>
+        </div>
+      </div>
+      <button class="tipo-btn" onclick="toggleTipo(this)"><span class="seta">▾</span> Ver análise completa</button>
+      <div class="tipo-body">
+        <div class="tipo-body-inner">
+          <p class="corpo">O Tipo 5-A não é resultado de fraqueza do grupo — é resultado da estrutura do sistema capitalista agindo sobre um empreendimento que ousa ser diferente. Concorrência predatória, ausência de políticas públicas, burocracia exclusiva e pressão para se comportar como empresa são forças reais que consomem energia, tempo e recursos.</p>
+          <p class="corpo">A armadilha do Tipo 5-A é imaginar que a solução é gerencial — trabalhar mais, ser mais eficiente, cortar custos. Mas C alto só cai com resposta política: articulação em rede, acesso a mercados protegidos e mobilização para mudar as condições externas.</p>
+          <div class="caixa terra">
+            <div class="caixa-titulo">Ação urgente para o Tipo 5-A</div>
+            <p>Articulação imediata com a rede solidária local. Busca de mercados protegidos (PAA, PNAE, feiras solidárias, compra direta comunitária). Acionamento do FBES, câmaras municipais e conselhos de ES para apoio político.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tipo 5-B -->
+    <div class="tipo-bloco t5b">
+      <div class="tipo-head">
+        <div class="tipo-id">
+          <div class="tipo-id-num">Tipo</div>
+          <div class="tipo-id-sigla">5B</div>
+        </div>
+        <div class="tipo-info">
+          <div class="tipo-nome">Em Construção</div>
+          <div class="tipo-cond">Demais combinações</div>
+          <div class="tipo-desc-head">Vulnerabilidade difusa — nenhuma dimensão atingiu resiliência ainda. Potencial existe, mas precisa ser ativado com estratégia e apoio.</div>
+        </div>
+      </div>
+      <button class="tipo-btn" onclick="toggleTipo(this)"><span class="seta">▾</span> Ver análise completa</button>
+      <div class="tipo-body">
+        <div class="tipo-body-inner">
+          <p class="corpo">O Tipo 5-B abrange os empreendimentos em estágio inicial ou de reconstrução — aqueles em que ainda não há nenhuma variável com pontuação consolidada, mas também não há nenhum problema dominante único que qualifique para outro tipo.</p>
+          <p class="corpo">A boa notícia: é o tipo com maior potencial de transformação. O grupo ainda não adquiriu hábitos cristalizados, ainda está aberto à formação e à mudança. A chave é identificar onde atuar primeiro para gerar ganho rápido e renovar a motivação coletiva.</p>
+          <div class="caixa verde">
+            <div class="caixa-titulo">Estratégia para o Tipo 5-B</div>
+            <p>Identifique a variável com menor pontuação e foque nela nos próximos 90 dias. Defina uma meta pequena, concreta e alcançável para os próximos 30 dias. Busque apoio de uma ITCP ou incubadora social para acompanhamento sistemático.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tipos-lista -->
+</section>
+
+<!-- ── 7. USO COLETIVO ── -->
+<section class="secao" id="uso-coletivo">
+  <div class="secao-header">
+    <div class="cap-num">Capítulo 7</div>
+    <h2 class="secao-titulo">Uso coletivo em <em>assembleias</em></h2>
+    <p class="secao-lead">A ferramenta revela mais quando usada coletivamente do que individualmente. Discordâncias entre membros são dados valiosos — não problemas a resolver.</p>
+  </div>
+
+  <p class="corpo">Quando membros diferentes de um mesmo empreendimento pontuam a mesma variável de formas muito diferentes, isso não significa que alguém está errado — significa que há perspectivas distintas sobre a mesma realidade. Isso é informação valiosa que a ferramenta ajuda a tornar visível e discutível.</p>
+
+  <div class="pull-quote">
+    <p>"A diferença entre o 3 que uma pessoa deu para A e o 7 que outra pessoa deu é a conversa mais importante que o grupo pode ter."</p>
+    <cite>Orientação para facilitadores</cite>
+  </div>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:28px 0 16px;color:var(--tinta);">Roteiro sugerido para uso em assembleia</h3>
+
+  <div class="passos-lista">
+    <div class="passo">
+      <div class="passo-num">1</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Preparação: leitura individual prévia</div>
+        <div class="passo-texto">Antes da assembleia, peça que cada membro leia a apostila e preencha a ferramenta individualmente, sem consultar outros membros. O objetivo é garantir que cada pessoa chegue com sua perspectiva genuína, não influenciada pelo que outros "provavelmente pensam".</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">2</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Votação individual anônima (opcional)</div>
+        <div class="passo-texto">Se o grupo tiver mais de 8 pessoas ou se houver relações de poder marcadas, considere coletar as pontuações de forma anônima antes da assembleia. Isso evita que membros com menos poder simbólico "ajustem" sua avaliação para coincidir com a liderança.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">3</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Apresentação das pontuações individuais</div>
+        <div class="passo-texto">Mostre os resultados de cada pessoa para o grupo. Calcule a média para cada variável, mas mantenha as pontuações individuais visíveis. Identifique as variáveis com maior dispersão — onde há mais discordância. Essas são as variáveis mais importantes para discutir.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">4</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Discussão por variável, começando pelas mais divergentes</div>
+        <div class="passo-texto">Para cada variável com alta dispersão: quem deu a pontuação mais baixa explica seu raciocínio. Quem deu a mais alta explica o seu. O grupo não precisa chegar a um consenso — precisa entender por que as perspectivas diferem. Quem vê algo que outros não estão vendo?</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">5</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Definição da pontuação coletiva</div>
+        <div class="passo-texto">Após a discussão, o grupo define coletivamente a pontuação de cada variável. Essa pontuação deve refletir o consenso informado — não a média aritmética, mas a avaliação que o grupo considera mais honesta à luz de tudo que foi discutido.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">6</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Leitura coletiva do laudo e priorização</div>
+        <div class="passo-texto">Leia o laudo gerado em voz alta. Discuta se o tipo identificado corresponde à percepção do grupo. Escolha coletivamente dois ou três passos do plano de ação para implementar nos próximos 30 dias. Defina responsáveis e data de revisão.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">7</div>
+      <div class="passo-corpo">
+        <div class="passo-titulo">Registro e revisão periódica</div>
+        <div class="passo-texto">Registre as pontuações definidas e o plano de ação. Agende nova rodada de diagnóstico para daqui a 6 meses. Compare os resultados ao longo do tempo: o que mudou? O que permanece igual? Por quê?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="caixa verde">
+    <div class="caixa-titulo">Dica para facilitadores</div>
+    <p>Variáveis como W (trabalho emancipatório) e S (racionalidade solidária) costumam gerar as discussões mais produtivas — e também as mais desconfortáveis. Prepare o grupo para isso. O desconforto é sinal de que a ferramenta está funcionando, não de que algo está errado. <strong>A divergência é dado, não crise.</strong></p>
+  </div>
+</section>
+
+<!-- ── 8. EXEMPLO PRÁTICO ── -->
+<section class="secao secao-alt" id="exemplo">
+  <div class="secao-header">
+    <div class="cap-num">Capítulo 8</div>
+    <h2 class="secao-titulo">Exemplo <em>prático</em></h2>
+    <p class="secao-lead">Dois empreendimentos fictícios — com o mesmo valor de R mas perfis completamente diferentes — para ilustrar como ler os resultados com profundidade.</p>
+  </div>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:0 0 20px;color:var(--tinta);">Cooperativa A — Boa no papel, frágil no trabalho</h3>
+
+  <div class="exemplo-card">
+    <div class="exemplo-label">Exemplo fictício — Cooperativa de artesanato</div>
+    <div class="exemplo-nome">Cooperativa Mãos que Tecem</div>
+    <div class="exemplo-vars">
+      <span class="evar">S = 7</span>
+      <span class="evar">A = 8</span>
+      <span class="evar deq">W = 2</span>
+      <span class="evar">I = 5</span>
+      <span class="evar">N = 6</span>
+      <span class="evar">F = 4</span>
+      <span class="evar">T = 7</span>
+      <span class="evar deq">C = 4</span>
+    </div>
+    <div class="exemplo-calc">R = 0,70 × (8 + 2 + 5 + 6 + 4 + 7) − 4 = 0,70 × 32 − 4 = 22,4 − 4 = 18,4</div>
+    <div class="exemplo-res">
+      R = 18,4 parece um bom resultado — mas <strong>W = 2 (crítico)</strong> acende o alerta do Tipo W: Trabalho Invisibilizado. A assembleia funciona bem (A = 8), a solidariedade parece genuína (S = 7), mas as condições concretas de trabalho são precárias. As artesãs que realizam as tarefas mais pesadas de finalização e embalagem são sempre as mesmas — as mais velhas, as que têm menos voz na assembleia. O R alto disfarça uma exploração real.
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--font-disp);font-size:20px;font-weight:700;margin:32px 0 20px;color:var(--tinta);">Cooperativa B — Mesma pontuação R, perfil muito diferente</h3>
+
+  <div class="exemplo-card">
+    <div class="exemplo-label">Exemplo fictício — Cooperativa de reciclagem</div>
+    <div class="exemplo-nome">Cooperativa Cidade Limpa</div>
+    <div class="exemplo-vars">
+      <span class="evar">S = 6</span>
+      <span class="evar">A = 5</span>
+      <span class="evar">W = 6</span>
+      <span class="evar">I = 4</span>
+      <span class="evar">N = 5</span>
+      <span class="evar">F = 3</span>
+      <span class="evar">T = 8</span>
+      <span class="evar deq">C = 5</span>
+    </div>
+    <div class="exemplo-calc">R = 0,60 × (5 + 6 + 4 + 5 + 3 + 8) − 5 = 0,60 × 31 − 5 = 18,6 − 5 = 13,6</div>
+    <div class="exemplo-res">
+      R = 13,6 — ligeiramente menor que a Cooperativa A, mas com <strong>perfil muito mais equilibrado</strong>. Sem nenhuma variável crítica. As condições de trabalho são básicas mas dignas (W = 6), o enraizamento territorial é forte (T = 8) e a solidariedade está consolidando-se (S = 6). O gargalo principal é F = 3: a cooperativa precisa de crédito solidário para renovar equipamentos de triagem. Diagnóstico Tipo 3 (Subcapitalizado). Problema identificado, solução possível.
+    </div>
+  </div>
+
+  <div class="caixa verde">
+    <div class="caixa-titulo">O que este exemplo ensina</div>
+    <p>Dois empreendimentos com R parecido podem precisar de intervenções completamente opostas. A Cooperativa A precisa de um processo formativo interno sobre divisão do trabalho e equidade — não de mais capital. A Cooperativa B precisa de crédito solidário — não de formação sobre autogestão que já funciona razoavelmente bem. <strong>O tipo e as variáveis individuais são mais informativos do que o valor de R sozinho.</strong></p>
+  </div>
+</section>
+
+<!-- ── 9. FAQ ── -->
+<section class="secao" id="faq">
+  <div class="secao-header">
+    <div class="cap-num">Capítulo 9</div>
+    <h2 class="secao-titulo">Perguntas <em>frequentes</em></h2>
+    <p class="secao-lead">As dúvidas mais comuns de quem usa a ferramenta pela primeira vez.</p>
+  </div>
+
+  <div class="faq-lista">
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFaq(this)">
+        <span class="fq-icone">+</span>
+        <span class="fq-texto">Com que frequência devo aplicar o diagnóstico?</span>
+      </button>
+      <div class="faq-resposta">
+        <p>O recomendado é aplicar o diagnóstico a cada 6 meses. Isso permite que intervenções concretas (um processo formativo, uma mudança na gestão, o ingresso em uma rede) tenham tempo de produzir efeito visível nas pontuações. Aplicações mensais tendem a gerar ansiedade e mudanças pequenas demais para ser significativas.</p>
+        <p>Para empreendimentos em situação de crise ou mudança intensa (fusão com outro grupo, troca de liderança, entrada em novo mercado), pode fazer sentido aplicar em intervalos menores — trimestralmente.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFaq(this)">
+        <span class="fq-icone">+</span>
+        <span class="fq-texto">Posso comparar meu empreendimento com outros usando esta ferramenta?</span>
+      </button>
+      <div class="faq-resposta">
+        <p>Sim — com cautela. A ferramenta usa a mesma escala para todos os empreendimentos, o que torna os resultados comparáveis em princípio. Mas as pontuações dependem da honestidade de quem responde, e diferentes grupos podem calibrar "parcial" ou "consolidado" de formas distintas.</p>
+        <p><strong>Comparações úteis:</strong> comparar o mesmo empreendimento ao longo do tempo, ou usar a ferramenta em rede com facilitação externa que alinhe os critérios de pontuação entre grupos.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFaq(this)">
+        <span class="fq-icone">+</span>
+        <span class="fq-texto">O que fazer se o grupo não consegue chegar a um consenso sobre uma variável?</span>
+      </button>
+      <div class="faq-resposta">
+        <p>Não tente forçar consenso. A divergência persistente sobre uma variável é o sinal mais claro de que <strong>essa variável precisa de mais atenção do grupo</strong>. Registre as pontuações individuais, adote provisoriamente a média mais baixa (o princípio da cautela) e coloque aquela dimensão como pauta prioritária nas próximas reuniões.</p>
+        <p>Frequentemente, a divergência em A (autogestão) ou W (trabalho) revela que há membros que experienciam o empreendimento de forma muito diferente dos demais. Essa diferença de percepção é informação valiosa.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFaq(this)">
+        <span class="fq-icone">+</span>
+        <span class="fq-texto">Nosso R ficou negativo. O que isso significa?</span>
+      </button>
+      <div class="faq-resposta">
+        <p>Significa que, neste momento, a combinação de baixas pontuações em S e/ou nas variáveis estruturais com alta pressão capitalista (C) está produzindo um resultado solidário menor do que zero — ou seja, o empreendimento pode estar consumindo mais energia e recursos do que está gerando em termos de vida solidária.</p>
+        <p>Isso não é o fim. É um alerta urgente. R negativo pede ação imediata em duas frentes: reduzir C (articulação coletiva, mercados protegidos) e aumentar S (formação, revisão de valores). Sozinhos, nenhum dos dois é suficiente.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFaq(this)">
+        <span class="fq-icone">+</span>
+        <span class="fq-texto">A ferramenta pode ser usada por grupos informais, sem CNPJ?</span>
+      </button>
+      <div class="faq-resposta">
+        <p>Completamente. A ferramenta avalia práticas e dinâmicas — não forma jurídica. Um grupo informal pode ter S altíssimo, A real e W cuidadoso. Um grupo formalizado pode ter S baixo e W crítico. O diagnóstico é sobre o que acontece no dia a dia, não sobre o papel registrado em cartório.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFaq(this)">
+        <span class="fq-icone">+</span>
+        <span class="fq-texto">Como tratar W em empreendimentos que não têm trabalho físico intenso?</span>
+      </button>
+      <div class="faq-resposta">
+        <p>W avalia quatro dimensões que se aplicam a qualquer tipo de trabalho: condições, divisão equitativa, desenvolvimento humano e dignidade percebida. Em empreendimentos de serviços digitais ou consultoria, por exemplo, W ainda pergunta: quem faz as tarefas menos valorizadas (relatórios, formatação, logística de reuniões)? Há membros que se sentem sobrecarregados? O trabalho contribui para o crescimento de cada pessoa?</p>
+        <p>Em empreendimentos com trabalho predominantemente não-físico, a dimensão 4 (dignidade percebida) e a dimensão 2 (divisão equitativa de tarefas invisíveis) costumam ser as mais reveladoras.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFaq(this)">
+        <span class="fq-icone">+</span>
+        <span class="fq-texto">Podemos adaptar a ferramenta para nossa realidade específica?</span>
+      </button>
+      <div class="faq-resposta">
+        <p>A ferramenta é de uso livre e pode ser adaptada — mas recomendamos manter a fórmula central intacta se quiser comparabilidade com outros grupos e acompanhamento longitudinal coerente. Adaptações úteis incluem: adicionar perguntas de aprofundamento para cada variável, criar indicadores locais para calibrar as pontuações, ou desenvolver uma versão com linguagem adaptada ao contexto do grupo (linguagem mais popular, por exemplo).</p>
+        <p>O que não recomendamos: remover variáveis da fórmula, pois isso altera a estrutura conceitual da TES que dá sentido aos resultados.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 10. GLOSSÁRIO ── -->
+<section class="secao secao-alt" id="glossario">
+  <div class="secao-header">
+    <div class="cap-num">Capítulo 10</div>
+    <h2 class="secao-titulo"><em>Glossário</em></h2>
+    <p class="secao-lead">Termos fundamentais da Teoria da Economia Solidária usados na ferramenta.</p>
+  </div>
+
+  <div class="glossario-grid">
+    <div class="gloss-item">
+      <div class="gloss-termo">Economia Solidária (ES)</div>
+      <div class="gloss-def">Conjunto de práticas econômicas baseadas na cooperação, autogestão, solidariedade e desenvolvimento humano, em contraposição à lógica do lucro e da exploração capitalista.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-termo">Empreendimento Econômico Solidário (EES)</div>
+      <div class="gloss-def">Organização coletiva que combina atividade econômica com valores solidários: cooperativas, associações produtivas, grupos informais, clubes de troca, bancos comunitários etc.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-termo">Autogestão</div>
+      <div class="gloss-def">Prática pela qual os próprios trabalhadores controlam e dirigem coletivamente o empreendimento, sem hierarquias fixas de mando. Inclui tomada de decisão democrática e transparência total.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-termo">Racionalidade solidária</div>
+      <div class="gloss-def">Princípio orientador das decisões econômicas que prioriza a reprodução ampliada da vida dos membros e da comunidade sobre a acumulação de capital.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-termo">Reprodução Ampliada da Vida</div>
+      <div class="gloss-def">Objetivo central da ES: garantir não apenas a sobrevivência, mas condições cada vez mais plenas e dignas de vida para os membros e seu entorno. É o que o valor R mede.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-termo">Isomorfismo institucional</div>
+      <div class="gloss-def">Processo pelo qual organizações alternativas acabam adotando as formas e a lógica das organizações dominantes (empresas capitalistas) para sobreviver no sistema — perdendo sua identidade solidária.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-termo">Integração sistêmica</div>
+      <div class="gloss-def">Articulação orgânica entre os diferentes campos de um empreendimento (produção, comercialização, finanças, formação) de modo que cada área fortalece as demais.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-termo">BCD — Banco Comunitário de Desenvolvimento</div>
+      <div class="gloss-def">Serviço financeiro solidário de base comunitária, geralmente com emissão de moeda social local. Oferece crédito acessível e adequado à lógica solidária.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-termo">Fundo Rotativo Solidário</div>
+      <div class="gloss-def">Capital coletivo gerido pelos próprios membros de um grupo ou rede, que se reveza entre os participantes conforme necessidade, sem juros ou com juros simbólicos.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-termo">ITCP — Incubadora Tecnológica de Cooperativas Populares</div>
+      <div class="gloss-def">Programa universitário que apoia empreendimentos solidários com assessoria técnica, formação e acompanhamento processual. Presente em dezenas de universidades brasileiras.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-termo">FBES — Fórum Brasileiro de Economia Solidária</div>
+      <div class="gloss-def">Principal articulação nacional dos empreendimentos, redes e entidades de apoio da ES no Brasil. Atua na defesa de políticas públicas e na articulação do movimento.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-termo">PAA / PNAE</div>
+      <div class="gloss-def">Programa de Aquisição de Alimentos (PAA) e Programa Nacional de Alimentação Escolar (PNAE): políticas públicas que garantem mercado e preço justo para produtores familiares e EES que produzem alimentos.</div>
+    </div>
+  </div>
+
+  <div class="caixa verde" style="margin-top:32px;">
+    <div class="caixa-titulo">Referências para aprofundamento</div>
+    <p>Esta ferramenta é baseada na Teoria da Economia Solidária desenvolvida no campo acadêmico e militante brasileiro. Para aprofundamento, recomenda-se a produção de Paul Singer, Jean-Louis Laville, Gaiger e outros autores do campo da Socioeconomia Solidária. As ITCPs e o FBES também produzem materiais formativos atualizados.</p>
+  </div>
+</section>
+
+<!-- ── RODAPÉ ── -->
+<footer class="rodape-doc">
+  <div class="rd-titulo">Diagnóstico Estratégico de Economia Solidária</div>
+  <div class="rd-formula">R = f ( S · [A + W + I + N + F + T] − C )</div>
+  <div class="rd-linha"></div>
+  <div class="rd-texto">Apostila de uso e orientação · Teoria da Economia Solidária · 2025<br>Ferramenta educativa de uso livre para empreendimentos, incubadoras, redes e movimentos solidários.<br>Reprodução permitida com indicação da fonte.</div>
+</footer>
+
+</div><!-- /main-content -->
+
+<!-- Botão de voltar ao topo -->
+<button class="btn-topo" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo">↑</button>
+
+<script>
+/* ── Navegação mobile ── */
+function toggleNav() {
+  const nav = document.getElementById('navAside');
+  const overlay = document.getElementById('overlay');
+  nav.classList.toggle('aberto');
+  overlay.classList.toggle('visivel');
+}
+function fechaNav() {
+  const nav = document.getElementById('navAside');
+  const overlay = document.getElementById('overlay');
+  nav.classList.remove('aberto');
+  overlay.classList.remove('visivel');
+}
+
+/* ── Highlight nav ativo ── */
+const secoes = document.querySelectorAll('section[id], footer[id]');
+const navLinks = document.querySelectorAll('.nav-lista a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('ativo'));
+      const link = document.querySelector(`.nav-lista a[href="#${entry.target.id}"]`);
+      if (link) link.classList.add('ativo');
+    }
+  });
+}, { threshold: 0.25 });
+document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+/* ── Toggle FAQ ── */
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const resp = item.querySelector('.faq-resposta');
+  const isAberto = item.classList.contains('aberto');
+  // fecha todos
+  document.querySelectorAll('.faq-item.aberto').forEach(i => {
+    i.classList.remove('aberto');
+    i.querySelector('.faq-resposta').classList.remove('aberta');
+  });
+  if (!isAberto) {
+    item.classList.add('aberto');
+    resp.classList.add('aberta');
+  }
+}
+
+/* ── Toggle Tipos ── */
+function toggleTipo(btn) {
+  const bloco = btn.closest('.tipo-bloco');
+  const body = bloco.querySelector('.tipo-body');
+  const isAberto = body.classList.contains('aberto');
+  document.querySelectorAll('.tipo-body.aberto').forEach(b => {
+    b.classList.remove('aberto');
+    b.previousElementSibling.classList.remove('aberto');
+  });
+  if (!isAberto) {
+    body.classList.add('aberto');
+    btn.classList.add('aberto');
+  } else {
+    btn.classList.remove('aberto');
+  }
+}
+
+/* ── Botão topo visível após scroll ── */
+const btnTopo = document.querySelector('.btn-topo');
+window.addEventListener('scroll', () => {
+  btnTopo.style.opacity = window.scrollY > 400 ? '1' : '0';
+  btnTopo.style.pointerEvents = window.scrollY > 400 ? 'auto' : 'none';
+});
+btnTopo.style.opacity = '0';
+btnTopo.style.pointerEvents = 'none';
+btnTopo.style.transition = 'opacity .3s';
+</script>
+</body>
+</html>
