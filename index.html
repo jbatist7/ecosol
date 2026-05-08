@@ -6,26 +6,14 @@
 <title>TES — Materiais de Acesso</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green-dark:  #1A3320;
-    --green-mid:   #26542A;
-    --amber:       #B36B10;
-    --amber-light: #D98F30;
-    --cream:       #EEE8D8;
-    --cream-dark:  #D9D0C0;
-    --text:        #111A12;
-    --text-soft:   #2E4430;
-    --white:       #F9F5EC;
-  }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: 'Source Serif 4', Georgia, serif;
-    background: var(--cream);
-    color: var(--text);
+    background: #E8EDF2;
+    color: #0D1A14;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -36,49 +24,48 @@
   /* ── HEADER ── */
   header {
     text-align: center;
-    max-width: 680px;
-    margin-bottom: 3.5rem;
+    max-width: 700px;
+    margin-bottom: 3rem;
   }
 
   .eyebrow {
     display: inline-block;
-    font-family: 'Source Serif 4', serif;
-    font-size: .72rem;
-    font-weight: 600;
-    letter-spacing: .18em;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .2em;
     text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 1rem;
+    color: #1A5C3A;
+    margin-bottom: .9rem;
   }
 
   header h1 {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-size: clamp(2rem, 4vw, 2.9rem);
     font-weight: 700;
-    line-height: 1.18;
-    color: var(--green-dark);
-    margin-bottom: .9rem;
+    line-height: 1.15;
+    color: #0A1F12;
+    margin-bottom: .85rem;
   }
 
   header h1 em {
     font-style: italic;
-    color: var(--green-mid);
+    color: #1A5C3A;
   }
 
   header p {
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.7;
-    color: var(--text-soft);
-    max-width: 520px;
+    color: #1A2E22;
+    max-width: 540px;
     margin: 0 auto;
   }
 
   .divider {
-    width: 48px;
-    height: 2px;
-    background: var(--amber);
-    margin: 1.4rem auto 0;
+    width: 52px;
+    height: 3px;
+    background: #1A5C3A;
+    margin: 1.3rem auto 0;
     border-radius: 2px;
   }
 
@@ -86,51 +73,86 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1.4rem;
     width: 100%;
-    max-width: 920px;
+    max-width: 940px;
   }
 
   @media (max-width: 640px) {
     .grid { grid-template-columns: 1fr; }
   }
 
-  /* ── CARD ── */
+  /* ── CARD BASE ── */
   .card {
-    background: var(--white);
-    border-radius: 4px;
-    padding: 2rem 1.8rem 1.8rem;
+    border-radius: 10px;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     text-decoration: none;
     color: inherit;
-    border: 1px solid var(--cream-dark);
-    box-shadow: 0 2px 10px rgba(30,50,30,.06);
-    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-    position: relative;
     overflow: hidden;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--amber);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .3s ease;
+    box-shadow: 0 3px 14px rgba(0,0,0,.13);
+    transition: transform .22s ease, box-shadow .22s ease;
   }
 
   .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(30,50,30,.12);
-    border-color: transparent;
+    transform: translateY(-5px);
+    box-shadow: 0 14px 36px rgba(0,0,0,.18);
   }
 
-  .card:hover::before { transform: scaleX(1); }
+  .card-strip {
+    height: 7px;
+    width: 100%;
+    flex-shrink: 0;
+  }
 
+  .card-body {
+    padding: 1.7rem 1.8rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+    flex: 1;
+  }
+
+  /* ── PER-CARD COLOURS ── */
+
+  /* Card 1 — verde-floresta */
+  .c1            { background: #E4F2EB; }
+  .c1 .card-strip{ background: #1A7A45; }
+  .c1 .card-num  { background: #1A7A45; color: #D0EFE0; }
+  .c1 .card-tag  { color: #145E35; }
+  .c1 h2         { color: #082B18; }
+  .c1 p          { color: #0E2C1C; }
+  .c1 .card-cta  { color: #1A7A45; }
+
+  /* Card 2 — azul-oceano */
+  .c2            { background: #E2EDF8; }
+  .c2 .card-strip{ background: #1656A8; }
+  .c2 .card-num  { background: #1656A8; color: #C8DEFF; }
+  .c2 .card-tag  { color: #0E4080; }
+  .c2 h2         { color: #071A40; }
+  .c2 p          { color: #0D1E3E; }
+  .c2 .card-cta  { color: #1656A8; }
+
+  /* Card 3 — verde-teal */
+  .c3            { background: #E2F3F1; }
+  .c3 .card-strip{ background: #10796E; }
+  .c3 .card-num  { background: #10796E; color: #C4EDE9; }
+  .c3 .card-tag  { color: #0B5C54; }
+  .c3 h2         { color: #062C28; }
+  .c3 p          { color: #0C2E2A; }
+  .c3 .card-cta  { color: #10796E; }
+
+  /* Card 4 — azul-ardósia */
+  .c4            { background: #E6EEF8; }
+  .c4 .card-strip{ background: #2C5F9E; }
+  .c4 .card-num  { background: #2C5F9E; color: #D2E4FF; }
+  .c4 .card-tag  { color: #1E4578; }
+  .c4 h2         { color: #0C2040; }
+  .c4 p          { color: #102240; }
+  .c4 .card-cta  { color: #2C5F9E; }
+
+  /* ── CARD INTERNALS ── */
   .card-meta {
     display: flex;
     align-items: center;
@@ -138,13 +160,11 @@
   }
 
   .card-num {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    background: var(--green-dark);
-    color: var(--amber-light);
     font-family: 'Playfair Display', serif;
-    font-size: .85rem;
+    font-size: .9rem;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -154,25 +174,22 @@
 
   .card-tag {
     font-size: .68rem;
-    font-weight: 600;
-    letter-spacing: .14em;
+    font-weight: 700;
+    letter-spacing: .15em;
     text-transform: uppercase;
-    color: var(--green-mid);
   }
 
   .card h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
+    font-size: 1.22rem;
     font-weight: 700;
     line-height: 1.3;
-    color: var(--green-dark);
   }
 
   .card p {
-    font-size: .93rem;
-    font-weight: 300;
+    font-size: .94rem;
+    font-weight: 400;
     line-height: 1.75;
-    color: #253530;
     flex: 1;
   }
 
@@ -180,29 +197,28 @@
     display: inline-flex;
     align-items: center;
     gap: .45rem;
-    font-size: .8rem;
-    font-weight: 600;
-    letter-spacing: .06em;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .07em;
     text-transform: uppercase;
-    color: var(--amber);
     margin-top: .2rem;
     transition: gap .2s ease;
   }
 
-  .card:hover .card-cta { gap: .7rem; }
+  .card:hover .card-cta { gap: .75rem; }
 
   .card-cta svg {
     width: 14px;
     height: 14px;
     stroke: currentColor;
-    stroke-width: 2.2;
+    stroke-width: 2.3;
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
     transition: transform .2s ease;
   }
 
-  .card:hover .card-cta svg { transform: translateX(3px); }
+  .card:hover .card-cta svg { transform: translateX(4px); }
 
   /* ── AUTHORS ── */
   .authors {
@@ -210,42 +226,39 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: .35rem;
+    gap: .3rem;
   }
 
   .authors-label {
     font-size: .68rem;
-    font-weight: 600;
-    letter-spacing: .16em;
+    font-weight: 700;
+    letter-spacing: .18em;
     text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: .3rem;
+    color: #1A5C3A;
+    margin-bottom: .4rem;
   }
 
   .authors a {
-    font-size: .88rem;
+    font-size: .9rem;
     font-weight: 400;
-    color: var(--text);
+    color: #0D1A14;
     text-decoration: none;
-    line-height: 1.6;
+    line-height: 1.7;
     transition: color .18s;
   }
 
-  .authors a:hover { color: var(--amber); }
+  .authors a:hover { color: #1A7A45; }
+  .author-name { font-weight: 700; }
 
-  .author-name {
-    font-weight: 600;
-  }
-
-  /* ── FORMULA BAR ── */
+  /* ── FORMULA ── */
   .formula-bar {
-    margin-top: 2.5rem;
+    margin-top: 2.2rem;
     font-family: 'Playfair Display', serif;
-    font-size: .92rem;
+    font-size: .9rem;
     font-style: italic;
-    color: var(--text-soft);
-    letter-spacing: .03em;
-    opacity: .6;
+    color: #2A3E30;
+    letter-spacing: .04em;
+    opacity: .65;
   }
 </style>
 </head>
@@ -260,48 +273,60 @@
 
 <div class="grid">
 
-  <!-- Card 1 -->
-  <a class="card" href="https://jbatist7.github.io/ecosol/formulario.html" target="_blank" rel="noopener">
-    <div class="card-meta">
-      <div class="card-num">1</div>
-      <span class="card-tag">Ferramenta interativa</span>
+  <!-- Card 1 — verde-floresta -->
+  <a class="card c1" href="https://jbatist7.github.io/ecosol/formulario.html" target="_blank" rel="noopener">
+    <div class="card-strip"></div>
+    <div class="card-body">
+      <div class="card-meta">
+        <div class="card-num">1</div>
+        <span class="card-tag">Ferramenta interativa</span>
+      </div>
+      <h2>Diagnóstico Estratégico</h2>
+      <p>Mova oito controles, calcule seu R e receba o mapa radar do empreendimento, o tipo diagnóstico e um plano de ação para os próximos 90 dias. A ferramenta que transforma autoavaliação em estratégia coletiva concreta.</p>
+      <span class="card-cta">Acessar ferramenta <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
-    <h2>Diagnóstico Estratégico</h2>
-    <p>Mova oito controles, calcule seu R e receba o mapa radar do empreendimento, o tipo diagnóstico e um plano de ação para os próximos 90 dias. A ferramenta que transforma autoavaliação em estratégia coletiva concreta.</p>
-    <span class="card-cta">Acessar ferramenta <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
   </a>
 
-  <!-- Card 2 -->
-  <a class="card" href="https://jbatist7.github.io/ecosol/apostila.html" target="_blank" rel="noopener">
-    <div class="card-meta">
-      <div class="card-num">2</div>
-      <span class="card-tag">Guia de uso</span>
+  <!-- Card 2 — azul-oceano -->
+  <a class="card c2" href="https://jbatist7.github.io/ecosol/apostila.html" target="_blank" rel="noopener">
+    <div class="card-strip"></div>
+    <div class="card-body">
+      <div class="card-meta">
+        <div class="card-num">2</div>
+        <span class="card-tag">Guia de uso</span>
+      </div>
+      <h2>Apostila de Orientação</h2>
+      <p>Dez capítulos que explicam cada variável da fórmula, ensinam a pontuar com honestidade, detalham os 7 tipos de empreendimento e guiam o uso coletivo em assembleias. Com exemplos práticos, FAQ e glossário.</p>
+      <span class="card-cta">Ler apostila <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
-    <h2>Apostila de Orientação</h2>
-    <p>Dez capítulos que explicam cada variável da fórmula, ensinam a pontuar com honestidade, detalham os 7 tipos de empreendimento e guiam o uso coletivo em assembleias. Com exemplos práticos, FAQ e glossário.</p>
-    <span class="card-cta">Ler apostila <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
   </a>
 
-  <!-- Card 3 -->
-  <a class="card" href="https://jbatist7.github.io/ecosol/ecosol1.html" target="_blank" rel="noopener">
-    <div class="card-meta">
-      <div class="card-num">3</div>
-      <span class="card-tag">E-book acadêmico</span>
+  <!-- Card 3 — verde-teal -->
+  <a class="card c3" href="https://jbatist7.github.io/ecosol/ecosol1.html" target="_blank" rel="noopener">
+    <div class="card-strip"></div>
+    <div class="card-body">
+      <div class="card-meta">
+        <div class="card-num">3</div>
+        <span class="card-tag">E-book acadêmico</span>
+      </div>
+      <h2>Teoria da ES — Referência</h2>
+      <p>Quinze capítulos: de Singer e Polanyi ao modelo formal R=f(S·[A+I+N+F+T]−C), com hipóteses testáveis, indicadores empíricos e diretrizes para políticas públicas. A teoria completa, em linguagem acessível e rigorosa.</p>
+      <span class="card-cta">Ler e-book <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
-    <h2>Teoria da ES — Referência</h2>
-    <p>Quinze capítulos: de Singer e Polanyi ao modelo formal R=f(S·[A+I+N+F+T]−C), com hipóteses testáveis, indicadores empíricos e diretrizes para políticas públicas. A teoria completa, em linguagem acessível e rigorosa.</p>
-    <span class="card-cta">Ler e-book <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
   </a>
 
-  <!-- Card 4 -->
-  <a class="card" href="https://jbatist7.github.io/ecosol/teoria.html" target="_blank" rel="noopener">
-    <div class="card-meta">
-      <div class="card-num">4</div>
-      <span class="card-tag">Esboço teórico</span>
+  <!-- Card 4 — azul-ardósia -->
+  <a class="card c4" href="https://jbatist7.github.io/ecosol/teoria.html" target="_blank" rel="noopener">
+    <div class="card-strip"></div>
+    <div class="card-body">
+      <div class="card-meta">
+        <div class="card-num">4</div>
+        <span class="card-tag">Esboço teórico</span>
+      </div>
+      <h2>Esboço Sistematizado da TES</h2>
+      <p>Sete partes, oito campos estruturais, três dimensões transversais e oito hipóteses científicas. Um convite à construção coletiva de uma teoria que une rigor acadêmico, agenda de pesquisa e compromisso com a transformação social.</p>
+      <span class="card-cta">Ler esboço <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
-    <h2>Esboço Sistematizado da TES</h2>
-    <p>Sete partes, oito campos estruturais, três dimensões transversais e oito hipóteses científicas. Um convite à construção coletiva de uma teoria que une rigor acadêmico, agenda de pesquisa e compromisso com a transformação social.</p>
-    <span class="card-cta">Ler esboço <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
   </a>
 
 </div>
@@ -314,8 +339,9 @@
 
 <p class="formula-bar">R = f ( S · [A + W + I + N + F + T] − C )</p>
 
-  
 </body>
+
+  </body>
   	<div align="center">
   <a title="contador de dias" href="https://www.calendario.cnt.br/ferramentas/contador-de-dias-calculadora-prazo-entre-datas">
     <img src="https://contador-gratis.com/contadores-de-visitas/070526103820984.gif" width="20" height="auto" style="border:none;">
