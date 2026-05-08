@@ -9,15 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --green-dark:  #253B26;
-    --green-mid:   #3A5E3B;
-    --amber:       #C0883A;
-    --amber-light: #E8B96A;
-    --cream:       #F4EEE0;
-    --cream-dark:  #E6DDD0;
-    --text:        #1C2B1D;
-    --text-soft:   #4A5E4B;
-    --white:       #FDFAF4;
+    --green-dark:  #1A3320;
+    --green-mid:   #26542A;
+    --amber:       #B36B10;
+    --amber-light: #D98F30;
+    --cream:       #EEE8D8;
+    --cream-dark:  #D9D0C0;
+    --text:        #111A12;
+    --text-soft:   #2E4430;
+    --white:       #F9F5EC;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -157,7 +157,7 @@
     font-weight: 600;
     letter-spacing: .14em;
     text-transform: uppercase;
-    color: var(--text-soft);
+    color: var(--green-mid);
   }
 
   .card h2 {
@@ -172,7 +172,7 @@
     font-size: .93rem;
     font-weight: 300;
     line-height: 1.75;
-    color: var(--text-soft);
+    color: #253530;
     flex: 1;
   }
 
@@ -204,15 +204,48 @@
 
   .card:hover .card-cta svg { transform: translateX(3px); }
 
+  /* ── AUTHORS ── */
+  .authors {
+    margin-top: 3rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+  }
+
+  .authors-label {
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: .3rem;
+  }
+
+  .authors a {
+    font-size: .88rem;
+    font-weight: 400;
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.6;
+    transition: color .18s;
+  }
+
+  .authors a:hover { color: var(--amber); }
+
+  .author-name {
+    font-weight: 600;
+  }
+
   /* ── FORMULA BAR ── */
   .formula-bar {
-    margin-top: 3.5rem;
+    margin-top: 2.5rem;
     font-family: 'Playfair Display', serif;
     font-size: .92rem;
     font-style: italic;
     color: var(--text-soft);
     letter-spacing: .03em;
-    opacity: .65;
+    opacity: .6;
   }
 </style>
 </head>
@@ -221,12 +254,7 @@
 <header>
   <span class="eyebrow">Teoria da Economia Solidária · 2025</span>
   <h1>Materiais de <em>Acesso</em></h1>
-  <p>Quatro recursos complementares da ferramenta interativa ao e-book acadêmico para compreender, aplicar e aprofundar o Diagnóstico Estratégico de Economia Solidária.</p>
-  <div class="divider"></div>
-</header>
-
-  <header>
-  <span class="eyebrow">João Batista de Oliveira - jbatist7@gmail.com</span>
+  <p>Quatro recursos complementares — da ferramenta interativa ao e-book acadêmico — para compreender, aplicar e aprofundar o Diagnóstico Estratégico de Economia Solidária.</p>
   <div class="divider"></div>
 </header>
 
@@ -276,6 +304,12 @@
     <span class="card-cta">Ler esboço <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
   </a>
 
+</div>
+
+<div class="authors">
+  <span class="authors-label">Autoria</span>
+  <a href="mailto:jbatist7@gmail.com"><span class="author-name">João Batista de Oliveira</span> · jbatist7@gmail.com</a>
+  <a href="mailto:gaudiacosta@gmail.com"><span class="author-name">Gáudia Maria Costa Leite Pereira</span> · gaudiacosta@gmail.com</a>
 </div>
 
 <p class="formula-bar">R = f ( S · [A + W + I + N + F + T] − C )</p>
